@@ -1,17 +1,18 @@
 {
-  "name": "glitch-hello-node",
+  "name": "ojvjpjgametext",
   "version": "0.1.0",
-  "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
-  "main": "server.js",
+  "description": "A fun text adventure game on Glitch! Note: This is a Work In Progress, so please don't blame me that it's not finished.",
+  "main": "index.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "fastify": "^4.21.0",
-    "handlebars": "^4.7.8",
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.10.2",
-    "@fastify/view": "^8.0.0"
+    "@fastify/view": "^8.0.0",
+    "express": "^4.18.2",
+    "fastify": "^4.21.0",
+    "handlebars": "^4.7.8"
   },
   "engines": {
     "node": "14.x"
@@ -22,6 +23,12 @@
   "license": "MIT",
   "keywords": [
     "node",
-    "glitch"
+    "glitch",
+    "socket.io",
+    "text adventure",
+    "game",
+    "multiplayer",
+    "mmo",
+    "fun"
   ]
 }
