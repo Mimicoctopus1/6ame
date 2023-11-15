@@ -4,7 +4,7 @@
   "description": "A fun text adventure game on Glitch! Note: This is a Work In Progress, so please don't blame me that it's not finished.",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@fastify/formbody": "^7.4.0",
