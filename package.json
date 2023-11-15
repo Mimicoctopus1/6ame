@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A fun text adventure game on Glitch! Note: This is a Work In Progress, so please don't blame me that it's not finished.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index.js"
   },
