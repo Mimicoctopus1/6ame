@@ -10,7 +10,7 @@ console.log(server);
 app.use(express.static("public"));
 
 app.get('/', function(req, res) {
-  res.sendFile(new URL("./public/index.html", import.meta.url).pathname);
+  res.sendFile(new URL("./index.html", import.meta.url).pathname);
 });
 
 io.on("connection", function(socket) {
