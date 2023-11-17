@@ -1,7 +1,0 @@
-span {
-  background-color: red;
-}
-
-/*So you see in the preview, nothing is red,
-but in index.html there is the span. Maybe this has something to do
-with this being a node.js project?*/
