@@ -5,7 +5,6 @@ import { Server } from "socket.io";
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-console.log(server);
 
 app.use(express.static("public"));
 
