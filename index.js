@@ -1,25 +1,17 @@
 import express from 'express';
 import { createServer } from 'node:http';
-import { Server } from "socket.io";
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
-console.log(server);
 
-app.use(express.static("public"));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
-app.get('/', function(req, res) {
-  res.sendFile(new URL("./public/index.html", import.meta.url).pathname);
+app.get('/', (req, res) => {
+  res.sendFile(join(__dirname, 'index.html'));
 });
 
-io.on("connection", function(socket) {
-  console.log("A user connected!");
-  socket.on("disconnect", function() {
-    console.log("A user disconnected!")
-  })
-});
-
-server.listen(3000, function() {
+server.listen(3000, () => {
   console.log('server running at http://localhost:3000');
 });

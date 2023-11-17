@@ -19,7 +19,7 @@
     "node": "14.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+    "url": "https://glitch.com/edit/#!/ojvjpjgame"
   },
   "license": "MIT",
   "keywords": [
@@ -30,6 +30,7 @@
     "game",
     "multiplayer",
     "mmo",
-    "fun"
+    "fun",
+    "ojvjpj"
   ]
 }
