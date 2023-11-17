@@ -14,7 +14,10 @@ app.get('/', function(req, res) {
 });
 
 io.on("connection", function(socket) {
-  console.log("A user connected!")
+  console.log("A user connected!");
+  socket.on("disconnect", function() {
+    console.log("A user disconnected!")
+  })
 });
 
 server.listen(3000, function() {
