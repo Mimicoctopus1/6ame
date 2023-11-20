@@ -40,14 +40,26 @@ app.get('/', function(req, res) {
 });
 
 
-/*Set an event: When */
+/*Set an event: When the server gets a connection, call a function. io automatically enters in who it connected with as the 
+first argument, socket, so that it knows who the socket is.*/
 io.on("connection", function(socket) {
+  
+  /*Log connection*/
   console.log("A user connected!");
-  /*Using the socket inputted above, detect a disconnection.*/
+  
+  /*Have the SOCKET add an event: When it disconnects, log it on the SERVER.*/
   socket.on("disconnect", function() {
     console.log("A user disconnected!")
   });
+  
+  /*chat message is not a built-in event. Go to socket.io explanatioin/public/index.html now.*/
   socket.on("chat message", function(msg){
+    
+    
+    
+    
+    
+    
     console.log("message: " + msg);
     io.emit("chat message", msg)
   });

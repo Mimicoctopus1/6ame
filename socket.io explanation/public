@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Welcome to socket.io explanation/public/index.html. Scroll to the beginning of <script> -->
 <html>
   <head>
     <title>Example</title>
@@ -10,7 +11,7 @@
         Feel free to use HTML to style!">
       <input type = "submit" value = "SEND!">
     </form>
-    <script>
+     <script>
       const socket = io();
       
       const messages = document.querySelector("#messages");
