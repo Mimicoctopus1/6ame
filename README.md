@@ -1,4 +1,4 @@
-* LICENSE is the MIT Llicense# OJVJPJ.game
+# OJVJPJ.game
 
 
 
