@@ -27,8 +27,10 @@
       
       /*Add an event to the form to detect submissions.*/
       form.addEventListener("submit", function(e) {
-        /*Use the event to prevent */
+        /*Use the event to prevent the page from reloading, at least I think.*/
         e.preventDefault();
+        
+        /*If input has a message init*/
         if(input.value) {
           socket.emit("chat message", input.value);
           input.value = "";
@@ -40,6 +42,7 @@
       socket.on("chat message", function(msg) {
         var item = document.createElement("li");
         item.innerHTML = msg;
+        messages.appendChild(item);
       })
     </script>
   </body>
