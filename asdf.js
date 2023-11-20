@@ -1,3 +1,3 @@
 var obj = {
-	why: false,
+  why: false,
 };
