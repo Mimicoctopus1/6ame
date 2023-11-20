@@ -30,15 +30,20 @@ const io = new Server(server);
 
 
 
-/*Next, I'll have express make sure to use the public folder to */
+/*Next, I'll have express make sure to use the public folder for HTML.*/
 app.use(express.static("public"));
 
+
+/*Express (named app) retrieves index.html and displays it*/
 app.get('/', function(req, res) {
   res.sendFile(new URL("./public/index.html", import.meta.url).pathname);
 });
 
+
+/*Set an event: When */
 io.on("connection", function(socket) {
-  console.log("A user connected!")
+  console.log("A user connected!");
+  /*Using the socket inputted above, detect a disconnection.*/
   socket.on("disconnect", function() {
     console.log("A user disconnected!")
   });

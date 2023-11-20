@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example</title>
+  </head>
+  <body>
+    <ul id = "messages"></ul>
+    <form id = "form" action = "">
+      <input type = "text" id = "input" autocomplete = "off" placeholder = "Type a message here!
+        Feel free to use HTML to style!">
+      <input type = "submit" value = "SEND!">
+    </form>
+    <script>
+      const socket = io();
+      
+      const messages = document.querySelector("#messages");
+      const form = document.querySelector("#form");
+      const input = document.querySelector("#input");
+      
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        if(input.value) {
+          socket.emit("chat message", input.value);
+          input.value = "";
+        } else {
+          socket.emit("chat messaage", "👍 Like!");
+        }
+      });
+      
+      socket.on("chat message", function(msg) {
+        var item = document.createElement("li");
+        item.innerHTML = msg;
+      })
+    </script>
+  </body>
+</html>
