@@ -11,14 +11,23 @@
         Feel free to use HTML to style!">
       <input type = "submit" value = "SEND!">
     </form>
-     <script>
+<!--   Get socket.io with a script import. You can just copy the integrity info and cross-origin.
+    It just makes sure the cdn file is the right one.-->
+      <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+      
+    
+      <script>
+      /*io is imported with the CDN, so activate it and save it as socket. The socket is basically the client.*/
       const socket = io();
       
+      /*Get all of the HTML elements necessary.*/
       const messages = document.querySelector("#messages");
       const form = document.querySelector("#form");
       const input = document.querySelector("#input");
       
+      /*Add an event to the form to detect submissions.*/
       form.addEventListener("submit", function(e) {
+        /*Use the event to prevent */
         e.preventDefault();
         if(input.value) {
           socket.emit("chat message", input.value);
