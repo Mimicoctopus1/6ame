@@ -53,18 +53,32 @@ io.on("connection", function(socket) {
   });
   
   /*chat message is not a built-in event. Go to socket.io explanatioin/public/index.html now.*/
+  
+  
+  
+  
+  /*You're back, it seems, or you didn't leave in the first place.*/
+  /*Anyways, this script still is connectected to the client it connected to. This could possibly be running for
+  multiple clients, too.
+  Anyways, the next event: When the server gets a chat message event from the client, take the message as an argument...*/
   socket.on("chat message", function(msg){
     
     
     
     
     
-    
+    /*Log it.*/
     console.log("message: " + msg);
-    io.emit("chat message", msg)
+    
+    /*And send it right back again, but this time, to ALL the users on the server.*/
+    io.emit("chat message", msg);
+    /*Now you can go back to index.html.*/
   });
 });
 
+
+/*Almost done. Notice that all the above constisted completely of events. That means it's all just prep for when a message does
+come. Now the server is connected to the domain, or localhost if you are running this by terminal.*/
 server.listen(3000, function() {
   console.log('server running at http://localhost:3000');
 });

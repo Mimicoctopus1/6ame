@@ -30,20 +30,32 @@
         /*Use the event to prevent the page from reloading, at least I think.*/
         e.preventDefault();
         
-        /*If input has a message init*/
+        /*If input has a message to send on submit,*/
         if(input.value) {
+          
+          /*This client, whoever is visiting the webpage, will emit an event to the server with the value of input in it.*/
           socket.emit("chat message", input.value);
+          
+          /*Clear the message out of the entry box.*/
           input.value = "";
         } else {
-          socket.emit("chat messaage", "👍 Like!");
+          
+          /*If the client presses enter without entering a message, send a like.*/
+          socket.emit("chat message", "👍 Like!");
         }
       });
       
+      /*Now that the client has sent a message, please go back to socket.io explanation/server.js.*/
+        
+      /*Now you're back, when the server sends a chat message to the client, the client makes an HTML element with the
+      msg sent and displays it in a list.*/
       socket.on("chat message", function(msg) {
         var item = document.createElement("li");
         item.innerHTML = msg;
         messages.appendChild(item);
       })
+        
+      /*Please go back one last time.*/
     </script>
   </body>
 </html>
