@@ -21,23 +21,26 @@
         e.preventDefault();
         
         /*Show a custom menu.*/
-        var right-click-menu = document.createElement("div");
-        
+        var rightClickMenu = document.createElement("div");
+        rightClickMenu.style = "position: fixed; bottom:";
         
         
         
         /*Start the menu tag*/
-        right-click-menu.innerHTML += "<menu>";
+        rightClickMenu.innerHTML += "<menu>";
         
-        
+        /*Copy*/
+        // if(window.getSelection) {
+          // rightClickMenu.innerHTML += "<li onclick = \"\"></li>"
+        // }
         
         /*Close the menu tag*/
-        right-click-menu.innerHTML += "</menu>";
+        rightClickMenu.innerHTML += "</menu>";
+        
+        body.append("rightClickMenu");
         
         
         
-        
-        window.getSelection.
       };
       
       
