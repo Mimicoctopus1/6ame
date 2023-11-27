@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- Welcome to socket.io explanation/public/index.html. Scroll to the beginning of <script> -->
+<!-- Welcome to socket.io-explanation/public/index.html. Scroll to the beginning of <script> -->
 <html>
   <head>
     <title>Example</title>
@@ -45,7 +45,7 @@
         }
       });
       
-      /*Now that the client has sent a message, please go back to socket.io explanation/server.js.*/
+      /*Now that the client has sent a message, please go back to socket.io-explanation/server.js.*/
         
       /*Now you're back, when the server sends a chat message to the client, the client makes an HTML element with the
       msg sent and displays it in a list.*/

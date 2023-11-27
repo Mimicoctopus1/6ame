@@ -52,7 +52,7 @@ io.on("connection", function(socket) {
     console.log("A user disconnected!")
   });
   
-  /*chat message is not a built-in event. Go to socket.io explanatioin/public/index.html now.*/
+  /*chat message is not a built-in event. Go to socket.io-explanation/public/index.html now.*/
   
   
   
