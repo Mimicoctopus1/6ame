@@ -11,7 +11,7 @@
     <!--Right-Click Menu-->
     <div class="rcmenu" 
         style="display: none;"> 
-        <ul> 
+        <menu> 
             <li><a onclick = "">Element-1</a></li> 
             <li><a onclick = "">Element-2</a></li> 
             <li><a onclick = "">Element-3</a></li> 
@@ -19,7 +19,7 @@
             <li><a onclick = "">Element-5</a></li> 
             <li><a onclick = "">Element-6</a></li> 
             <li><a onclick = "">Element-7</a></li> 
-        </ul> 
+        </menu> 
     </div>
     
     
@@ -79,7 +79,9 @@
 			  /*Stop the right click menu from working the way it usually does.*/
 			  e.preventDefault();
         
-        rcmenu.style = "display: block;"
+        menu.style.display = 'block'; 
+                menu.style.left = e.pageX + "px";
+                menu.style.top = e.pageY + "px";
 			};
 
 			document.addEventListener("contextmenu", handlecontextmenu);
