@@ -26,28 +26,11 @@
       var game = {
         "mode": "flat"
       };
-      alert();
-      
-			/*Edit the right click menu*/
-			// var handle-contextmenu = function(e) {
-			  /*Stop the right click menu from working the way it usually does.*/
-			  // e.preventDefault();
-        // alert();
-        
-        
-//         /*Create a custom menu*/
-//         var menu = document.createElement("div");
-        
-//         menu.innerHTML = "<menu><li>copy</li></menu>";
-//         body.append(menu);
-			// };
 
 
 
 
 
-
-			document.addEventListener("contextmenu", handle-contextmenu);
 
 			const socket = io();
 
@@ -57,11 +40,11 @@
 
 			form.addEventListener("submit", function(e) {
 			  e.preventDefault();
-			  if(input.value) {
+			  if(input.value != "") {
 			    socket.emit("chat message", input.value);
 			    input.value = "";
 			  } else {
-			    socket.emit("chat messaage", "👍 Like!");
+			    socket.emit("chat message", "👍 Like!");
 			  }
 			});
 
@@ -69,7 +52,23 @@
 			  var item = document.createElement("li");
 			  item.innerHTML = msg;
 			  messages.appendChild(item);
-			})
+			});
+      
+      /*Edit the right click menu*/
+			var handlecontextmenu = function(e) {
+			  /*Stop the right click menu from working the way it usually does.*/
+			  e.preventDefault();
+        
+        /*Create a custom menu*/
+        var rcmenu = document.createElement("div");
+        
+        menu.innerHTML = "<menu><li onclick = "">Copy</li></menu>";
+        menu.innerHTML = "<h1>hi</h1>"
+        rcmenu.style = "position = sticky; bottom: 50%; left: 50%;";
+        body.append(rcmenu);
+			};
+
+			document.addEventListener("contextmenu", handlecontextmenu);
 		</script>
 	</body>
 </html>
