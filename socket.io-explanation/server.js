@@ -2,6 +2,10 @@
 
 This is for ESModules, Express.js, and Node.js.
 
+If you would like to see how this works before you make it, go to 
+
+https://codesandbox.io/p/devbox/github/socketio/chat-example/tree/cjs/step5
+
 First, I'll import the socket.io and express modules for the SERVER.
 Of course, because this is a server, I'll need to go into the terminal
 on the toolbar below and enter in 
@@ -81,4 +85,7 @@ io.on("connection", function(socket) {
 come. Now the server is connected to the domain, or localhost if you are running this by terminal.*/
 server.listen(3000, function() {
   console.log('server running at http://localhost:3000');
-});
+}); 
+/*If you would like to try this out, go to the link specified at the top of this file
+https://codesandbox.io/p/devbox/github/socketio/chat-example/tree/cjs/step5
+*/
