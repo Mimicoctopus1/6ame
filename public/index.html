@@ -1,77 +1,82 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset = "utf-8">
-    <title>OJVJPJ Game: Text</title>
-    <link rel = "stylesheet" href = "style.css">
-  </head>
-  <body>
-    <ul id = "messages"></ul>
-    <form id = "form" action = "">
-      <input type = "text" id = "input" autocomplete = "off" placeholder = "Type a message here!
-        Feel free to use HTML to style!">
-      <input type = "submit" value = "SEND!">
-    </form>
-    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
-    <script>
-      
-      /*Edit the right click menu*/
-      var onContextMenu = function(e) {
-        /*Stop the right click menu from working the way it usually does.*/
-        e.preventDefault();
+	<head>
+		<meta charset="utf-8" />
+		<title>OJVJPJ Game: Text</title>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<ul id="messages"></ul>
+		<form id="form" action="">
+			<input
+				type="text"
+				id="input"
+				autocomplete="off"
+				placeholder="Type a message here!
+        Feel free to use HTML to style!"
+			/>
+			<input type="submit" value="SEND!" />
+		</form>
+		<script
+			src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+			integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+			crossorigin="anonymous"
+		></script>
+		<script>
+
+			/*Edit the right click menu*/
+			var handle-contextmenu = function(e) {
+			  /*Stop the right click menu from working the way it usually does.*/
+			  e.preventDefault();
         
-        /*Show a custom menu.*/
-        var rightClickMenu = document.createElement("div");
-        rightClickMenu.style = "position: fixed; bottom:";
-        
-        
-        
-        /*Start the menu tag*/
-        rightClickMenu.innerHTML += "<menu>";
-        
-        /*Copy*/
-        // if(window.getSelection) {
-          // rightClickMenu.innerHTML += "<li onclick = \"\"></li>"
-        // }
-        
-        /*Close the menu tag*/
-        rightClickMenu.innerHTML += "</menu>";
-        
-        body.append("rightClickMenu");
-        
-        
-        
-      };
-      
-      
-      
-      
-      
-      
-      document.addEventListener("contextmenu", onContextMenu);
-      
-      
-      const socket = io();
-      
-      const messages = document.querySelector("#messages");
-      const form = document.querySelector("#form");
-      const input = document.querySelector("#input");
-      
-      form.addEventListener("submit", function(e) {
-        e.preventDefault();
-        if(input.value) {
-          socket.emit("chat message", input.value);
-          input.value = "";
-        } else {
-          socket.emit("chat messaage", "👍 Like!");
-        }
-      });
-      
-      socket.on("chat message", function(msg) {
-        var item = document.createElement("li");
-        item.innerHTML = msg;
-        messages.appendChild(item);
-      })
-    </script>
-  </body>
+        /*In case handle-onclick doesn't stop the right-click menu, call it again*/
+        if(document.getElementById("contextMenu").style.display == "block") 
+            handle-onclick();
+        } else { 
+            var menu = document.getElementById("contextMenu") 
+  
+            menu.style.display = 'block'; 
+            menu.style.left = e.pageX + "px"; 
+            menu.style.top = e.pageY + "px"; 
+        } 
+			};
+
+
+			var handle-onclick = function(e) {
+        /*When you right click, your browser automatically labels the menu with the id contextMenu. I will hide the menu,
+        taking advantage of this id.*/
+			  document.getElementById("contextMenu").style.display("none");
+			};
+
+
+
+
+
+
+			document.addEventListener("contextmenu", handle-contextmenu);
+			documetn.addEventListener("onclick", handle-onclick)
+
+			const socket = io();
+
+			const messages = document.querySelector("#messages");
+			const form = document.querySelector("#form");
+			const input = document.querySelector("#input");
+
+			form.addEventListener("submit", function(e) {
+			  e.preventDefault();
+			  if(input.value) {
+			    socket.emit("chat message", input.value);
+			    input.value = "";
+			  } else {
+			    socket.emit("chat messaage", "👍 Like!");
+			  }
+			});
+
+			socket.on("chat message", function(msg) {
+			  var item = document.createElement("li");
+			  item.innerHTML = msg;
+			  messages.appendChild(item);
+			})
+		</script>
+	</body>
 </html>
