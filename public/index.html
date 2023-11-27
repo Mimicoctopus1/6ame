@@ -7,6 +7,25 @@
 	</head>
 	<body>
 		<ul id="messages"></ul>
+    
+    <!--Right-Click Menu-->
+    <div class="rcmenu" 
+        style="display: none;"> 
+        <ul> 
+            <li><a onclick = "">Element-1</a></li> 
+            <li><a onclick = "">Element-2</a></li> 
+            <li><a onclick = "">Element-3</a></li> 
+            <li><a onclick = "">Element-4</a></li> 
+            <li><a onclick = "">Element-5</a></li> 
+            <li><a onclick = "">Element-6</a></li> 
+            <li><a onclick = "">Element-7</a></li> 
+        </ul> 
+    </div>
+    
+    
+    
+    
+    
 		<form id="form" action="">
 			<input
 				type="text"
@@ -28,7 +47,7 @@
       };
 
 
-
+      
 
 
 
@@ -37,7 +56,8 @@
 			const messages = document.querySelector("#messages");
 			const form = document.querySelector("#form");
 			const input = document.querySelector("#input");
-
+      const rcmenu = document.querySelectorAll(".rcmenu")[0];
+      
 			form.addEventListener("submit", function(e) {
 			  e.preventDefault();
 			  if(input.value != "") {
@@ -59,13 +79,7 @@
 			  /*Stop the right click menu from working the way it usually does.*/
 			  e.preventDefault();
         
-        /*Create a custom menu*/
-        var rcmenu = document.createElement("div");
-        
-        menu.innerHTML = "<menu><li onclick = "">Copy</li></menu>";
-        menu.innerHTML = "<h1>hi</h1>"
-        rcmenu.style = "position = sticky; bottom: 50%; left: 50%;";
-        body.append(rcmenu);
+        rcmenu.style = "display: block;"
 			};
 
 			document.addEventListener("contextmenu", handlecontextmenu);

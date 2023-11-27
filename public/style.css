@@ -5,6 +5,11 @@ body {
     Arial, sans-serif;
 }
 
+.rcmenu ul li {
+  width: 100px;
+  border: 1px solid black;
+}
+
 #form {
   background: rgba(0, 0, 0, 0.15);
   padding: 0.25rem;
