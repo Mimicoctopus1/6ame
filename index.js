@@ -1,5 +1,5 @@
 import express from "express";
-import fs from "fs";                   /*File Reader*/
+import * as fs from "fs";                   /*File Reader*/
 import {createServer} from "node:http";
 import {Server} from "socket.io";      /*socket.io SERVER end*/
 
@@ -7,7 +7,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-
+// var game = fs.readFileSync("/game.json");
 
 app.use(express.static('public'));
 
