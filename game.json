@@ -10,7 +10,10 @@
           "COMMENT": "Five indents later, we're finally into the planet.",
           
           
-          ""
+          "mesh": {
+            "geometry": "",
+            "material": ""
+          },
           
           
           
