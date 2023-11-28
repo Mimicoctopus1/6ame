@@ -1,7 +1,7 @@
 import express from "express";
 import fs from "fs";                   /*File Reader*/
 import {createServer} from "node:http";
-import {Server} from "socket.io";      /*socket.io*/
+import {Server} from "socket.io";      /*socket.io SERVER end*/
 
 const app = express();
 const server = createServer(app);
