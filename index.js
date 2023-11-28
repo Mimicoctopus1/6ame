@@ -30,17 +30,15 @@ server.listen(3000, function() {
     console.log('server running at http://localhost:3000');
 });
 
-fs.readFile("game.json", function(error, data) {
-  if(error) {
-    console.error(error);
-    throw error;
-  }
-
-  // parsing the JSON object
-  // to convert it to a JavaScript object
-  const user = JSON.parse(data);
-
-  // printing the JavaScript object
-  // retrieved from the JSON file
-  console.log(user);
-});
+var readJSON = function() {
+  fs.readFile("game.json", function(error, data) {
+    if(error) {
+      console.error(error);
+      throw error;
+    }
+  
+    let returnData = JSON.parse(data);
+    
+    return(returnData);
+  });
+}
