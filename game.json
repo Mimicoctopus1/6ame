@@ -1,0 +1,47 @@
+{
+  "COMMENT": "game.json is basically a multiverse, if you think about it.",
+  "universe": {
+    "unilaxy": {
+      "unisystem": {
+        "planet hot": {
+          
+        },
+        "uniworld": {
+          "COMMENT": "Five indents later, we're finally into the planet.",
+          
+          
+          ""
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          "moons": {
+            "unimoon": {
+              
+            }
+          }
+        },
+        "planet cold": {
+          
+        }
+      }
+    },
+    "milky way": {
+      "sol": {
+        
+      }
+    }
+  }
+}
