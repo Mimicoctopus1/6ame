@@ -30,8 +30,8 @@ server.listen(3000, function() {
     console.log('server running at http://localhost:3000');
 });
 
-var readJSON = function() {
-  fs.readFile("game.json", function(error, data) {
+var readJSON = function(jsonFileName) {
+  fs.readFile(jsonFileName, function(error, data) {
     if(error) {
       console.error(error);
       throw error;
@@ -42,3 +42,5 @@ var readJSON = function() {
     return(returnData);
   });
 }
+
+//(readJSON("game.json"))
