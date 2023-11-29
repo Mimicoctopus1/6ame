@@ -30,6 +30,7 @@ server.listen(3000, function() {
     console.log('server running at http://localhost:3000');
 });
 
+/*Make files to read and write JSON*/
 var readJSON = function(jsonFileName) {
   try {
     let returnData = fs.readFileSync(jsonFileName);
@@ -39,7 +40,6 @@ var readJSON = function(jsonFileName) {
     console.error(error); /*Send an error to the user console and the Glitch logs.*/
   }
 };
-
 var writeJSON = function(jsonFileName, dataToSave) {
   try {
     fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
@@ -48,5 +48,3 @@ var writeJSON = function(jsonFileName, dataToSave) {
     console.error(error); /*Send an error to the user console and the Glitch logs.*/
   }
 };
-
-writeJSON("testWrite.json", [1, 2, 3, 4]);
