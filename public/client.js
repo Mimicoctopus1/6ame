@@ -31,8 +31,9 @@ var handlecontextmenu = function (e) {
 	e.preventDefault();
 
 	rcmenu.style.display = 'block';
-	rcmenu.style.left = e.pageX + 'px';
-	rcmenu.style.top = e.pageY + 'px';
+  rcmenu.style.position = "absolute";
+	rcmenu.style.left = e.pageX - 50 + 'px';
+	rcmenu.style.top = e.pageY - 20 + 'px';
 };
 
 document.addEventListener('contextmenu', handlecontextmenu);
