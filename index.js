@@ -36,11 +36,9 @@ var readJSON = function(jsonFileName) {
       console.error(error);
       throw error;
     }
-  
-    let returnData = JSON.parse(data);
     
-    return(returnData);
+    return(JSON.parse(data));
   });
 }
 
-//(readJSON("game.json"))
+//console.log(readJSON("game.json"));
