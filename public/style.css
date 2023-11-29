@@ -5,10 +5,6 @@ body {
     Arial, sans-serif;
 }
 
-.rcmenu {
-  display: none;
-}
-
 .rcmenu menu li {
   width: 100px;
   border: 1px solid black;

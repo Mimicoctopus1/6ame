@@ -3,13 +3,14 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>OJVJPJ Game: Text</title>
-		<link rel="stylesheet" href="client.css" />
+		<link rel="stylesheet" href="style.css" />
 	</head>
 	<body>
 		<ul id="messages"></ul>
     
     <!--Right-Click Menu-->
-    <div class="rcmenu"> 
+    <div class="rcmenu" 
+        style="display: none;"> 
         <menu> 
             <li><a onclick = "">Element-1</a></li> 
             <li><a onclick = "">Element-2</a></li> 
@@ -35,6 +36,11 @@
 			/>
 			<input type="submit" value="SEND!" />
 		</form>
+		<script
+			src="https://cdn.socket.io/4.6.0/socket.io.min.js"
+			integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
+			crossorigin="anonymous"
+		></script>
 		<script src = "client.js"></script>
 	</body>
 </html>
