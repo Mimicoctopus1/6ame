@@ -27,18 +27,27 @@ io.on('connection', function (socket) {
 });
 
 server.listen(3000, function() {
-    console.log('server running at http://localhost:3000');
-});
+console.log('Server running at http://localhost:3000');
+
 
 var readJSON = function(jsonFileName) {
+  let returnData;
+  
+  /*Read the file with the fs module*/
   fs.readFile(jsonFileName, function(error, data) {
     if(error) {
       console.error(error);
       throw error;
     }
     
-    return(JSON.parse(data));
+    
+    returnData = (JSON.parse(data));
+  
   });
+  return(returnData);
 }
 
-//console.log(readJSON("game.json"));
+
+
+console.log(readJSON("game.json"));
+});
