@@ -33,7 +33,7 @@ socket.on('chat message', function (msg) {
 });
 
 /*Edit the right click menu*/
-var handlecontextmenu = function (e) {
+var handlecontextmenu = function(e) {
 	/*Stop the right click menu from working the way it usually does.*/
 	e.preventDefault();
 
