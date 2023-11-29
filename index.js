@@ -42,9 +42,10 @@ server.listen(3000, function () {
 
 	/*Make a function that gets the location to save data to and what to write.*/
 	var writeJSON = function (jsonFileName, dataToWrite) {
-		/*Writes that data by */
+		/*Writes that data by converting the JSON dataToWrite into a long string of characters that can be written as a JSON file
+    labeled jsonFileName.*/
 		try {
-			fs.writeFileSync(JSON.stringify(jsonFileName), dataToWrite);
+			fs.writeFileSync(jsonFileName, JSON.stringify(dataToWrite));
 		} catch (error) {
 			console.error(error);/*Give an error to the user console and the logs in the Glitch toolbar*/
 			throw error;         /*Give an error to the server/terminal*/

@@ -26,10 +26,11 @@ socket.on('chat message', function (msg) {
 });
 
 /*Edit the right click menu*/
-var handlecontextmenu = function (e) {
+var handlecontextmenu = function(e) {
 	/*Stop the right click menu from working the way it usually does.*/
 	e.preventDefault();
 
+  rcmenu.style.position = "absol";
 	rcmenu.style.display = 'block';
 	rcmenu.style.left = e.pageX + 'px';
 	rcmenu.style.top = e.pageY + 'px';
