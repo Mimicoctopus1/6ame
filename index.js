@@ -1,13 +1,13 @@
 import express from "express";
 import * as fs from "fs";                   /*File Reader*/
 import {createServer} from "node:http";
-import {Server} from "socket.io";      /*socket.io SERVER end*/
+import {Server} from "socket.io";           /*socket.io (SERVER end)*/
 
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-// var game = fs.readFileSync("/game.json");
+
 
 app.use(express.static('public'));
 
@@ -26,28 +26,64 @@ io.on('connection', function (socket) {
     });
 });
 
-server.listen(3000, function() {
+server.listen(3000, function() { /*Only execute the below once connected to the server.*/
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 console.log('Server running at http://localhost:3000');
 
 
 var readJSON = function(jsonFileName) {
-  let returnData;
-  
-  /*Read the file with the fs module*/
-  fs.readFile(jsonFileName, function(error, data) {
-    if(error) {
-      console.error(error);
-      throw error;
-    }
+  /*Read the file with the fs module, then use the built-in JSON.parse function to convert it from strings of digits and letters
+  to readable js objects.*/
+  try {
+    return JSON.parse(fs.readFileSync(jsonFileName));
+  } catch(error) {/*If there's an error with try, don't halt the system. Instead,*/
     
+    throw error;/*Give an error to the terminal and server*/
     
-    returnData = (JSON.parse(data));
+    console.error(error);/*and log it to the user console as well as the logs of this Glitch project (down below).*/
+  }
+}
+
+var writeJSON = function(jsonFileName) {
   
-  });
-  return(returnData);
 }
 
 
-
 console.log(readJSON("game.json"));
-});
+
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+});/*Only execute the above when connected to the server.*/
