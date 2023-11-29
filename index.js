@@ -31,16 +31,22 @@ server.listen(3000, function() {
 });
 
 var readJSON = function(jsonFileName) {
-  fs.readFile(jsonFileName, function(error, data) {
-    if(error) {
-      console.error(error);
-      throw error;
-    }
-  
-    let returnData = JSON.parse(data);
-    
-    return(returnData);
-  });
-}
+  try {
+    let returnData = fs.readFileSync(jsonFileName);
+    return(JSON.parse(returnData));
+  } catch(error) {
+    throw error; /*Send an error to the terminal*/
+    console.error(error); /*Send an error to the user console and the Glitch logs.*/
+  }
+};
 
-//(readJSON("game.json"))
+var writeJSON = function(jsonFileName, dataToSave) {
+  try {
+    fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
+  } catch(error) {
+    throw error; /*Send an error to the terminal*/
+    console.error(error); /*Send an error to the user console and the Glitch logs.*/
+  }
+};
+
+writeJSON("testWrite.json", [1, 2, 3, 4]);
