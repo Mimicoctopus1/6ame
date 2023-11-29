@@ -16,6 +16,5 @@
   "trailingComma": "all",
   "useTabs": true,
   "endOfLine": "auto",
-  "singleAttributePerLine": true,
-  "htmlSelfClosing": false
+  "singleAttributePerLine": true
 }
