@@ -3,7 +3,7 @@ in index.html, but I keep getting an error:
 
 line 12: io is not defined.
 
-So, I'm putting this anyways*/
+So, I'm putting this anyways, even though, honestly, I like <script> imports more.*/
 
 var game = {
 	mode: 'flat',
