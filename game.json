@@ -1,50 +1,39 @@
 {
-  "COMMENT": "game.json is basically a multiverse, if you think about it.",
-  "universe": {
-    "unilaxy": {
-      "unisystem": {
-        "planet hot": {
-          
-        },
-        "uniworld": {
-          "COMMENT": "Five indents later, we're finally into the planet.",
-          
-          
-          "mesh": {
-            "geometry": "",
-            "material": ""
-          },
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          "moons": {
-            "unimoon": {
-              
-            }
-          }
-        },
-        "planet cold": {
-          
-        }
+  "character": {
+    "player": {
+      "Mimicoctopus1": {
+        "clan": "MOD"
       }
     },
-    "milky way": {
-      "sol": {
-        
-      }
+    "npc": {
+      
     }
-  }
+  },
+	"multiverse": {
+		"universe": {
+			"unilaxy": {
+				"unisystem": {
+					"planet hot": {},
+					"uniworld": {
+						"COMMENT": "Five indents later, we're finally into the planet.",
+
+						"mesh": {
+							"geometry": "",
+							"material": "",
+							"img": "",
+							"position": {}
+						},
+
+						"moons": {
+							"unimoon": {}
+						}
+					},
+					"planet cold": {}
+				}
+			},
+			"milky way": {
+				"sol": {}
+			}
+		}
+	}
 }
