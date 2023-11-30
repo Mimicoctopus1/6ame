@@ -2,7 +2,10 @@
   "character": {
     "player": {
       "Mimicoctopus1": {
-        "clan": "MOD"
+        "showAboveHead": ["name", "clan", "level", "class"],
+        "clan": "MOD",
+        "level": "infinity",
+        "class": "none"
       }
     },
     "npc": {
