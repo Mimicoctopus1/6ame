@@ -7,8 +7,20 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-process.env.variable = "hi"
+
+
+
+
+process.env.variable = "hi";
 console.log(process.env.variable);
+
+
+
+
+
+
+
+
 
 // var game = fs.readFileSync("/game.json");
 
