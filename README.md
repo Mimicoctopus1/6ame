@@ -8,10 +8,10 @@ chat app) can be found in the
 [socket.io-explanation folder](https://glitch.com/edit/#!/ojvjpj?path=socket.io-explanation%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
 * .env is the environment variables (secrets) file. I don't use this for anything because you when you edit the stuff in it from 
-JS, it refreshes once you reload the page. Instead I use .data/userdata.json, but nobody sees this because the .data folder is 
-and you can only access it from the terminal, only nobody can get to the terminal unless they're an editor, have the link, or 
-have remixed the project, but when you remix the project, the .data folder disappears. If you're remixing this, you may want to 
-create the .data/userdata.json file.
+JS, it refreshes once you reload the page. Instead I use .data/userdata.json, but nobody sees this because the .data folder is
+hidden and you can only access it from the terminal, only nobody can get to the terminal unless they're an editor, have the link,
+or have remixed the project, but when you remix the project, the .data folder disappears. If you're remixing this, you may want 
+to create the .data/userdata.json file.
 * .gitignore tells which files for git to ignore (IDK what this means if you can clarify in the comments that would be nice)
 * .prettierrc is my [PRETTIER](https://prettier.io) format. If you would like to use the default PRETTIER format, simply delete
 the .prettierrc file and it will use the same format as Glitch.
