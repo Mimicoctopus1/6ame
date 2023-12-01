@@ -11,7 +11,6 @@ const io = new Server(server);
 
 
 
-process.env.variable = "hi";
 console.log(process.env.variable);
 
 
