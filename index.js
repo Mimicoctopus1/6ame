@@ -7,20 +7,6 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-
-
-
-
-console.log(process.env.variable);
-
-
-
-
-
-
-
-
-
 // var game = fs.readFileSync("/game.json");
 
 app.use(express.static('public'));
