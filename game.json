@@ -5,7 +5,13 @@
         "showAboveHead": ["name", "clan", "level", "class"],
         "clan": "MOD",
         "level": "infinity",
-        "class": "none"
+        "class": "none",
+        "position": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "universe": "universe"
+        }
       }
     },
     "npc": {
