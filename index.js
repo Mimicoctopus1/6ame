@@ -1,4 +1,6 @@
-import web-push from 
+import webpush from "web-push";
+import bodyParser from "body-parser";
+import path from "path";
 import express from "express";
 import * as fs from "fs";                   /*File Reader*/
 import {createServer} from "node:http";
@@ -7,8 +9,6 @@ import {Server} from "socket.io";      /*socket.io SERVER end*/
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
-
-// var game = fs.readFileSync("/game.json");
 
 app.use(express.static('public'));
 
@@ -34,18 +34,21 @@ server.listen(3000, function() {
 /*Make files to read and write JSON*/
 var readJSON = function(jsonFileName) {
   try {
-    let returnData = fs.readFileSync(jsonFileName);
-    return(JSON.parse(returnData));
+    let returnData = JSON.parse(fs.readFileSync(jsonFileName));
+    return(returnData);
   } catch(error) {
     throw error; /*Send an error to the terminal*/
     console.error(error); /*Send an error to the user console and the Glitch logs.*/
   }
 };
+
 var writeJSON = function(jsonFileName, dataToSave) {
   try {
     fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
+    return(true); /*Return that the data save was successful.*/
   } catch(error) {
     throw error; /*Send an error to the terminal*/
     console.error(error); /*Send an error to the user console and the Glitch logs.*/
+    return(false); /*Return that the data save was unsuccessful.*/
   }
 };
