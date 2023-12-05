@@ -6,12 +6,24 @@ const form = document.querySelector('#form');
 const input = document.querySelector('#input');
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
 
+input.addEventListener('keyup', function(e) {
+  if (e.key === 'Enter' || e.keyCode === 13) {
+      e.preventDefault();
+	    if(input.innerHTML != '') {
+		    socket.emit('chat message', input.innerHTML);
+		    input.innerHTML = '';
+      }
+	} else {
+		  socket.emit('chat message', '👍 Like!');
+	}
+});
+
 
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
-	if(input.value != '') {
-		socket.emit('chat message', input.value);
-		input.value = '';
+	if(input.innerHTML != '') {
+		socket.emit('chat message', input.innerHTML);
+		input.innerHTML = '';
 	} else {
 		socket.emit('chat message', '👍 Like!');
 	}

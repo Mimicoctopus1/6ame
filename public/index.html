@@ -7,38 +7,29 @@
 	</head>
 	<body>
 		<ul id="messages"></ul>
-    
-    <!--Right-Click Menu-->
-    <div class="rcmenu" 
-        style="display: none;"> 
-        <menu> 
-            <li><a onclick = "">Element-1</a></li> 
-            <li><a onclick = "">Element-2</a></li> 
-            <li><a onclick = "">Element-3</a></li> 
-            <li><a onclick = "">Element-4</a></li> 
-            <li><a onclick = "">Element-5</a></li> 
-            <li><a onclick = "">Element-6</a></li> 
-            <li><a onclick = "">Element-7</a></li> 
-        </menu> 
-    </div>
-    
-    
-    
-    
-    
+
+		<!--Right-Click Menu-->
+		<div class="rcmenu" style="display: none">
+			<menu>
+				<li><a onclick="">Element-1</a></li>
+				<li><a onclick="">Element-2</a></li>
+				<li><a onclick="">Element-3</a></li>
+				<li><a onclick="">Element-4</a></li>
+				<li><a onclick="">Element-5</a></li>
+				<li><a onclick="">Element-6</a></li>
+				<li><a onclick="">Element-7</a></li>
+			</menu>
+		</div>
+
 		<form id="form" action="">
-			<input id = "arrowInput" readonly = "true" value = ">">
-      <input
-				type="text"
-				id="input"
-				autocomplete="off"
-			/>
+      <p></p>
+			<p id="input" autocomplete="off" contenteditable="true"></p>
 		</form>
 		<script
 			src="https://cdn.socket.io/4.6.0/socket.io.min.js"
 			integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
 			crossorigin="anonymous"
 		></script>
-		<script src = "client.js"></script>
+		<script src="client.js"></script>
 	</body>
 </html>

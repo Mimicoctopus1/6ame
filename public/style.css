@@ -10,9 +10,8 @@ body {
   border: 1px solid black;
   background: rgba(0, 0, 0, 0.05);
 }
-
 #form {
-  padding: 0.25rem;
+  padding: 0;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -22,16 +21,11 @@ body {
   box-sizing: border-box;
   backdrop-filter: blur(10px);
 }
-#arrowInput {
-  /*border: none;*/
-  margin: 0;
-  padding: 0;
-  flex-grow: 1;
-  pointer-events: none;
-  width: 30px;
-  height: 30px;
+#arrowIcon {
+  border: none;
 }
 #input {
+  left: 0px;
   border: none;
   padding: 0 1rem;
   flex-grow: 1;
