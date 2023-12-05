@@ -27,6 +27,9 @@ body {
   padding: 0 1rem;
   flex-grow: 1;
   pointer-events: none;
+  
+  width: 30px;
+  height: 30px;
 }
 #input {
   border: none;
