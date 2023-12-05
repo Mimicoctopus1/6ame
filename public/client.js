@@ -8,28 +8,16 @@ const rcmenu = document.querySelectorAll('.rcmenu')[0];
 
 input.addEventListener('keyup', function(e) {
   if (e.key === 'Enter' || e.keyCode === 13) {
-      e.preventDefault();
-	    if(input.innerHTML != '') {
-		    socket.emit('chat message', input.innerHTML);
-		    input.innerHTML = '';
-      }
-	} else {
-		  socket.emit('chat message', '👍 Like!');
-	}
+	  if(input.innerHTML != '<div><br></div><div><br></div>') { /*Check if there's anytihng in the text box.*/
+		  socket.emit('message', input.innerHTML);
+		  input.innerHTML = '';
+    } else {
+		  socket.emit('message', '👍 Like!'); /*Default message.*/
+	  }
+  }
 });
 
-
-form.addEventListener('submit', function (e) {
-	e.preventDefault();
-	if(input.innerHTML != '') {
-		socket.emit('chat message', input.innerHTML);
-		input.innerHTML = '';
-	} else {
-		socket.emit('chat message', '👍 Like!');
-	}
-});
-
-socket.on('chat message', function (msg) {
+socket.on('message', function (msg) {
 	var item = document.createElement('li');
 	item.innerHTML = msg;
 	messages.appendChild(item);

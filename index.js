@@ -19,11 +19,14 @@ app.get('/', function (req, res) {
 io.on('connection', function (socket) {
     console.log('A user connected!');
     socket.on('disconnect', function () {
-        console.log('A user disconnected!');
+      console.log('A user disconnected!');
     });
-    socket.on('chat message', function (msg) {
-        console.log('message: ' + msg);
-        io.emit('chat message', msg);
+  
+  
+    socket.on('message', function (msg) {/*When the user types something*/
+      console.log('message: ' + msg);
+      
+      io.emit('message', msg);
     });
 });
 
