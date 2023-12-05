@@ -1,13 +1,11 @@
-var game = {
-	mode: 'flat',
-};
-
-const socket = io();
+var gameMode = "flat";
+const socket = io();/*Ignore this error. io is defined in index.html.*/
 
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
+
 
 form.addEventListener('submit', function (e) {
 	e.preventDefault();
