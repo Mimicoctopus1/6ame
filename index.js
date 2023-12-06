@@ -33,6 +33,10 @@ io.on('connection', function (socket) {
       if(["chat", "say", "talk"].includes(cmnd)) {
         
       }
+      if(["whisperto", "sayto", "talkto", "tell"].includes(cmnd)) {
+        
+      }
+      
       io.emit('message', msg);
     });
 });
