@@ -1,23 +1,23 @@
 {
-    "name": "OJVJPJ Game",
-    "short_name": "OJVJPJ",
-    "start_url": "/",
-    "background_color": "#000000",
-    "theme_color": "#00ffff",
-    "icons": [
-        {
-            "src": "https://cdn.glitch.global/8daea706-1e6f-480a-9627-31efd187e265/ojvjpj%20512x512.png?v=1701899220331",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable any"
-        },
-        {
-            "src": "https://cdn.glitch.global/8daea706-1e6f-480a-9627-31efd187e265/ojvjpj.png?v=1701811931314",
-            "sizes": "1880x80",
-            "type": "image/png",
-            "purpose": "maskable any"
-        }
-    ],
-    "display": "standalone",
-    "orientation":"portrait"
+  "name": "OJVJPJ Game",
+  "short_name": "OJVJPJ",
+  "start_url": "/",
+  "background_color": "#000000",
+  "theme_color": "#00ffff",
+  "icons": [
+    {
+      "src": "https://cdn.glitch.global/8daea706-1e6f-480a-9627-31efd187e265/ojvjpj%20512x512.png?v=1701899220331",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "https://cdn.glitch.global/8daea706-1e6f-480a-9627-31efd187e265/ojvjpj.png?v=1701811931314",
+      "sizes": "1880x80",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "display": "standalone",
+  "orientation":"portrait"
 }

@@ -37,7 +37,7 @@ var handlecontextmenu = function (e) {
 document.addEventListener('contextmenu', handlecontextmenu);
 
 if('serviceWorker' in navigator) {/*If serviceWorker is allowed in the browser.*/
-  navigator.serviceWorker.register('/service-worker.js');/*Register the service worker*/
+  navigator.serviceWorker.register('./service-worker.js');/*Register the service worker*/
 } else {
   console.error("Service worker is not supported!");
 }
