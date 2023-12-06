@@ -27,7 +27,8 @@ it *doesn't* change as people play, that's because you need to run `refresh` in 
 version number, name, and description.
 * species.json. Don't touch it unless you really are adding more species to this game in a remix. The species.json file is just 
 my notes on the species in this game, and where each one is in the tree of life.
-
+* Console VS. Terminal VS. Logs
+* * Console
 ### To-Do
 
 * Add a admin to the 
