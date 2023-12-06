@@ -7,11 +7,11 @@
 chat app) can be found in the 
 [socket.io-explanation folder](https://glitch.com/edit/#!/ojvjpj?path=socket.io-explanation%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
-* .env is the environment variables (secrets) file. I don't use this for anything because you when you edit the stuff in it from 
-JS, it refreshes once you reload the page. Instead I use .data/userdata.json, but nobody sees this because the .data folder is
-hidden and you can only access it from the terminal, only nobody can get to the terminal unless they're an editor, have the link,
-or have remixed the project, but when you remix the project, the .data folder disappears. If you're remixing this, you may want 
-to create the .data/userdata.json file.
+* .env is the environment variables (secrets) file. I don't use this for user data because when you edit it from JS, you can't
+make it show in the actual file.
+* You can't see the .data file because the .data folder is hidden and you can only access it from the terminal, only nobody can
+get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, the 
+.data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file.
 * .gitignore tells which files for git to ignore (IDK what this means if you can clarify in the comments that would be nice)
 * .prettierrc is my [PRETTIER](https://prettier.io) format. If you would like to use the default PRETTIER format, simply delete
 the .prettierrc file and it will use the same format as Glitch.
@@ -27,3 +27,9 @@ it *doesn't* change as people play, that's because you need to run `refresh` in 
 version number, name, and description.
 * species.json. Don't touch it unless you really are adding more species to this game in a remix. The species.json file is just 
 my notes on the species in this game, and where each one is in the tree of life.
+
+### To-Do
+
+* Add a admin to the 
+
+### Changelog
