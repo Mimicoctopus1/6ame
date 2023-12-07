@@ -24,6 +24,9 @@ sometimes. If it *doesn't* change as people play, that's because you need to run
 up 
 [(more info here)](https://tinyurl.com/makefswork). I use node:fs to make the JSON files update 
 ([great tutorial here](https://www.atatus.com/blog/read-write-a-json-file-with-node-js/)).
+* manifest.json is like package.json but it only is used when you download the file as a 
+[Progressive Web App](https://glitch.com/edit/#!/glitch-hello-installable) (
+[TUTORIAL](https://dev.to/developertharun/convert-any-website-into-a-pwa-in-just-3-simple-steps-35pp)).
 * package.json is the file in every Node.js repo that explains what you need to run it, how it imports, what it imports, its
 version number, name, and description.
 * species.json. Don't touch it unless you really are adding more species to this game in a remix. The species.json file is just 
