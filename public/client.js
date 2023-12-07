@@ -23,8 +23,17 @@ socket.on('message', function (msg) {
 	messages.appendChild(item);
 });
 
+var admin = function() {/*Make a function that gives all the admin functions that are to be used from the console only.*/
+  console.log("");
+}
+
+var watch = function(cmnd, p1) {/*Create a function that can be accessed from the dev console to be constantly notified about
+certain */
+  
+};
+
 /*Edit the right click menu*/
-var handlecontextmenu = function (e) {
+var handlecontextmenu = function(e) {
 	/*Stop the right click menu from working the way it usually does.*/
 	e.preventDefault();
 

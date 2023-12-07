@@ -1,6 +1,6 @@
 /*This file does everything only necessary when this app is downloaded to the home screen.*/
 
-// Specify what we want added to the cache for offline use
+/*Specify what we want added to the cache for offline use*/
 self.addEventListener("install", function(e) {
   e.waitUntil(
     // Give the cache a name
