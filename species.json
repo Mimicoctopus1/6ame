@@ -11,5 +11,6 @@
   
 	"": ["", ""],
   
-	"COMMENT": "The previous entry is to make more entries. It will format upon pressing the prettier button if filled in."
+	"COMMENT": "The previous entry is to make more entries. It will format like the others upon pressing the prettier button if",
+  "COMMENT": "filled in."
 }
