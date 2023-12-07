@@ -35,3 +35,10 @@ var handlecontextmenu = function (e) {
 };
 
 document.addEventListener('contextmenu', handlecontextmenu);
+
+if ("serviceWorker" in navigator) { /*Check if the navigator is working properly and has the serviceWorker attribute.*/
+  /*Register service worker from the navigator object*/
+  navigator.serviceWorker.register("service-worker.js");
+} else {
+  console.error("The navigator object doesn't have the serviceWorker attribute \nserviceWorker in navigator\nproved false");
+}
