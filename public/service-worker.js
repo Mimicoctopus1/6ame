@@ -31,7 +31,7 @@ self.addEventListener("push", function(e) {
     promises.push(promise);/*Add a promise to the end of the array*/
   }
 
-  // Promise to show a notification
+  /*Promise to show a notification*/
   promises.push(
     self.registration.showNotification(data.title, {
       body: data.body,
