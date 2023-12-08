@@ -33,6 +33,21 @@ io.on('connection', function (socket) {
       if(["whisperto", "sayto", "talkto", "tell"].includes(cmnd)) {
         
       }
+      if(["settings"].includes(cmnd)) {
+        if(["notifications"].includes(messageWords[1])) {
+          if(["on"].includes(messageWords[2])) {
+            io.emit("Would you like to activate notifications? Type \n`settings notifications activate` to ");
+          } else {
+            
+          }
+        }
+      }
+      
+      /*Blank template*/
+      if([].includes(cmnd)) {
+        
+      }
+      /*Blank template*/
       
       io.emit('message', msg);
     });
