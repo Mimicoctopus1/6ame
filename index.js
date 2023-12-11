@@ -21,7 +21,8 @@ io.on('connection', function (socket) {
 		let parameters = arg[1];/*The parameters the client entered in.*/
     /*If the command is the password in .env...*/
 		if(command === process.env.adminPassword){
-      console.log("You are now signed in.")
+      socket.emit("log", "Logged in! Unless you are in Incognito or Private Browsing, you will stay logged in until you" + 
+                 "")
       var adminIn = true;
       localStorage.adminPassword = command; /*Save the password on the user's computer to prove they have signed in.*/
     } else if(adminIn || (localStorage.adminPassword === process.env.adminPassword)) {/*Otherwise, if you are logged in or have

@@ -30,6 +30,14 @@ socket.on('chat', function (msg) {
 	messages.appendChild(printItem);
 });
 
+socket.on('run', function(callback) {
+  callback();
+});
+
+socket.on("log", function(messageToLog) {
+  console.log(messageToLog);
+});
+
 var admin = function (command, p) {
 	/*This function is for me only. When you call it...*/
 	socket.emit('admin', [command, p]); /*Bundle all the info and send to index.js.*/
