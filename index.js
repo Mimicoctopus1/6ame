@@ -17,20 +17,24 @@ io.on('connection', function (socket) {
   /*Admin is basically a way for the game's moderators to have admin features like watching your every move and banning you! Of
   course, you have to log in, but the password is in the .env file.*/
 	socket.on('admin', function(arg) {/*When a client attempts to become admin...*/
-		let command = arg[0];/*The command the client is attempting to use...*/
-		let parameters = arg[1];/*The parameters the client entered in.*/
+		let command = arg[0];           /*The command the client is attempting to use...*/
+		let parameters = arg[1];        /*The parameters the client entered in.*/
     /*If the command is the password in .env...*/
 		if(command === process.env.adminPassword){
       socket.emit("log", "Logged in! Unless you are in Incognito or Private Browsing, you will stay logged in until you" + 
-                 "")
-      var adminIn = true;
-      localStorage.adminPassword = command; /*Save the password on the user's computer to prove they have signed in.*/
-    } else if(adminIn || (localStorage.adminPassword === process.env.adminPassword)) {/*Otherwise, if you are logged in or have
+      "clear localStorage, clear browsing data, or run admin(\"logout\")");/*Have the client log a message.*/
+      localStorage.adminPassword = command; /*Save the password on the user's computer to prove they have logged in.*/
+    } else if(localStorage.adminPassword === process.env.adminPassword) {/*Otherwise, if you are logged in or have
     logged in before...*/
       /*All the admin commands you can use:*/
-      if(command = "watch"){}
+      if(command === "watch"){
+        
+      } else {
+        socket.emit("log")
+      }
     } else {/*If you don't know the password or have never logged in before...*/
-      console.log("You are logged out and that is the incorrect password.\nUse admin(~PASSWORD GOES HERE~); to sign in.");
+      socket.emit("log", "You are logged out and what you just entered in is not the correct password.\nUse " +
+      "admin(~PASSWORD GOES HERE~) to sign in.");/*Tell the user the password is incorrect.*/
       
     }
 	});
