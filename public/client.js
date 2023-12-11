@@ -9,20 +9,26 @@ const rcmenu = document.querySelectorAll('.rcmenu')[0];
 input.addEventListener('keyup', function(e) {
   if (e.key === 'Enter' || e.keyCode === 13) {/*When enter is pressed...*/
 		  socket.emit('message', input.innerHTML);/*Send a message to the server, index.js*/
+      input.innerHTML = "<div><br></div><div><br></div>";
   }
 });
 
-socket.on('message', function (msg) {
-	var item = document.createElement('li');
-	item.innerHTML = msg;
-	messages.appendChild(item);
+socket.on('print', function (msg) {
+	let printItem = document.createElement('li');
+	printItem.innerHTML = msg;
+	messages.appendChild(printItem);
 });
 
-var admin = function() {/*Make a function that gives all the admin functions that are to be used from the console only.*/
-  console.log("");
+var admin = function(commandToExplain) {/*Make a function that gives all the admin functions that are to be used from the 
+console only, and how to use them each, if the commandToExplain parameter is given.*/
+  if(commandToExplain == "watch") {
+    console.log("watch(cmnd, settings);\nAfter using, takes cmnd and watches all prints given to anybody")
+  } else {
+    console.log("watch\nadmin");
+  }
 }
 
-var watch = function(cmnd, p1) {/*Create a function that can be accessed from the dev console to be constantly notified about
+var admin.watch = function(cmnd, settings) {/*Create a function that can be accessed from the dev console to be constantly notified about
 certain */
   
 };

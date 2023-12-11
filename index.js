@@ -21,14 +21,12 @@ io.on('connection', function (socket) {
   
   
     socket.on('message', function (msg) {/*When the user types something*/
-      console.log('entered: ' + msg);
-      
       let messageWords = msg.split(" "); /*Split the string by whitespaces.*/
       let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
       
       /*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
       if(["chat", "say", "talk"].includes(cmnd)) {
-        
+        io.emit("print", "\"" + msg + "\"")
       }
       if(["whisperto", "sayto", "talkto", "tell"].includes(cmnd)) {
         
@@ -48,8 +46,6 @@ io.on('connection', function (socket) {
         
       }
       /*Blank template*/
-      
-      io.emit('message', msg);
     });
 });
 
