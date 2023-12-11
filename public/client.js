@@ -21,21 +21,10 @@ socket.on('print', function (msg) {
 	messages.appendChild(printItem);
 });
 
-var admin = function(commandToExplain) {/*Make a function that gives all the admin functions that are to be used from the 
-console by moderators, or explains how one is used if the commandToExplain parameter is given.*/
-  if(commandToExplain == "watch") {
-    console.log("watch(cmnd, settings);\nAfter using, takes cmnd and watches all prints given to anybody, logging them to your " +
-                "console")
-  } else {
-    console.log("admin\nwatch");
-  }
+var admin = function(command, p) {/*This function is for me and me only. When you call it, entering the password as an argument,
+it sends the password to index.js, which */
+  socket.emit("admin", [command, p]);/*Bundle all the info and send to index.js.*/
 }
-
-var watch = function(cmnd, settings) {/*Create a function that can be accessed from the dev console to be constantly notified 
-about
-certain */
-  
-};
 
 /*Edit the right click menu*/
 var handlecontextmenu = function(e) {
