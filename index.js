@@ -55,7 +55,7 @@ server.listen(3000, function () {
 	console.log('server running at http://localhost:3000');
 });
 
-/*Make files to read and write JSON*/
+/*Make files to read and write JSON*/{
 var readJSON = function (jsonFileName) {
 	try {
 		let returnData = JSON.parse(fs.readFileSync(jsonFileName));
@@ -75,4 +75,4 @@ var writeJSON = function (jsonFileName, dataToSave) {
 		console.error(error); /*Send an error to the user console and the Glitch logs.*/
 		return false; /*Return that the data save was unsuccessful.*/
 	}
-};
+};}
