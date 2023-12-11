@@ -5,7 +5,7 @@
 * index.js renders `public/index.html`, which imports public/index.css and runs public/client.js.
 * Uses socket.io for websocket API (for lack of better resources). Brief socket.io explanation to make a chat app (yes, another 
 chat app) can be found in the 
-[socket.io-explanation folder](https://glitch.com/edit/#!/ojvjpj?path=socket.io-explanation%2Fserver.js%3A1%3A0) (new tab only. 
+[examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
 * .env is the environment variables (secrets) file. I don't use this for user data because when you edit it from JS, you can't
 make it show in the actual file.
