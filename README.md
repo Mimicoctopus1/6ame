@@ -39,10 +39,13 @@ my notes on the species in this game, and where each one is in the tree of life.
   errors. Also, it takes logs and errors from index.js, not `public/client.js`.
 ### To-Do
 If you would like to have a feature added to the game, please say so in the comments and I will add it here, or reply to your
-message if I can't seem to add your feature.
+message if I can't seem to add your feature. Also, if you remix my project and add something cool, I would like to add that to
+mine as well, so please let me know.
 * Make whitelist for chat.
   * Allow people who know each other in real life to chat without the whitelist and with a blacklist instead to allow more
   freedom.
+    * To prove you know somebody in real life, they must sign in on your end with their password, and you must sign in on their
+    end with your password. You can be friends without doing this, but you will still have to use the whitelist.
 * Create the stories.
 
 

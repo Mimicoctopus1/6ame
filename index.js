@@ -14,14 +14,14 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function() {
     });
   
   
     socket.on('message', function (msg) {/*When the user types something*/
       let messageWords = msg.split(" "); /*Split the string by whitespaces.*/
       let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
-      
+      console.log(msg);
       /*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
       if(["chat", "c", "say", "talk"].includes(cmnd)) {
         io.emit("print", "\"" + messageWords.slice(1) + "\"");/*Message all the words except the command word, in quotation

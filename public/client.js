@@ -8,8 +8,8 @@ const rcmenu = document.querySelectorAll('.rcmenu')[0];
 
 input.addEventListener('keyup', function(e) {
   if (e.key === 'Enter' || e.keyCode === 13) {/*When enter is pressed...*/
-		  socket.emit('message', input.innerHTML);/*Send a message to the server, index.js*/
-      input.innerHTML = "<div><br></div><div><br></div>";
+		  socket.emit('message', input.firstChild.innerHTML);/*Send a message to the server, index.js*/
+      input.innerHTML = "";/*Clear the entry area.*/
   }
 });
 
