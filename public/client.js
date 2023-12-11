@@ -7,13 +7,8 @@ const input = document.querySelector('#input');
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
 
 input.addEventListener('keyup', function(e) {
-  if (e.key === 'Enter' || e.keyCode === 13) {
-	  if(input.innerHTML != '<div><br></div><div><br></div>') { /*Check if there's anytihng in the text box.*/
-		  socket.emit('message', input.innerHTML);
-		  input.innerHTML = '';
-    } else {
-		  socket.emit('message', '👍 Like!'); /*Default message.*/
-	  }
+  if (e.key === 'Enter' || e.keyCode === 13) {/*When enter is pressed...*/
+		  socket.emit('message', input.innerHTML);/*Send a message to the server, index.js*/
   }
 });
 

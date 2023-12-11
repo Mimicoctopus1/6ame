@@ -21,7 +21,7 @@ io.on('connection', function (socket) {
   
   
     socket.on('message', function (msg) {/*When the user types something*/
-      console.log('used: ' + msg);
+      console.log('entered: ' + msg);
       
       let messageWords = msg.split(" "); /*Split the string by whitespaces.*/
       let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
