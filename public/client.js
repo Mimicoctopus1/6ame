@@ -38,11 +38,6 @@ socket.on("log", function(messageToLog) {
   console.log(messageToLog);
 });
 
-var admin = function (command, p) {/*Create*/
-	/*This function is for me only. When called...*/
-	socket.emit('admin', [command, p]); /*Bundle all the info and send to index.js.*/
-};
-
 /*Edit the right click menu*/
 var handlecontextmenu = function (e) {
   /*Stop the right click menu from working the way it usually does.*/

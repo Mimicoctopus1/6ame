@@ -8,9 +8,7 @@ chat app) can be found in the
 [examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
 * .env is the environment variables (secrets) file. I don't use this for user data because when you edit it from JS, you can't
-make it show in the actual file, but I have a password in it. That password is used 
-[here](https://glitch.com/edit/#!/ojvjpj?path=index.js%3A17%3A36) for moderators to log in to the admin from the 
-ojvjpj.glitch.me console.
+make it show in the actual file.
 * You can't see the `.data` files because the .data folder is hidden and you can only access it from the terminal, only nobody 
 can get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, 
 the .data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file.
