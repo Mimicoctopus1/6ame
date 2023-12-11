@@ -26,8 +26,8 @@ io.on('connection', function (socket) {
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
 		/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
 		if (['chat', 'c', 'say', 'talk'].includes(cmnd)) {
-			io.emit('print', '"' + messageWords.slice(1) + '"'); /*Message all the words except the command word, in quotation
-        marks.*/
+			io.emit('chat', messageWords.slice(1));/*Give all the users a chat message with all the words of the message except the 
+      command word.*/
 		}
 		if (['whisperto', 'sayto', 'talkto', 'tell', 't'].includes(cmnd)) {
 		}
