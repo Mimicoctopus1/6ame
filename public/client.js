@@ -1,5 +1,5 @@
 var gameMode = "flat";
-const socket = io();/*Ignore this error. io is defined in index.html.*/
+const socket = io();
 
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
@@ -15,7 +15,13 @@ input.addEventListener('keyup', function(e) {
   }
 });
 
-socket.on('print', function (msg) {
+var print = function(msgToPrint) {
+	let printItem = document.createElement('li');
+	printItem.innerHTML = msgToPrint;
+	messages.appendChild(printItem);
+}
+
+socket.on('chat', function (msg) {
 	let printItem = document.createElement('li');
 	printItem.innerHTML = msg;
 	messages.appendChild(printItem);

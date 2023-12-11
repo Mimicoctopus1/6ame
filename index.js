@@ -21,6 +21,7 @@ io.on('connection', function (socket) {
   });
 
 	socket.on('message', function (msg) {
+    io.emit("chat")
 		/*When the user types something*/ console.log(msg);
 		let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
