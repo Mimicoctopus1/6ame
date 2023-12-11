@@ -8,8 +8,10 @@ const rcmenu = document.querySelectorAll('.rcmenu')[0];
 
 input.addEventListener('keyup', function(e) {
   if (e.key === 'Enter' || e.keyCode === 13) {/*When enter is pressed...*/
-		  socket.emit('message', input.firstChild.innerHTML);/*Send a message to the server, index.js*/
-      input.innerHTML = "";/*Clear the entry area.*/
+    console.log(input.firstChild);/*The program seems to always put the message in a div, so I'm selecting the innerHTML of the 
+    firstChild (the div). Apparently you don't have to use firstChild.innerHTML. I don't know why.*/
+	  socket.emit('message', input.firstChild.innerHTML);/*Send a message to the server, index.js.*/
+    input.innerHTML = "";/*Clear the entry area.*/
   }
 });
 
@@ -29,7 +31,8 @@ console by moderators, or explains how one is used if the commandToExplain param
   }
 }
 
-var watch = function(cmnd, settings) {/*Create a function that can be accessed from the dev console to be constantly notified about
+var watch = function(cmnd, settings) {/*Create a function that can be accessed from the dev console to be constantly notified 
+about
 certain */
   
 };
