@@ -21,11 +21,11 @@ io.on('connection', function (socket) {
   });
 
 	socket.on('message', function (msg) {/*When an entry is received from the user...*/
-    io.emit("chat", msg);/*Send it to all the other clients.*/
 		let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
 		/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
 		if (['chat', 'c', 'say', 'talk'].includes(cmnd)) {
+      let messageWords
 			io.emit('chat', messageWords.slice(1));/*Give all the users a chat message with all the words of the message except the 
       command word.*/
 		}
