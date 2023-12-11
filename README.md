@@ -38,8 +38,12 @@ my notes on the species in this game, and where each one is in the tree of life.
   * Logs: The build-in Glitch logs are basically the console, only you can't enter anything in: you can only *read* logs and 
   errors. Also, it takes logs and errors from index.js, not `public/client.js`.
 ### To-Do
-If you would like to have a feature added to the game, 
-Make whitelist for
+If you would like to have a feature added to the game, please say so in the comments and I will add it here, or reply to your
+message if I can't seem to add your feature.
+* Make whitelist for chat.
+  * Allow people who know each other in real life to chat without the whitelist and with a blacklist instead to allow more
+  freedom.
+* Create the stories.
 
 
 ### Changelog
