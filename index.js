@@ -14,10 +14,16 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-	socket.on('admin', function (arg) {
-		let adminCommand = arg[0];
-		let parameters = arg[1];
-		/*Get a few*/
+  /*Admin is basically a way for the game's moderators to have admin features like watching your every move and banning you! Of
+  course, you have to log in, but the password is in the .env file.*/
+	socket.on('admin', function(arg) {/*When a client attempts to become admin...*/
+		let command = arg[0];/*The command the client is attempting to use...*/
+		let parameters = arg[1];/*The parameters the client entered in.*/
+    /*If the command is the password in .env...*/
+		if(command === process.env.adminPassword){
+      var adminIn = true;
+      localStorage.adminPassword = command; /*Save that*/
+    }
 	});
 
 	socket.on('message', function (msg) {
