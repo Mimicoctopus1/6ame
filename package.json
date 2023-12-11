@@ -1,7 +1,7 @@
 {
   "name": "ojvjpj",
   "version": "0.1.0",
-  "description": "A fun adventure game on Glitch! Note: This is a Work In Progress, so please don't blame me that it's not finished.",
+  "description": "A fun adventure game on Glitch! Note: This is a Work In Progress, so please don't get mad it's not finished.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "@fastify/formbody": "^7.4.0",
-    "@fastify/static": "^6.10.2",
-    "@fastify/view": "^8.0.0",
+    "@fastify/static": "^6.12.0",
+    "@fastify/view": "^8.2.0",
     "express": "^4.18.2",
-    "fastify": "^4.21.0",
+    "fastify": "^4.24.3",
     "handlebars": "^4.7.8",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.6.0"
   },
   "engines": {
     "node": "16.x"
