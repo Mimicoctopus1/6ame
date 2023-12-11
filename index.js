@@ -14,20 +14,23 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-  socket.on("admin", function(arg) {
-    let adminCommand = arg[0];
-    let parameters = arg[1];
-    /*Get a few*/
-  });
+	socket.on('admin', function (arg) {
+		let adminCommand = arg[0];
+		let parameters = arg[1];
+		/*Get a few*/
+	});
 
-	socket.on('message', function (msg) {/*When an entry is received from the user...*/
-		let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
+	socket.on('message', function (msg) {
+		/*When an entry is received from the user...*/ let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
-		/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
-		if (['chat', 'c', 'say', 'talk'].includes(cmnd)) {
-      /*Give all the users a chat message with all the words of the message except the command word.*/
-			io.emit('chat', messageWords.slice(1).join(" "));
-		}
+		if (['help'].includes(cmnd)) {
+      
+    }
+			if (['chat', 'c', 'say', 'talk'].includes(cmnd)) {
+				/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
+				/*Take all the words except the first, join them together by spaces (the opposite of .split), and send to the clients.*/
+				io.emit('chat', messageWords.slice(1).join(' '));
+			}
 		if (['whisperto', 'sayto', 'talkto', 'tell', 't'].includes(cmnd)) {
 		}
 		if (['yell', 'y', 'scream', 'shout'].includes(cmnd)) {
