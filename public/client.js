@@ -20,15 +20,16 @@ socket.on('print', function (msg) {
 });
 
 var admin = function(commandToExplain) {/*Make a function that gives all the admin functions that are to be used from the 
-console only, and how to use them each, if the commandToExplain parameter is given.*/
+console by moderators, or explains how one is used if the commandToExplain parameter is given.*/
   if(commandToExplain == "watch") {
-    console.log("watch(cmnd, settings);\nAfter using, takes cmnd and watches all prints given to anybody")
+    console.log("watch(cmnd, settings);\nAfter using, takes cmnd and watches all prints given to anybody, logging them to your " +
+                "console")
   } else {
-    console.log("watch\nadmin");
+    console.log("admin\nwatch");
   }
 }
 
-var admin.watch = function(cmnd, settings) {/*Create a function that can be accessed from the dev console to be constantly notified about
+var watch = function(cmnd, settings) {/*Create a function that can be accessed from the dev console to be constantly notified about
 certain */
   
 };
