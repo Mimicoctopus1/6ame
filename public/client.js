@@ -38,8 +38,8 @@ socket.on("log", function(messageToLog) {
   console.log(messageToLog);
 });
 
-var admin = function (command, p) {
-	/*This function is for me only. When you call it...*/
+var admin = function (command, p) {/*Create*/
+	/*This function is for me only. When called...*/
 	socket.emit('admin', [command, p]); /*Bundle all the info and send to index.js.*/
 };
 

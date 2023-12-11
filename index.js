@@ -28,7 +28,7 @@ io.on('connection', function (socket) {
     logged in before...*/
       /*All the admin commands you can use:*/
       if(command === "watch"){
-        
+        {}[parameters[0]]
       } else {
         socket.emit("log")
       }
@@ -36,7 +36,7 @@ io.on('connection', function (socket) {
       socket.emit("log", "You are logged out and what you just entered in is not the correct password.\nUse " +
       "admin(~PASSWORD GOES HERE~) to sign in.");/*Tell the user the password is incorrect.*/
       
-    }
+    };
 	});
 
 	socket.on('message', function (msg) {
