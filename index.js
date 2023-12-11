@@ -22,7 +22,6 @@ io.on('connection', function (socket) {
 
 	socket.on('message', function (msg) {/*When an entry is received from the user...*/
     io.emit("chat", msg);/*Send it to all the other clients.*/
-    console.log(msg);/*Log it in the console.*/
 		let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
 		/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
