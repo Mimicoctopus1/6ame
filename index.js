@@ -14,9 +14,7 @@ app.get('/', function (req, res) {
 });
 
 io.on('connection', function (socket) {
-    console.log('A user connected!');
     socket.on('disconnect', function () {
-      console.log('A user disconnected!');
     });
   
   
@@ -25,11 +23,14 @@ io.on('connection', function (socket) {
       let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
       
       /*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
-      if(["chat", "say", "talk"].includes(cmnd)) {
+      if(["chat", "c", "say", "talk"].includes(cmnd)) {
         io.emit("print", "\"" + messageWords.slice(1) + "\"");/*Message all the words except the command word, in quotation
         marks.*/
       }
-      if(["whisperto", "sayto", "talkto", "tell"].includes(cmnd)) {
+      if(["whisperto", "sayto", "talkto", "tell", "t"].includes(cmnd)) {
+        
+      }
+      if(["yell", "y", "scream", "shout"].includes(cmnd)) {
         
       }
       if(["settings"].includes(cmnd)) {

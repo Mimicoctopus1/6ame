@@ -2,16 +2,16 @@
 
 ### Inside Code
 
-* index.js renders public/index.html, which imports public/index.css and runs public/client.js.
+* index.js renders `public/index.html`, which imports public/index.css and runs public/client.js.
 * Uses socket.io for websocket API (for lack of better resources). Brief socket.io explanation to make a chat app (yes, another 
 chat app) can be found in the 
 [socket.io-explanation folder](https://glitch.com/edit/#!/ojvjpj?path=socket.io-explanation%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
 * .env is the environment variables (secrets) file. I don't use this for user data because when you edit it from JS, you can't
 make it show in the actual file.
-* You can't see the .data file because the .data folder is hidden and you can only access it from the terminal, only nobody can
-get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, the 
-.data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file.
+* You can't see the `.data` files because the .data folder is hidden and you can only access it from the terminal, only nobody 
+can get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, 
+the .data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file.
 * .gitignore tells which files for git to ignore (IDK what this means if you can clarify in the comments that would be nice)
 * .prettierrc is my [PRETTIER](https://prettier.io) format. If you would like to use the default PRETTIER format, simply delete
 the .prettierrc file and it will use the same format as Glitch.
@@ -36,9 +36,12 @@ my notes on the species in this game, and where each one is in the tree of life.
   manager, Package Manager (downloader), and program runner.
   * Console: The console (`Ctrl + Shift + J`) is like a terminal but for websites. (Also it can do math really quick.)
   * Logs: The build-in Glitch logs are basically the console, only you can't enter anything in: you can only *read* logs and 
-  errors.
+  errors. Also, it takes logs and errors from index.js, not `public/client.js`.
 ### To-Do
-
+If you would like to have a feature added to the game, 
+Make whitelist for
 
 
 ### Changelog
+12/11/2023:
+  Added tell, chat, and yell to the text command list.
