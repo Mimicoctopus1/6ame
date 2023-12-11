@@ -21,8 +21,16 @@ io.on('connection', function (socket) {
 		let parameters = arg[1];/*The parameters the client entered in.*/
     /*If the command is the password in .env...*/
 		if(command === process.env.adminPassword){
+      console.log("You are now signed in.")
       var adminIn = true;
-      localStorage.adminPassword = command; /*Save that*/
+      localStorage.adminPassword = command; /*Save the password on the user's computer to prove they have signed in.*/
+    } else if(adminIn || (localStorage.adminPassword === process.env.adminPassword)) {/*Otherwise, if you are logged in or have
+    logged in before...*/
+      /*All the admin commands you can use:*/
+      if(command = "watch"){}
+    } else {/*If you don't know the password or have never logged in before...*/
+      console.log("You are logged out and that is the incorrect password.\nUse admin(~PASSWORD GOES HERE~); to sign in.");
+      
     }
 	});
 
