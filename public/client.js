@@ -6,6 +6,10 @@ const form = document.querySelector('#form');
 const input = document.querySelector('#input');
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
 
+if(localStorage.acceptedToS) {
+  
+}
+
 input.addEventListener('keyup', function (e) {
 	if (e.key === 'Enter' || e.keyCode === 13) {
 		/*When enter is pressed...*/
