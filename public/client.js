@@ -5,9 +5,11 @@ const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
+const ToS = document.querySelectorAll(".ToS")[0];
+const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
 
 if(localStorage.acceptedToS) {
-  
+  ToS.style.display = "none";
 }
 
 input.addEventListener('keyup', function (e) {
