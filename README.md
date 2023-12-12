@@ -4,8 +4,7 @@
 
 * index.js renders `public/index.html`, which imports public/index.css and runs public/client.js.
 * Uses socket.io for websocket API (for lack of better resources). Brief socket.io explanation to make a chat app (yes, another 
-chat app) can be found in the 
-[examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
+chat app) can be found in the [examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
 * .env is the environment variables (secrets) file. I don't use this for user data because when you edit it from JS, you can't
 make it show in the actual file.
@@ -42,13 +41,10 @@ If you would like to have a feature added to the game, please say so in the comm
 message if I can't seem to add your feature. Also, if you remix my project and add something cool, I would like to add that to
 mine as well, so please let me know.
 * Make whitelist for chat.
-  * Allow people who know each other in real life to chat without the whitelist and with a blacklist instead to allow more
-  freedom.
-    * To prove you know somebody in real life, they must sign in on your end with their password, and you must sign in on their
-    end with your password. You can be friends without doing this, but you will still have to use the whitelist.
+  * Allow people who know each other in real life to chat without the whitelist and with a blacklist instead to allow more freedom.
+  * To prove you know somebody in real life, they must sign in on your end with their password, and you must sign in on their end with your password. You can be friends without doing this, but you will still have to use the whitelist.
 * Create the stories.
 
 
 ### Changelog
-12/11/2023:
-  Added tell, chat, and yell to the text command list.
+12/11/2023: Added tell, chat, and yell to the text command list.

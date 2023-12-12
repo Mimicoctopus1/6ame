@@ -7,11 +7,14 @@
 		<link rel="manifest" href="manifest.json" />
 	</head>
 	<body>
-		<ul id="messages"></ul>
-    <div class = "Terms of Service" style = "display: none;">
+		<ul id="messages"><li>hi</li></ul>
+    <div><!--This div covers the entier screen so you can't click anything behind it.-->
+    <div class = "ToS" style = "border: 1px solid black; display: block; position: fixed; left: 5%; top: 5%; height: 90%; width: 90%; z-index: 100;">
       <h1>
-        
+        Terms of Service
       </h1>
+      <input type = "checkbox" value = "I agree">
+    </div>
     </div>
     
 		<!--Right-Click Menu-->
