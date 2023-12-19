@@ -9,13 +9,20 @@ const ToS = document.querySelectorAll(".ToS")[0];
 const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
 const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 
-if(!localStorage.acceptedToS == "true") { /*If the client has never accepted the Terms of Service...*/
+if(localStorage.signedIntoGame != "true") {
+  messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type ~signin~, only without the ~ symbols (tildes). For help, type ~help~, only again without the ~ symbols.</li>"
+}
+
+if(localStorage.acceptedToS != "true") {  /*If the client has never accepted the Terms of Service...*/
   input.style.display = "none";           /*Hide the text-mode input.*/
-  ToS.display = "block";                  /*Prompt the client to accept the Terms of Service.*/
+  ToS.style.display = "block";            /*Prompt the client to accept the Terms of Service.*/
   continueFromToS.addEventListener("click", function() {/*When the continue button is clicked...*/
   if(ToSCheckbox.checked) {               /*Then if the checkbox is checked...*/
     localStorage.acceptedToS = true;      /*Save the data in localStorage.*/
+    input.style.display = "block";        /*Re-show the input.*/
     ToS.style.display = "none";           /*Hide the Terms of Service.*/
+  } else {                                /*If the checkbox isn't checked...*/
+    alert("You haven't clicked the checkbox yet.")
   }
 });
 }
