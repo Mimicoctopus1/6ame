@@ -8,7 +8,14 @@ const rcmenu = document.querySelectorAll('.rcmenu')[0];
 const ToS = document.querySelectorAll(".ToS")[0];
 const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
 
-if(localStorage.acceptedToS) {
+ToSCheckbox.value = false;
+if(ToSCheckbox.value) {
+  console.log("Checkbox checked!")
+  localStorage.acceptedToS = "true";
+}
+console.log(ToSCheckbox.value);
+
+if(localStorage.acceptedToS = "true") {
   ToS.style.display = "none";
 }
 

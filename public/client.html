@@ -8,12 +8,12 @@
 	</head>
 	<body>
 		<ul id="messages"><li>hi</li></ul>
-    <div class = "ToS" style = "position: fixed; left: 0px; top: 0px; height: 100%; width: 100%;"><!--This div covers the entier screen so you can't click anything behind it, although the input has to be blocked from client.js for some reason.-->
+    <div class = "ToS" style = "display: block; position: fixed; left: 0px; top: 0px; height: 100%; width: 100%;"><!--This div covers the entier screen so you can't click anything behind it, although the input has to be blocked from client.js for some reason.-->
     <div style = "border: 1px solid black; position: fixed; left: 5%; top: 5%; height: 90%; width: 90%; z-index: 2147483647;"><!--This is the largest z-index allowed in HTML, so this should be in front of everything else.-->
       <h1>
         Terms of Service
       </h1>
-      <input class = "ToSCheckbox" type = "checkbox" value = "I agree">
+      <input id = "ToSCheckbox" class = "ToSCheckbox" type = "checkbox" value = "I agree">
       I accept and agree to the <a href = "https://ojvjpj.glitch.me/tos">Terms of Use</a>
     </div>
     </div>
