@@ -7,6 +7,7 @@ const input = document.querySelector('#input');
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
 const ToS = document.querySelectorAll(".ToS")[0];
 const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
+document.querySelectorAll("body")[0].style.display = "none";
 
 ToSCheckbox.addEventListener("click", function() {
   if(ToSCheckbox.checked) {
@@ -14,7 +15,7 @@ ToSCheckbox.addEventListener("click", function() {
     localStorage.acceptedToS = "true";
     setTimeout(function() {
       ToS.style.display = "none";
-    }, 1000);
+    }, 500);
   } else {
     localStorage.acceptedToS = "false";
   }
