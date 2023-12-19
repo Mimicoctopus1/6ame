@@ -7,19 +7,20 @@ const input = document.querySelector('#input');
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
 const ToS = document.querySelectorAll(".ToS")[0];
 const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
-document.querySelectorAll("body")[0].style.display = "none";
+const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 
-ToSCheckbox.addEventListener("click", function() {
-  if(ToSCheckbox.checked) {
-    console.log("Checkbox checked!");
-    localStorage.acceptedToS = "true";
-    setTimeout(function() {
-      ToS.style.display = "none";
-    }, 500);
-  } else {
-    localStorage.acceptedToS = "false";
+if(!localStorage.acceptedToS == "true") { /*If the client has never accepted the Terms of Service...*/
+  input.style.display = "none";           /*Hide the text-mode input.*/
+  ToS.display = "block";                  /*Prompt the client to accept the Terms of Service.*/
+  continueFromToS.addEventListener("click", function() {/*When the continue button is clicked...*/
+  if(ToSCheckbox.checked) {               /*Then if the checkbox is checked...*/
+    localStorage.acceptedToS = true;      /*Save the data in localStorage.*/
+    ToS.style.display = "none";           /*Hide the Terms of Service.*/
   }
 });
+}
+
+
 input.addEventListener('keyup', function (e) {
 	if (e.key === 'Enter' || e.keyCode === 13) {
 		/*When enter is pressed...*/
