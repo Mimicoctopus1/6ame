@@ -7,7 +7,29 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-app.use(express.static('public'));
+/*Make functions to read and write JSON*/
+var readJSON = function (jsonFileName) {
+	try {
+		let returnData = JSON.parse(fs.readFileSync(jsonFileName));
+		return returnData;
+	} catch (error) {
+		throw error; /*Send an error to the terminal*/
+		console.error(error); /*Send an error to the user console and the Glitch logs.*/
+	}
+};
+
+var writeJSON = function (jsonFileName, dataToSave) {
+	try {
+		fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
+		return true; /*Return that the data save was successful.*/
+	} catch (error) {
+		throw error; /*Send an error to the terminal*/
+		console.error(error); /*Send an error to the user console and the Glitch logs.*/
+		return false; /*Return that the data save was unsuccessful.*/
+	}
+};
+
+app.use(express.static('public'));/*Tell node and express to use the public folder as the files to send to the client.*/
 
 app.get('/', function (req, res) {
 	res.sendFile(new URL('./public/client.html', import.meta.url).pathname);
@@ -37,6 +59,11 @@ io.on('connection', function (socket) {
 				}
 			}
 		}
+    if(['signin'].includes(cmnd)) {
+      if(readJSON(".data/userdata.json")[messageWords[1]] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get the corresponding password. If it matches the password given by the */
+        
+      }
+    }
 
 		/*Blank template*/
 		if ([].includes(cmnd)) {
@@ -58,25 +85,3 @@ io.on('connection', function (socket) {
 server.listen(3000, function () {
 	console.log('server running at http://localhost:3000');
 });
-
-/*Make files to read and write JSON*/{
-var readJSON = function (jsonFileName) {
-	try {
-		let returnData = JSON.parse(fs.readFileSync(jsonFileName));
-		return returnData;
-	} catch (error) {
-		throw error; /*Send an error to the terminal*/
-		console.error(error); /*Send an error to the user console and the Glitch logs.*/
-	}
-};
-
-var writeJSON = function (jsonFileName, dataToSave) {
-	try {
-		fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
-		return true; /*Return that the data save was successful.*/
-	} catch (error) {
-		throw error; /*Send an error to the terminal*/
-		console.error(error); /*Send an error to the user console and the Glitch logs.*/
-		return false; /*Return that the data save was unsuccessful.*/
-	}
-};}

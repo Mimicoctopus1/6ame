@@ -9,8 +9,8 @@ const ToS = document.querySelectorAll(".ToS")[0];
 const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
 const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 
-if(localStorage.signedIntoGame != "true") {
-  messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type ~signin~, only without the ~ symbols (tildes). For help, type ~help~, only again without the ~ symbols.</li>"
+if(localStorage.signedIntoGame != "true") { /*If you aren't already signed into the game...*/
+  messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type \nsignin\n For help, type \nhelp\n.</li>"
 }
 
 if(localStorage.acceptedToS != "true") {  /*If the client has never accepted the Terms of Service...*/
