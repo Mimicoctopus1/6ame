@@ -8,17 +8,17 @@ const rcmenu = document.querySelectorAll('.rcmenu')[0];
 const ToS = document.querySelectorAll(".ToS")[0];
 const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
 
-ToSCheckbox.value = false;
-if(ToSCheckbox.value) {
-  console.log("Checkbox checked!")
-  localStorage.acceptedToS = "true";
-}
-console.log(ToSCheckbox.value);
-
-if(localStorage.acceptedToS = "true") {
-  ToS.style.display = "none";
-}
-
+ToSCheckbox.addEventListener("click", function() {
+  if(ToSCheckbox.checked) {
+    console.log("Checkbox checked!");
+    localStorage.acceptedToS = "true";
+    setTimeout(function() {
+      ToS.style.display = "none";
+    }, 1000);
+  } else {
+    localStorage.acceptedToS = "false";
+  }
+});
 input.addEventListener('keyup', function (e) {
 	if (e.key === 'Enter' || e.keyCode === 13) {
 		/*When enter is pressed...*/
