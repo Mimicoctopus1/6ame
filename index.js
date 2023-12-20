@@ -61,12 +61,7 @@ io.on('connection', function (socket) {
       }
     }
     if(['signup'].includes(cmnd)) {
-      socket.emit('run', function() {
-        let printItem = document.createElement('li');
-	      printItem.innerHTML = 'Great, please use<br>h';
-	      document.querySelector('#messages').appendChild(printItem);
-        alert();
-      });
+      socket.emit('runSignUpProcedure', "THIS IS A PLACEHOLDER.")
     }
 
 		/*Blank template*/

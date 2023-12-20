@@ -63,6 +63,10 @@ socket.on("log", function(messageToLog) {
   console.log(messageToLog);
 });
 
+socket.on("runSignUpProcedure", function(THIS_IS_A_PLACEHOLDER) {
+  print('Great. To sign up, please enter <code><span class = "argument">signup</span></code>.');
+});
+
 var admin = function (command, p) {
 	/*This function is for me only. When you call it...*/
 	socket.emit('admin', [command, p]); /*Bundle all the info and send to index.js.*/
