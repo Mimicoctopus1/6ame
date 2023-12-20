@@ -36,7 +36,10 @@ input.addEventListener('keyup', function (e) {
 			input.firstChild.textContent,
 		); /*Send a message to the server, index.js. The program seems to always put the message in a div, so I'm selecting the 
     textContent of the firstChild (the div).*/
-		input.innerHTML = ''; /*Clear the entry area. */
+		input.innerHTML = ''; /*Clear the entry area.*/
+	  let printItem = document.createElement('li');
+	  printItem.innerHTML = "--------------------------------------NEW--------------------------------------";
+	  messages.appendChild(printItem);
 	}
 });
 
