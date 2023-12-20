@@ -53,16 +53,20 @@ io.on('connection', function (socket) {
 		}
 		if (['settings'].includes(cmnd)) {
 			if (['notifications'].includes(messageWords[1])) {
-				if (['on'].includes(messageWords[2])) {
-					io.emit('Would you like to activate notifications? Type \n`settings notifications activate` to ');
-				} else {
-				}
 			}
 		}
     if(['signin'].includes(cmnd)) {
       if(readJSON(".data/userdata.json")[messageWords[1]] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get the corresponding password. If it matches the password given by the */
         
       }
+    }
+    if(['signup'].includes(cmnd)) {
+      socket.emit('run', function() {
+        let printItem = document.createElement('li');
+	      printItem.innerHTML = 'Great, please use<br>h';
+	      document.querySelector('#messages').appendChild(printItem);
+        alert();
+      });
     }
 
 		/*Blank template*/
