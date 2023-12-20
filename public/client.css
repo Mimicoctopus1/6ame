@@ -21,15 +21,14 @@ body {
   backdrop-filter: blur(10px);
   z-index: 1;
 }
-#arrowIcon {
-  border: none;
+.arrowSymbol {
+  margin: 0px;
+  border: 0px;
 }
 #input {
-  left: 0px;
-  border: none;
-  padding: 0 1rem;
-  flex-grow: 1;
-  margin: 0.25rem;
+  border: 0px;
+  margin: 0px;
+  width: 100%
 }
 #input:focus {
   outline: none;
