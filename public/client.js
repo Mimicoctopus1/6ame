@@ -64,7 +64,7 @@ socket.on("log", function(messageToLog) {
 });
 
 socket.on("runSignUpProcedure", function(THIS_IS_A_PLACEHOLDER) {
-  print('Great. To sign up, please enter <code>signup<span class = "argument">username</span><span class = "argument">password</span></code>.');
+  print('Great. To sign up, please enter <code>signup <span class = "argument">username</span> <span class = "argument">password</span></code>.');
 });
 
 var admin = function (command, p) {
