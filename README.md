@@ -47,4 +47,5 @@ mine as well, so please let me know.
 
 
 ### Changelog
+12/21/2023: Working on signin and signup features.
 12/11/2023: Added tell, chat, and yell to the text command list.
