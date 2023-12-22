@@ -74,7 +74,7 @@ socket.on("signUpProcedureUsernameTaken", function(){
 });
 
 socket.on('usernameAndPasswordAddedToUserdata', function(usernameAndPassword){
-  print('Great! Your username and password have been added to the system.\nUsername: ' + usernameAndPassword[0] + "\nPassword: " + usernameAndPassword[1]);
+  print('Great! Your username and password have been added to the system.<br>Username: ' + usernameAndPassword[0] + "<br>Password: " + usernameAndPassword[1]);
 });
 
 var admin = function (command, p) {
