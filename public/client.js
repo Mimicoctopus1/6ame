@@ -66,13 +66,15 @@ socket.on("log", function(messageToLog) {
 socket.on("runSignUpProcedure", function(usernameAndPassword) {
   if(usernameAndPassword == undefined) {
     print('To sign up, please enter <code>signup <span class = "argument">username</span> <span class = "argument">password</span></code>.');
-  } else {
-    print('Great! Your username and password have been added to the system.');
   }
 });
 
 socket.on("signUpProcedureUsernameTaken", function(){
-  print('Uh oh! That username is taken. Please repeat with a different username')
+  print('Uh oh! That username is taken. Please repeat with a different username.')
+});
+
+socket.on('usernameAndPasswordAddedToUserdata', function(usernameAndPassword){
+  print('Great! Your username and password have been added to the system.\nUsername: ' + usernameAndPassword[0] + "\nPassword: " + usernameAndPassword[1]);
 });
 
 var admin = function (command, p) {

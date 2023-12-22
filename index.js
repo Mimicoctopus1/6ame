@@ -65,7 +65,10 @@ io.on('connection', function (socket) {
         socket.emit('runSignUpProcedure'); 
       } else {
         if(readJSON('.data/userdata.json')[messageWords[1]] == undefined) {
-          
+          let userdata = readJSON('.data/userdata.json');
+          userdata[messageWords[1]] = userdata[messageWords[2]];
+          writeJSON('.data/userdata.json', userdata);
+          socket.emit('usernameAndPasswordAddedToUserdata', [messageWords[1], readJSON('.data/userdata.json')[messageWords[1]]]);
         } else {
           socket.emit('signUpProcedureUsernameTaken');
         }
