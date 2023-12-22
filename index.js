@@ -61,10 +61,15 @@ io.on('connection', function (socket) {
       }
     }
     if(['signup'].includes(cmnd)) {
-      if() {
-        
+      if(messageWords[2] == undefined) {
+        socket.emit('runSignUpProcedure'); 
+      } else {
+        if(readJSON('.data/userdata.json')[messageWords[1]] == undefined) {
+          
+        } else {
+          socket.emit('signUpProcedureUsernameTaken');
+        }
       }
-      socket.emit('runSignUpProcedure', "THIS IS A PLACEHOLDER.")
     }
 
 		/*Blank template*/

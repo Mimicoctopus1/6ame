@@ -63,8 +63,16 @@ socket.on("log", function(messageToLog) {
   console.log(messageToLog);
 });
 
-socket.on("runSignUpProcedure", function(THIS_IS_A_PLACEHOLDER) {
-  print('Great. To sign up, please enter <code>signup <span class = "argument">username</span> <span class = "argument">password</span></code>.');
+socket.on("runSignUpProcedure", function(usernameAndPassword) {
+  if(usernameAndPassword == undefined) {
+    print('To sign up, please enter <code>signup <span class = "argument">username</span> <span class = "argument">password</span></code>.');
+  } else {
+    print('Great! Your username and password have been added to the system.');
+  }
+});
+
+socket.on("signUpProcedureUsernameTaken", function(){
+  print('Uh oh! That username is taken. Please repeat with a different username')
 });
 
 var admin = function (command, p) {
