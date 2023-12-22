@@ -61,6 +61,9 @@ io.on('connection', function (socket) {
       }
     }
     if(['signup'].includes(cmnd)) {
+      if() {
+        
+      }
       socket.emit('runSignUpProcedure', "THIS IS A PLACEHOLDER.")
     }
 
