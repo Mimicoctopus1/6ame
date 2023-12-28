@@ -11,6 +11,9 @@ const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 
 if(localStorage.signedIntoGame != "true") { /*If you aren't already signed into the game...*/
   messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
+} else {
+  socket.emit('message', 'signin ' + localStorage.username + " " + localStorage.password);
+  messages.innerHTML += "<li>Welcome! You are currently signed in as:<br>" + localStorage.username +"</li>"
 }
 
 if(localStorage.acceptedToS != "true") {  /*If the client has never accepted the Terms of Service...*/
@@ -33,7 +36,7 @@ input.addEventListener('keyup', function (e) {
 		/*When enter is pressed...*/
 		socket.emit(
 			'message',
-			input.firstChild.textContent,
+			input.firstChild.textContent
 		); /*Send a message to the server, index.js. The program seems to always put the message in a div, so I'm selecting the 
     textContent of the firstChild (the div).*/
 		input.innerHTML = ''; /*Clear the entry area.*/
@@ -76,6 +79,12 @@ socket.on("signUpProcedureUsernameTaken", function() {
 socket.on('usernameAndPasswordAddedToUserdata', function(usernameAndPassword){
   print('Great! Your username and password have been added to the system.<br>Username: ' + usernameAndPassword[0] + "<br>Password: " + usernameAndPassword[1]);
   print('To sign into your new account, please type in signin ' + usernameAndPassword[0] + " " + usernameAndPassword[1]);
+});
+
+socket.on('signInGranted', function(words) {
+  localStorage.username = words[0];
+  localStorage.password = words[1];
+  localStorage.signedIntoGame = "true";
 });
 
 socket.on('incorrectPasswordOrUsername', function() {

@@ -57,7 +57,8 @@ io.on('connection', function (socket) {
 			}
 		}
     if(['signin'].includes(cmnd)) {
-      if(readJSON(".data/userdata.json")[messageWords[1]] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get the corresponding password. If it matches the password given by the */  
+      if(readJSON(".data/userdata.json")[messageWords[1]] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get the corresponding password. If it matches the password given by the */
+        socket.emit('signInGranted', [messageWords[1], messageWords[2]]);
       } else {
         socket.emit('incorrectPasswordOrUsername');
       }
