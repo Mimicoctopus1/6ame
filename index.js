@@ -23,11 +23,12 @@ var writeJSON = function (jsonFileName, dataToSave) {
 		fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
 		return true; /*Return that the data save was successful.*/
 	} catch (error) {
-		throw error; /*Send an error to the terminal*/
+		throw error; /*Send an error to the Glitch logs.*/
 		console.error(error); /*Send an error to the user console and the Glitch logs.*/
 		return false; /*Return that the data save was unsuccessful.*/
 	}
 };
+
 
 app.use(express.static('public'));/*Tell node and express to use the public folder as the files to send to the client.*/
 
