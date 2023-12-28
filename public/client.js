@@ -69,16 +69,21 @@ socket.on("runSignUpProcedure", function(usernameAndPassword) {
   }
 });
 
-socket.on("signUpProcedureUsernameTaken", function(){
+socket.on("signUpProcedureUsernameTaken", function() {
   print('Uh oh! That username is taken. Please repeat with a different username.')
 });
 
 socket.on('usernameAndPasswordAddedToUserdata', function(usernameAndPassword){
   print('Great! Your username and password have been added to the system.<br>Username: ' + usernameAndPassword[0] + "<br>Password: " + usernameAndPassword[1]);
+  print('To sign into your new account, please type in signin ' + usernameAndPassword[0] + " " + usernameAndPassword[1]);
 });
 
-var admin = function (command, p) {
-	/*This function is for me only. When you call it...*/
+socket.on('incorrectPasswordOrUsername', function() {
+  print('That password-username combination is incorrect! Please try again.')
+});
+
+var admin = function(command, p) {
+	/*This function is for moderators only. When you call it...*/
 	socket.emit('admin', [command, p]); /*Bundle all the info and send to index.js.*/
 };
 

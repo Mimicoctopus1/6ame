@@ -57,8 +57,9 @@ io.on('connection', function (socket) {
 			}
 		}
     if(['signin'].includes(cmnd)) {
-      if(readJSON(".data/userdata.json")[messageWords[1]] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get the corresponding password. If it matches the password given by the */
-        
+      if(readJSON(".data/userdata.json")[messageWords[1]] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get the corresponding password. If it matches the password given by the */  
+      } else {
+        socket.emit('incorrectPasswordOrUsername');
       }
     }
     if(['signup'].includes(cmnd)) {
@@ -67,7 +68,7 @@ io.on('connection', function (socket) {
       } else {
         if(readJSON('.data/userdata.json')[messageWords[1]] == undefined) {
           let userdata = readJSON('.data/userdata.json');
-          userdata[messageWords[1]] = userdata[messageWords[2]];
+          userdata[messageWords[1]] = messageWords[2];/*Add the password to the corresponding username.*/
           writeJSON('.data/userdata.json', userdata);
           socket.emit('usernameAndPasswordAddedToUserdata', [messageWords[1], readJSON('.data/userdata.json')[messageWords[1]]]);
         } else {
