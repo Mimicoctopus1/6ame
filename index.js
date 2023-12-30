@@ -29,6 +29,18 @@ var writeJSON = function (jsonFileName, dataToSave) {
 	}
 };
 
+var trade = function(inv, socket, arrayMode) {
+  if(arrayMode) {
+    for(let i in inv) {
+      let newI = {};
+      for(let item in i) {
+        newI[item] += 1;
+      }
+      i = newI;
+    }
+  }
+  socket.emit()
+}
 
 app.use(express.static('public'));/*Tell node and express to use the public folder as the files to send to the client.*/
 
@@ -77,9 +89,12 @@ io.on('connection', function (socket) {
         }
       }
     }
-
+		if(['trade'].includes(cmnd)) {
+      trade(messageWords[1]);
+		}
+    
 		/*Blank template*/
-		if ([].includes(cmnd)) {
+		if([].includes(cmnd)) {
 		}
 		/*Blank template*/
 	});
