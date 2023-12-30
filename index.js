@@ -90,7 +90,7 @@ io.on('connection', function (socket) {
       }
     }
 		if(['trade'].includes(cmnd)) {
-      trade(messageWords[1]);
+      trade([], socket);
 		}
     
 		/*Blank template*/
