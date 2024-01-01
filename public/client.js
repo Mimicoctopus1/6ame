@@ -102,9 +102,8 @@ socket.on('buzzermode', function(onOrOff) {
 });
 
 socket.on('buzzesUpdate', function(array) {
-  localStorage.buzzesDetected = array;
-  console.log(localStorage.buzzesDetected);
-  console.log(localStorage.buzzesDetected[0][1] + " buzzed first!");
+  console.log(array);
+  console.log(array[0][1] + " buzzed first!");
 });
 
 var clear = function(){
