@@ -8,6 +8,7 @@ const rcmenu = document.querySelectorAll('.rcmenu')[0];
 const ToS = document.querySelectorAll(".ToS")[0];
 const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
 const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
+const buzzerButton = document.querySelectorAll(".buzzerButton")[0];
 
 if(localStorage.signedIntoGame != "true") { /*If you aren't already signed into the game...*/
   messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
@@ -92,7 +93,12 @@ socket.on('incorrectPasswordOrUsername', function() {
 });
 
 socket.on('buzzermode', function(onOrOff) {
+  buzzerButton.style.display = "block";
   var buzzermode = onOrOff;
+  buzzerButton.addEventListener("click", function() {
+    let timeStamp = new Date().getTime();
+    
+  });
 });
 
 var admin = function(command, p) {
