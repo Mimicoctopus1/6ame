@@ -97,9 +97,19 @@ socket.on('buzzermode', function(onOrOff) {
   var buzzermode = onOrOff;
   localStorage.buzzerName = prompt("What would you like your buzzer name to be?")
   buzzerButton.addEventListener("click", function() {
-    socket.emit("buzzDetected", new Date().getTime());
+    socket.emit("buzzDetected", new Date().getTime(), localStorage.buzzerName);
   });
 });
+
+socket.on('buzzesUpdate', function(array) {
+  localStorage.buzzesDetected = array;
+  console.log(localStorage.buzzesDetected);
+  console.log(localStorage.buzzesDetected[0][1] + " buzzed first!");
+});
+
+var clear = function(){
+  socket.emit("clearBuzzes");
+};
 
 var admin = function(command, p) {
 	/*This function is for moderators only. When you call it...*/

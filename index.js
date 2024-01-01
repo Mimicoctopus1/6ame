@@ -116,11 +116,16 @@ io.on('connection', function (socket) {
   var buzzes = [];
   socket.on("buzzDetected", function(timeStamp, name) {
     /*A buzz just came in.*/
-    buzzes[buzzes.length] = timeStamp;
-    buzzes.sort(function(a, b) {
-      return a - b; /*If a is bigger, return a positive number, if b is bigger, return a negative number.*/
+    buzzes[buzzes.length] = [timeStamp, name];
+    buzzes.sort(function(a, b) {/*Sort the numbers least to greatest.*/
+      return a - b; /*If a is bigger, return a positive number, if b is bigger, return a negative number. Positive, zero, or negative determines which item goes first in the sorted array.*/
     });
+    socket.emit("buzzesUpdate", buzzes);
   });
+  
+  socket.on('clearBuzzes', function(){
+    socket.emit('buzzesUpdate', buzzes);
+  })
 });
 server.listen(3000, function () {
 	console.log('server running at http://localhost:3000');
