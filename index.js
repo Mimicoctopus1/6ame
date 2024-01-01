@@ -93,6 +93,10 @@ io.on('connection', function (socket) {
       trade([], socket);
 		}
     
+    if(['buzz'].includes(cmnd)) {
+      socket.emit('buzzermode', true);
+    }
+    
 		/*Blank template*/
 		if([].includes(cmnd)) {
 		}

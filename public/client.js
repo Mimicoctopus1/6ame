@@ -91,6 +91,10 @@ socket.on('incorrectPasswordOrUsername', function() {
   print('That password-username combination is incorrect! Please try again.')
 });
 
+socket.on('buzzermode', function(onOrOff) {
+  var buzzermode = onOrOff;
+});
+
 var admin = function(command, p) {
 	/*This function is for moderators only. When you call it...*/
 	socket.emit('admin', [command, p]); /*Bundle all the info and send to index.js.*/
