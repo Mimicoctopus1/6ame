@@ -95,6 +95,7 @@ socket.on('incorrectPasswordOrUsername', function() {
 socket.on('buzzermode', function(onOrOff) {
   buzzerButton.style.display = "block";
   var buzzermode = onOrOff;
+  localStorage.buzzerName = prompt("What would you like your buzzer name to be?")
   buzzerButton.addEventListener("click", function() {
     socket.emit("buzzDetected", new Date().getTime());
   });

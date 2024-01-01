@@ -114,9 +114,9 @@ io.on('connection', function (socket) {
   });
   
   var buzzes = [];
-  socket.on("buzzDetected", function(timeStamp) {
+  socket.on("buzzDetected", function(timeStamp, name) {
     /*A buzz just came in.*/
-    buzzes.push(timeStamp);
+    buzzes[buzzes.length] = timeStamp;
   });
 });
 server.listen(3000, function () {
