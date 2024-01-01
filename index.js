@@ -112,8 +112,13 @@ io.on('connection', function (socket) {
       socket.emit("log", "Uh oh! \"" + cmnd + "\" isn't a valid command. Please try again or use admin(\"help\") for help.");
     }
   });
+  
+  var buzzes = [];
+  socket.on("buzzDetected", function(timeStamp) {
+    /*A buzz just came in.*/
+    buzzes.push();
+  });
 });
-
 server.listen(3000, function () {
 	console.log('server running at http://localhost:3000');
 });

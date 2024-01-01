@@ -96,8 +96,7 @@ socket.on('buzzermode', function(onOrOff) {
   buzzerButton.style.display = "block";
   var buzzermode = onOrOff;
   buzzerButton.addEventListener("click", function() {
-    let timeStamp = new Date().getTime();
-    
+    socket.emit("buzzDetected", new Date().getTime());
   });
 });
 
