@@ -23,7 +23,7 @@ if(localStorage.acceptedToS != "true") {  /*If the client has never accepted the
   continueFromToS.addEventListener("click", function() {/*When the continue button is clicked...*/
   if(ToSCheckbox.checked) {               /*Then if the checkbox is checked...*/
     localStorage.acceptedToS = true;      /*Save the data in localStorage.*/
-    input.style.display = "block";        /*Re-show the input.*/
+    input.style.display = "inline";        /*Re-show the input.*/
     ToS.style.display = "none";           /*Hide the Terms of Service.*/
   } else {                                /*If the checkbox isn't checked...*/
     alert("You haven't clicked the checkbox yet.")

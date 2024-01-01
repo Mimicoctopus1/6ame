@@ -117,6 +117,9 @@ io.on('connection', function (socket) {
   socket.on("buzzDetected", function(timeStamp, name) {
     /*A buzz just came in.*/
     buzzes[buzzes.length] = timeStamp;
+    buzzes.sort(function(a, b) {
+      return a - b; /*If a is bigger, return a positive number, if b is bigger, return a negative number.*/
+    });
   });
 });
 server.listen(3000, function () {
