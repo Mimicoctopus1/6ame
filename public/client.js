@@ -107,7 +107,7 @@ socket.on('buzzesUpdate', function(array) {
   buzzesTableBody.innerHTML = "";
   let addArrayToBuzzesTableBodyRep = 0;
   while(addArrayToBuzzesTableBodyRep <= array.length) {
-    buzzesTableBody.innerHTML += "<tr><td>" + array[addArrayToBuzzesTableBodyRep][0] + "</td><td></td></tr>";
+    buzzesTableBody.innerHTML += "<tr><td>" + array[addArrayToBuzzesTableBodyRep][0] + "</td><td>" + array[addArrayToBuzzesTableBodyRep][1]+ "</td></tr>";
   }
 });
 
