@@ -118,8 +118,9 @@ io.on('connection', function (socket) {
   });
   
   socket.on('clearBuzzes', function(){
-    var buzzes = []; /*Clear the buzzes.*/
-    socket.emit('buzzesUpdate', buzzes);
+    buzzes = []; /*Clear the buzzes.*/
+    console.log(buzzes);
+    io.emit('buzzesUpdate', buzzes);
   })
 });
 server.listen(3000, function () {

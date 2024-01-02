@@ -109,14 +109,14 @@ socket.on('buzzermode', function(adminOrNot) {
 });
 
 socket.on('buzzesUpdate', function(array) {
+  console.log(array)
   buzzesTableBody.innerHTML = "";
   let addArrayToBuzzesTableBodyRep = 0;
   while(addArrayToBuzzesTableBodyRep <= array.length) {
-    console.log(addArrayToBuzzesTableBodyRep);
     buzzesTableBody.innerHTML += "<tr><td>" + array[addArrayToBuzzesTableBodyRep][0] + "</td><td>" + array[addArrayToBuzzesTableBodyRep][1]+ "</td></tr>";
     addArrayToBuzzesTableBodyRep += 1;
   }
-  console.log(buzzesTableBody.innerHTML)
+  console.log(buzzesTableBody.innerHTML + " is the HTML");
 });
 
 /*Edit the right click menu*/
