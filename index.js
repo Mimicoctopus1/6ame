@@ -46,8 +46,8 @@ var trade = function(inv, socket, arrayMode) {
 var emailer = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: "",
-    pass: ""
+    user: "lemondelightstand@gmail.com",
+    pass: process.env.emailPassword
   }
 });
 
