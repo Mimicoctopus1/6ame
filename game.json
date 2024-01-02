@@ -1,19 +1,20 @@
 {
-  "Monoverse": {
-    "Monogalaxy": {
-      "Monosystem": {
-        "Monoplanet": {
-          "Monomoon": {
-            
-          },
-          "Mimicoctopus1": {
-            
-          },
-          "JellyBee": {
-            
-          }
-        }
-      }
-    }
-  }
+	"Monoverse": {
+		"Monogalaxy": {
+			"Monosystem": {
+				"Monoplanet": {
+					"Monomoon": {},
+					"Mimicoctopus1": {
+						"vp": "Infinity",
+						"moves": {
+							"hit": {
+                "op": 1
+              }
+						}
+					},
+					"JellyBee": {}
+				}
+			}
+		}
+	}
 }
