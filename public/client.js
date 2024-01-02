@@ -1,5 +1,5 @@
 var gameMode = 'flat';
-const socket = io();/*I know there is an error, but */
+const socket = io();
 
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
@@ -10,6 +10,7 @@ const ToSCheckbox = document.querySelectorAll(".ToSCheckbox")[0];
 const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 const buzzerButton = document.querySelectorAll(".buzzerButton")[0];
 const buzzesTableBody = document.querySelectorAll(".buzzesTableBody")[0];
+const clearBuzzesButton = document.querySelectorAll(".clearBuzzesButton")[0];
 
 if(localStorage.signedIntoGame != "true") { /*If you aren't already signed into the game...*/
   messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
@@ -93,9 +94,11 @@ socket.on('incorrectPasswordOrUsername', function() {
   print('That password-username combination is incorrect! Please try again.')
 });
 
-socket.on('buzzermode', function(onOrOff) {
+socket.on('buzzermode', function(adminOrNot) {
   buzzerButton.style.display = "block";
-  var buzzermode = onOrOff;
+  if(adminOrNot) {
+    clearBuzzesButton.style.display = "block";
+  }
   localStorage.buzzerName = prompt("What would you like your buzzer name to be?");
   buzzerButton.addEventListener("click", function() {
     socket.emit("buzzDetected", new Date().getTime(), localStorage.buzzerName);
@@ -112,11 +115,6 @@ socket.on('buzzesUpdate', function(array) {
     addArrayToBuzzesTableBodyRep += 1;
   }
 });
-
-var admin = function(command, p) {
-	/*This function is for moderators only. When you call it...*/
-	socket.emit('admin', [command, p]); /*Bundle all the info and send to index.js.*/
-};
 
 /*Edit the right click menu*/
 var handlecontextmenu = function (e) {

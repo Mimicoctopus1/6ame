@@ -96,6 +96,9 @@ io.on('connection', function (socket) {
 		}
     
     if(['buzz'].includes(cmnd)) {
+      socket.emit('buzzermode');
+    }
+    if(['buzzadmin'].includes(cmnd)) {
       socket.emit('buzzermode', true);
     }
     
@@ -104,16 +107,6 @@ io.on('connection', function (socket) {
 		}
 		/*Blank template*/
 	});
-  
-  socket.on("admin", function(packagedInfo){
-    let cmnd = packagedInfo[0];
-    let p = packagedInfo[1];
-    if(cmnd = "login") {
-      
-    } else {
-      socket.emit("log", "Uh oh! \"" + cmnd + "\" isn't a valid command. Please try again or use admin(\"help\") for help.");
-    }
-  });
 
   socket.on("buzzDetected", function(timeStamp, name) {
     /*A buzz just came in.*/
