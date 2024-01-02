@@ -1,5 +1,5 @@
 var gameMode = 'flat';
-const socket = io();
+const socket = io();/*I know there is an error, but */
 
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
@@ -112,10 +112,6 @@ socket.on('buzzesUpdate', function(array) {
     addArrayToBuzzesTableBodyRep += 1;
   }
 });
-
-var c = function() {
-  socket.emit("clearBuzzes");
-};
 
 var admin = function(command, p) {
 	/*This function is for moderators only. When you call it...*/
