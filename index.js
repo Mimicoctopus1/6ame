@@ -121,7 +121,7 @@ io.on('connection', function (socket) {
     buzzes.sort(function(a, b) {/*Sort the numbers least to greatest.*/
       return a[0] - b[0]; /*If a is bigger, return a positive number, if b is bigger, return a negative number. Positive, zero, or negative determines which item goes first in the sorted array.*/
     });
-    socket.emit("buzzesUpdate", buzzes);
+    io.emit("buzzesUpdate", buzzes);
   });
   
   socket.on('clearBuzzes', function(){
