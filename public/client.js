@@ -1,6 +1,3 @@
-var gameMode = 'flat';
-const socket = io();
-
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
