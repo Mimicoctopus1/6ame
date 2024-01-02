@@ -98,6 +98,9 @@ socket.on('buzzermode', function(adminOrNot) {
   buzzerButton.style.display = "block";
   if(adminOrNot) {
     clearBuzzesButton.style.display = "block";
+    clearBuzzesButton.addEventListener("click", function() {
+      socket.emit("clearBuzzes");
+    });
   }
   localStorage.buzzerName = prompt("What would you like your buzzer name to be?");
   buzzerButton.addEventListener("click", function() {
@@ -106,7 +109,6 @@ socket.on('buzzermode', function(adminOrNot) {
 });
 
 socket.on('buzzesUpdate', function(array) {
-  console.log(array[0][1] + " buzzed first!");
   buzzesTableBody.innerHTML = "";
   let addArrayToBuzzesTableBodyRep = 0;
   while(addArrayToBuzzesTableBodyRep <= array.length) {
@@ -114,6 +116,7 @@ socket.on('buzzesUpdate', function(array) {
     buzzesTableBody.innerHTML += "<tr><td>" + array[addArrayToBuzzesTableBodyRep][0] + "</td><td>" + array[addArrayToBuzzesTableBodyRep][1]+ "</td></tr>";
     addArrayToBuzzesTableBodyRep += 1;
   }
+  console.log(buzzesTableBody.innerHTML)
 });
 
 /*Edit the right click menu*/
