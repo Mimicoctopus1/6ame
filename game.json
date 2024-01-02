@@ -1,16 +1,19 @@
 {
-  "characters": {
-    "Mimicoctopus1": {
-      "lvl": "Infinity",
-      "pets": {},
-      "friends": [
-        "JellyBee"
-      ]
-    },
-    "JellyBee": {
-      "friends": [
-        "Mimicoctopus1"
-      ]
+  "Monoverse": {
+    "Monogalaxy": {
+      "Monosystem": {
+        "Monoplanet": {
+          "Monomoon": {
+            
+          },
+          "Mimicoctopus1": {
+            
+          },
+          "JellyBee": {
+            
+          }
+        }
+      }
     }
   }
 }
