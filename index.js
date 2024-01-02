@@ -48,6 +48,8 @@ app.get('/', function (req, res) {
 	res.sendFile(new URL('./public/client.html', import.meta.url).pathname);
 });
 
+var buzzes = [];
+
 io.on('connection', function (socket) {
 	socket.on('message', function (msg) {
 		/*When an entry is received from the user...*/ let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
@@ -112,11 +114,10 @@ io.on('connection', function (socket) {
       socket.emit("log", "Uh oh! \"" + cmnd + "\" isn't a valid command. Please try again or use admin(\"help\") for help.");
     }
   });
-  
-  var buzzes = [];
+
   socket.on("buzzDetected", function(timeStamp, name) {
     /*A buzz just came in.*/
-    buzzes[buzzes.length] = [timeStamp, name];
+    buzzes.push([timeStamp, name]);
     console.log(buzzes);
     buzzes.sort(function(a, b) {/*Sort the numbers least to greatest.*/
       return a[0] - b[0]; /*If a is bigger, return a positive number, if b is bigger, return a negative number. Positive, zero, or negative determines which item goes first in the sorted array.*/
