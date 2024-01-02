@@ -1,26 +1,3 @@
-import "filepond/dist/filepond.min.css";
-import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
-
-import FilePondPluginImagePreview from "filepond-plugin-image-preview";
-import { create, registerPlugin } from "filepond";
-
-registerPlugin(FilePondPluginImagePreview);
-
-const inputElement = document.querySelector('input[type="file"]');
-
-create(inputElement, {
-  allowMultiple: true
-});
-
-
-
-
-
-
-
-
-
-
 var gameMode = 'flat';
 const socket = io();
 
