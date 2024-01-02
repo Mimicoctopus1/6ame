@@ -2,6 +2,7 @@ import express from 'express';
 import * as fs from 'fs'; /*File Reader*/
 import {createServer} from 'node:http';
 import {Server} from 'socket.io'; /*socket.io SERVER end*/
+import * as nodemailer from 'nodemailer';
 
 const app = express();
 const server = createServer(app);
@@ -41,6 +42,14 @@ var trade = function(inv, socket, arrayMode) {
   }
   socket.emit()
 }
+
+var emailer = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: "",
+    pass: ""
+  }
+});
 
 app.use(express.static('public'));/*Tell node and express to use the public folder as the files to send to the client.*/
 
