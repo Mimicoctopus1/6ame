@@ -2,9 +2,11 @@
 
 ### Inside Code
 
-* index.js renders `public/client.html`, which imports `public/client.css` and runs `public/client.js`.
-  * client.html:
-    * Uses everything found in [this](https://www.freecodecamp.org/news/upload-files-with-html/) tutorial to get files from users.
+* index.js renders the client files by displaying `public/client.html`.
+  * I use [this tutorial](https://www.w3schools.com/nodejs/nodejs_email.asp) to send emails.
+* public folder
+  * `public/client.html` imports `public/client.css` and runs `public/client.js`.
+  * Uses everything found in [this](https://www.freecodecamp.org/news/upload-files-with-html/) tutorial to get files from users.
 * Uses socket.io for websocket API (for lack of better resources). Brief socket.io explanation to make a chat app (yes, another 
 chat app) can be found in the [examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
