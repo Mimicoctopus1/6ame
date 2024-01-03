@@ -1,4 +1,5 @@
 var socket = io();
+import * as robot from 'robotjs';
 
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
