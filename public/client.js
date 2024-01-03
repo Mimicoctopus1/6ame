@@ -1,8 +1,6 @@
 var gameMode = "flat"
 var socket = io();
 
-
-
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
@@ -16,9 +14,9 @@ const clearBuzzesButton = document.querySelectorAll(".clearBuzzesButton")[0];
 
 if(localStorage.signedIntoGame != "true") { /*If you aren't already signed into the game...*/
   //messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
-  messages.innerHTML += "<li>Please type the word 'buzz' right after the arrow, then press enter.</li>"
+  messages.innerHTML += "<li>Please type the word 'buzz' right after the arrow, then press enter. <a href = '#' onclick = \"socket.emit('message', 'buzz');\">Not working? Click here!</a></li>"
 } else {
-  socket.emit('message', 'signin ' + localStorage.username + " " + localStorage.password);
+  socket.emit('message', 'signin ' + localStorage.username + " " + localStorage.password);/*Automatically sign in*/
   messages.innerHTML += "<li>Welcome! You are currently signed in as:<br>" + localStorage.username +"</li>"
 }
 
