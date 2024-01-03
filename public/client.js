@@ -1,6 +1,8 @@
 var socket = io();
 import * as robot from 'robotjs';
 
+//robot.moveMouseSmooth(0, 0);
+
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
@@ -11,7 +13,6 @@ const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 const buzzerButton = document.querySelectorAll(".buzzerButton")[0];
 const buzzesTableBody = document.querySelectorAll(".buzzesTableBody")[0];
 const clearBuzzesButton = document.querySelectorAll(".clearBuzzesButton")[0];
-
 
 if(localStorage.signedIntoGame != "true") { /*If you aren't already signed into the game...*/
   //messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
