@@ -1,7 +1,4 @@
 var socket = io();
-import * as robot from 'robotjs';
-
-//robot.moveMouseSmooth(0, 0);
 
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
