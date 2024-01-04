@@ -61,7 +61,6 @@ var buzzes = [];
 
 io.on('connection', function (socket) {
 	socket.on('message', function (msg) {
-    console.log(msg)
 		/*When an entry is received from the user...*/ let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
 		if (['help'].includes(cmnd)) {

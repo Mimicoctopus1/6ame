@@ -6,11 +6,10 @@
 					"Monomoon": {},
 					"Mimicoctopus1": {
 						"vp": "Infinity",
-						"moves": {
-							"hit": {
-                "op": 1
-              }
-						}
+						"moves": [
+              "hit"
+            ],
+            
 					},
 					"JellyBee": {}
 				}
