@@ -8,14 +8,19 @@
     <meta class = "googleSignInMeta" name="google-signin-client_id" content="I fill this in from client.js">
 	</head>
 	<body>
+    <div class = "panels">
+      <span onclick = "signOut();">Sign Out</span>
+    </div>
+
 		<ul id="messages"></ul>
     <div style = "display: none; background: rgba(200, 200, 200, 0.8); position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; padding: 5%;" method = "post" enctype = "multipart/form-data" class = "fileUpload"><!--post means send the data to the server and multipart/form-data means that binary data is being sent across, rather than text.-->
       <h1>
         Choose your file!
       </h1>
     </div>
-    <div class = "signInWithThirdPartyButtons">
-      Sign In With Third Party
+    <div style = "display: none;" class = "signInWithThirdPartyButtons">
+      <h1>Sign In With Third Party</h1>
+      <!--Google--><div class="g-signin2" data-onsuccess="onSignIn"></div>
     </div>
     <div class = "buzzerButton" style = "display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(200, 200, 200, 1); padding: 0px"><span style = "position: fixed; top: 45%; left: 40%; font-size: 80px">BUZZ!</span>
       <table>

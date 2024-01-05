@@ -42,14 +42,40 @@ input.focus();
 
 googleSignInMeta.content = process.env.googleSignInKey;
 
-
-/*SOCKET.IO EVENT*/
+/*IMPORTANT FUNCTIONS FOR FUTURE USE*/
 
 var print = function (msgToPrint) {
 	let printItem = document.createElement('li');
 	printItem.innerHTML = msgToPrint;
 	messages.appendChild(printItem);
 };
+
+var googleSignIn = function(googleUser) {
+  function onSignIn(googleUser) {
+    var id_token = googleUser.getAuthResponse().id_token;/*Get the user signin instance ID.*/
+    
+    /**/
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onload = function() {
+    console.log('Signed in as: ' + xhr.responseText);
+};
+xhr.send('idtoken=' + id_token);
+  }
+  var profile = googleUser.getBasicProfile();
+  console.log('ID: ' + profile.getId()); /*NOTE FROM GOOGLE: Do not send to your backend! Use an ID token instead.*/
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail()); /*NOTE FROM GOOGLE: This is null if the 'email' scope is not present.*/
+}
+
+var signOut = function() {
+  /*Sign out from:*/
+  gapi.auth2.getAuthInstance().signOut();/*Google*/
+}
+
+/*SOCKET.IO EVENTS*/
 
 socket.on('chat', function (msg) {
 	let printItem = document.createElement('li');
