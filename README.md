@@ -11,7 +11,7 @@
 chat app) can be found in the [examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
 * .env is the environment variables (secrets) file. I don't use this for user data because when you edit it from JS, you can't
-make it show in the actual file. So far the only things in it are API keys, email passwords, and secrets.
+make it show in the actual file.
 * You can't see the `.data` files because the .data folder is hidden and you can only access it from the terminal, only nobody 
 can get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, 
 the .data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file. The structure of the file looks something like this:
