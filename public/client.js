@@ -12,6 +12,8 @@ const buzzerButton = document.querySelectorAll(".buzzerButton")[0];
 const buzzesTableBody = document.querySelectorAll(".buzzesTableBody")[0];
 const clearBuzzesButton = document.querySelectorAll(".clearBuzzesButton")[0];
 
+/*HTML Setup*/
+
 if(localStorage.signedIntoGame != "true") { /*If you aren't already signed into the game...*/
   //messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
   messages.innerHTML += "<li>Please type the word 'buzz' right after the arrow, then press enter. <a class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>"
@@ -35,12 +37,19 @@ if(localStorage.acceptedToS != "true") {  /*If the client has never accepted the
 }
 
 input.focus();
+document.addEventListener("click", function() {
+  document.body.requestFullscreen();
+});
+
+/*Define functions*/
 
 var print = function (msgToPrint) {
 	let printItem = document.createElement('li');
 	printItem.innerHTML = msgToPrint;
 	messages.appendChild(printItem);
 };
+
+/*Socket event preperation*/
 
 socket.on('chat', function (msg) {
 	let printItem = document.createElement('li');
@@ -105,6 +114,8 @@ socket.on('buzzesUpdate', function(array) {
   }
   console.log(buzzesTableBody.innerHTML + " is the HTML");
 });
+
+/*Event Listeners*/
 
 /*Edit the right click menu*/
 var handlecontextmenu = function (e) {
