@@ -43,7 +43,7 @@ var trade = function(inv, socket, arrayMode) {
   socket.emit()
 }
 
-var emailer = nodemailer.createTransport({
+var emailer = nodemailer.createTransport({/*Setup the account recovery emailer in case you forget your password or something.*/
   service: 'gmail',
   auth: {
     user: "lemondelightstand@gmail.com",
