@@ -145,7 +145,7 @@ var enterBuzzMode = function() {
 };
 
 var enterFullscreen = function() {
-  socket.emit('fullscreenCheck');/*Tell the server to check if it's a good idea to */
+  socket.emit('fullscreenCheck');/*Tell the server to check if it's a good idea to fullscreen or not.*/
 };
 
 document.addEventListener('contextmenu', handlecontextmenu);
