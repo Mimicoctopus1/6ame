@@ -1,4 +1,10 @@
-var gameMode = "flat"
+var gameMode = "2D";
+/*
+text: Text adventure game.
+2D: Flat, top-down view.
+3D: 3D mode;
+blind: Text adventure, only text-to-speech reads out output and voice recognition reads input.
+*/
 var socket = io();
 
 const messages = document.querySelector('#messages');

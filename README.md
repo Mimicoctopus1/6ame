@@ -57,6 +57,7 @@ mine as well, so please let me know.
   * Allow people who know each other in real life to chat without the whitelist and with a blacklist instead to allow more freedom.
   * To prove you know somebody in real life, they must sign in on your end with their password, and you must sign in on their end with your password. You can be friends without doing this, but you will still have to use the whitelist.
 * Create the stories.
+* Finish fullscreen capablilty.
 
 
 ### Changelog

@@ -7,6 +7,15 @@ body {
 body::backdrop { /*body::backdrop is a psuedo (theoretical) -element that is behind the body.*/
   background: rgba(255, 255, 255, 1); /*I make this white so that when you fullscreen, the background is still white; it would usually turn black.*/
 }
+.renderer {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border: 0px solid black;
+  margin: 0px;
+}
 .rcmenu menu li {
   width: 100px;
   border: 1px solid black;
