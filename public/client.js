@@ -37,9 +37,6 @@ if(localStorage.acceptedToS != "true") {  /*If the client has never accepted the
 }
 
 input.focus();
-document.addEventListener("click", function() {
-  document.body.requestFullscreen();
-});
 
 /*Define functions*/
 
@@ -147,6 +144,11 @@ var enterBuzzMode = function() {
   socket.emit('message', 'buzz');
 };
 
+var enterFullscreen = function() {
+  socket.emit('fullscreenCheck');/*Tell the server to check if it's a good idea to */
+};
+
 document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.querySelectorAll(".buzzActivation")[0].addEventListener("click", enterBuzzMode);
+document.addEventListener('click', enterFullscreen);

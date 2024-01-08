@@ -4,6 +4,9 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
 }
+body::backdrop { /*body::backdrop is a psuedo (theoretical) -element that is behind the body.*/
+  background: rgba(255, 255, 255, 1); /*I make this white so that when you fullscreen, the background is still white; it would usually turn black.*/
+}
 .rcmenu menu li {
   width: 100px;
   border: 1px solid black;
