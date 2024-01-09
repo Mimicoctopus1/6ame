@@ -6,15 +6,9 @@ text: Text adventure game.
 blind: Text adventure, only text-to-speech reads out output and voice recognition reads input.
 */
 
-/*Imports*/
-
-import BrowserScreen from 'browser-screen-record';
-
 /*Initializing with functions from imports.*/
 
 var socket = io();/*This error may be looked past; io is imported in client.html.*/
-const screenRecorder = new BrowserScreen();
-
 
 /*Establish HTML elements.*/
 
@@ -167,18 +161,6 @@ var enterBuzzMode = function() {
 
 var enterFullscreen = function() {
   socket.emit('fullscreenCheck');/*Tell the server to check if it's a good idea to fullscreen or not.*/
-};
-
-var startScreenRecording = function() {
-  screenRecorder.startRecord();
-};
-var stopScreenRecording = function() {
-  screen.stopRecord().then(function(blobURL) {
-    mediaPreviewDownload.href = blobURL; /*Add something to download from the download link.   */
-    mediaPreview.src = blobURL;          /*Add some media to the pre-made preview <media> tag. */
-    mediaPreview.play();                 /*Run the built-in HTML function that plays the video.*/
-    URL.revokeObjectURL(blobURL);        /*Get rid of the URL to clear storage.                */
-  });
 };
 
 document.addEventListener('contextmenu', handlecontextmenu);
