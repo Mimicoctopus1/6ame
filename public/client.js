@@ -66,30 +66,6 @@ var print = function (msgToPrint) {
 	messages.appendChild(printItem);
 };
 
-/*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
-var recorder;
-var stream;
-
-async function startRecording() {
-	/*Make a function that...*/
-	stream = await navigator.mediaDevices.getDisplayMedia({
-		/*This built-in function gets permission from the browser */
-		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
-	});
-	recorder = new MediaRecorder(stream);
-
-	const chunks = [];
-	recorder.ondataavailable = function (e) {
-		chunks.push(e.data);
-	};
-	recorder.onstop = function (e) {
-		const completeBlob = new Blob(chunks, {type: chunks[0].type});
-		mediaPreview.src = URL.createObjectURL(completeBlob);
-	};
-
-	recorder.start();
-}
-
 /*Socket event preperation*/
 
 socket.on('chat', function (msg) {
@@ -200,7 +176,46 @@ var enterFullscreen = function () {
 	socket.emit('fullscreenCheck'); /*Tell the server to check if it's a good idea to fullscreen or not.*/
 };
 
+/*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
+var recorder;
+var stream;
+
+/*Make a function that...*/
+var startRecording = async function (e) { 
+	stream = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
+		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
+	});
+	recorder = new MediaRecorder(stream);
+
+	const chunks = [];
+	recorder.ondataavailable = function(e) {
+		chunks.push(e.data);
+	};
+	recorder.onstop = function(e) {
+		const completeBlob = new Blob(chunks, {type: chunks[0].type});
+		mediaPreview.src = URL.createObjectURL(completeBlob);
+	};
+
+	recorder.start();
+
+	/*Make it so you can't start it again until you stop it.*/
+	mediaPreviewStart.disabled = true;
+	mediaPreviewStop.disabled = false;
+};
+
+var stopRecording = function(e) {
+	mediaPreviewStop.disabled = true;
+	mediaPreviewStart.disabled = false;
+
+	mediaPreview.controls = true;
+
+	recorder.stop();
+	stream.getVideoTracks()[0].stop();
+};
+
 document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.querySelectorAll('.buzzActivation')[0].addEventListener('click', enterBuzzMode);
 document.addEventListener('click', enterFullscreen);
+mediaPreviewStart.addEventListener('click', startRecording);
+mediaPreviewStop.addEventListener('click', stopRecording);
