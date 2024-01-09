@@ -61,6 +61,8 @@ var print = function (msgToPrint) {
 	messages.appendChild(printItem);
 };
 
+
+
 /*Socket event preperation*/
 
 socket.on('chat', function (msg) {
@@ -153,7 +155,7 @@ var handleInputKeyup = function (e) {
 	  printItem.innerHTML = "------------------------------------------------NEW------------------------------------------------";
 	  messages.appendChild(printItem);
 	}
-}
+};
 
 var enterBuzzMode = function() {
   socket.emit('message', 'buzz');
@@ -167,5 +169,3 @@ document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.querySelectorAll(".buzzActivation")[0].addEventListener("click", enterBuzzMode);
 document.addEventListener('click', enterFullscreen);
-
-var startRecording = async function() {}

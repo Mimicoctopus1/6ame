@@ -3,7 +3,7 @@
 	<body>
 		<button id="start"> Start Recording </button>
 		<button id="stop" disabled> Stop Recording </button>
-		<video autoplay />
+		<video autoplay/>
 
 		<script>
 			const start = document.getElementById('start');
@@ -39,7 +39,9 @@
 			stop.addEventListener('click', function() {
 				stop.disabled = true;
 				start.disabled = false;
-
+        
+        video.controls = true;
+        
 				recorder.stop();
 				stream.getVideoTracks()[0].stop();
 			});
