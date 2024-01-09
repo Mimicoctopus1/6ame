@@ -10,8 +10,12 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 
 import BrowserScreen from 'browser-screen-record';
 
+/*Initializing with functions from imports.*/
 
 var socket = io();/*This error may be looked past; io is imported in client.html.*/
+const screenRecorder = new BrowserScreen();
+
+
 /*Establish HTML elements.*/
 
 const messages = document.querySelector('#messages');
@@ -24,6 +28,8 @@ const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 const buzzerButton = document.querySelectorAll(".buzzerButton")[0];
 const buzzesTableBody = document.querySelectorAll(".buzzesTableBody")[0];
 const clearBuzzesButton = document.querySelectorAll(".clearBuzzesButton")[0];
+const mediaPreview = document.querySelectorAll(".mediaPreview")[0];
+const mediaPreviewDownload = document.querySelectorAll(".mediaPreviewDownload")[0];
 const mediaPreviewStart = document.querySelectorAll(".mediaPreviewStart")[0];
 const mediaPreviewStop = document.querySelectorAll(".mediaPreviewStop")[0];
 
@@ -163,8 +169,21 @@ var enterFullscreen = function() {
   socket.emit('fullscreenCheck');/*Tell the server to check if it's a good idea to fullscreen or not.*/
 };
 
+var startScreenRecording = function() {
+  screenRecorder.startRecord();
+};
+var stopScreenRecording = function() {
+  screen.stopRecord().then(function(blobURL) {
+    mediaPreviewDownload.href = blobURL; /*Add something to download from the download link.   */
+    mediaPreview.src = blobURL;          /*Add some media to the pre-made preview <media> tag. */
+    mediaPreview.play();                 /*Run the built-in HTML function that plays the video.*/
+    URL.revokeObjectURL(blobURL);        /*Get rid of the URL to clear storage.                */
+  });
+};
+
 document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.querySelectorAll(".buzzActivation")[0].addEventListener("click", enterBuzzMode);
 document.addEventListener('click', enterFullscreen);
-mediaPreviewStart.addEventListener('click', screen.startRecord);
+mediaPreviewStart.addEventListener('click', startScreenRecording);
+mediaPreviewStart.addEventListener('click', stopScreenRecording);
