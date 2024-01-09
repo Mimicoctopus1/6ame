@@ -20,10 +20,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <canvas class = "3dRenderer renderer"></canvas><!--The canvas for rendering in 3D-->
     
     <div style = "display: block; background: rgba(200, 200, 200, 0.8); position: fixed; left: 0px; top: 0px; width: 100%; height: 100%; padding: 5%;" method = "post" enctype = "multipart/form-data" class = "fileUpload"><!--post means send the data to the server and multipart/form-data means that binary data is being sent across, rather than text.-->
-      <embed src = "https://filebin.net/monogame/Monologo.png">
-      <iframe src = "https://filebin.net">
-        Uh oh! Can't connect to uploading system. Try using a different browser such as Google Chrome or switch computers.
-      </iframe>
+      <embed class = "mediaPreview" autoplay><!--This is to preview the media the user has selected.-->
     </div>
     <div class = "buzzerButton" style = "display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; background: rgba(200, 200, 200, 1); padding: 0px"><span style = "position: fixed; top: 45%; left: 40%; font-size: 80px">BUZZ!</span>
       <table>
