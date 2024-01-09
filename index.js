@@ -5,17 +5,6 @@ import {Server} from 'socket.io'; /*socket.io SERVER end*/
 import * as nodemailer from 'nodemailer';
 import { exec } from 'child_process';
 
-/*exec(``, function(error, stdout, stderr) {
-  if (error) {
-    console.error(`Error: ${error}`);
-    return;
-  }
-  if (stderr) {
-    console.error(`stderr: ${stderr}`);
-    return;
-  }
-  console.log(`stdout: ${stdout}`);
-});*/
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
@@ -142,7 +131,21 @@ io.on('connection', function (socket) {
     buzzes = []; /*Clear the buzzes.*/
     console.log(buzzes);
     io.emit('buzzesUpdate', buzzes);
-  })
+  });
+  
+  socket.on("filebin", function(){
+  /*exec(``, function(error, stdout, stderr) {
+  if (error) {
+    console.error(`Error: ${error}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`stderr: ${stderr}`);
+    return;
+  }
+    console.log(`stdout: ${stdout}`);
+  });*/
+  });
 });
 server.listen(3000, function () {
 	console.log('server running at http://localhost:3000');
