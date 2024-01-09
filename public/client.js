@@ -192,6 +192,8 @@ var startRecording = async function (e) {
 		chunks.push(e.data);
 	};
 	recorder.onstop = function(e) {
+    mediaPreviewStop.disabled = true;
+    mediaPreviewStart.disabled = false;
 		const completeBlob = new Blob(chunks, {type: chunks[0].type});
 		mediaPreview.src = URL.createObjectURL(completeBlob);
 	};
@@ -207,7 +209,7 @@ var stopRecording = function(e) {
 	mediaPreviewStop.disabled = true;
 	mediaPreviewStart.disabled = false;
 
-	mediaPreview.controls = true;
+	mediaPreview.controls = true; /*Show to controls, which couldn't be shown before or they would show for a blank video frame.*/
 
 	recorder.stop();
 	stream.getVideoTracks()[0].stop();
