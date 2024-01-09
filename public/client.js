@@ -167,5 +167,5 @@ document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.querySelectorAll(".buzzActivation")[0].addEventListener("click", enterBuzzMode);
 document.addEventListener('click', enterFullscreen);
-mediaPreviewStart.addEventListener('click', startScreenRecording);
-mediaPreviewStart.addEventListener('click', stopScreenRecording);
+
+var startRecording = async function() {}
