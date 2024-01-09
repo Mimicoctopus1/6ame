@@ -5,7 +5,14 @@ text: Text adventure game.
 3D: 3D mode;
 blind: Text adventure, only text-to-speech reads out output and voice recognition reads input.
 */
-var socket = io();
+
+/*Imports*/
+
+import BrowserScreen from 'browser-screen-record';
+
+
+var socket = io();/*This error may be looked past; io is imported in client.html.*/
+/*Establish HTML elements.*/
 
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
@@ -17,6 +24,8 @@ const continueFromToS = document.querySelectorAll(".continueFromToS")[0];
 const buzzerButton = document.querySelectorAll(".buzzerButton")[0];
 const buzzesTableBody = document.querySelectorAll(".buzzesTableBody")[0];
 const clearBuzzesButton = document.querySelectorAll(".clearBuzzesButton")[0];
+const mediaPreviewStart = document.querySelectorAll(".mediaPreviewStart")[0];
+const mediaPreviewStop = document.querySelectorAll(".mediaPreviewStop")[0];
 
 /*HTML Setup*/
 
@@ -158,3 +167,4 @@ document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.querySelectorAll(".buzzActivation")[0].addEventListener("click", enterBuzzMode);
 document.addEventListener('click', enterFullscreen);
+mediaPreviewStart.addEventListener('click', screen.startRecord);
