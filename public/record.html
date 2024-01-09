@@ -18,8 +18,10 @@
 				recorder = new MediaRecorder(stream);
 
 				const chunks = [];
-				recorder.ondataavailable = (e) => chunks.push(e.data);
-				recorder.onstop = (e) => {
+				recorder.ondataavailable = function(e) {
+          chunks.push(e.data);
+        }
+        recorder.onstop = function(e) {
 					const completeBlob = new Blob(chunks, {type: chunks[0].type});
 					video.src = URL.createObjectURL(completeBlob);
 				};
