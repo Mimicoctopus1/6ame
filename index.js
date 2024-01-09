@@ -3,7 +3,19 @@ import * as fs from 'fs'; /*File Reader*/
 import {createServer} from 'node:http';
 import {Server} from 'socket.io'; /*socket.io SERVER end*/
 import * as nodemailer from 'nodemailer';
+import { exec } from 'child_process';
 
+exec(``, (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error: ${error}`);
+    return;
+  }
+  if (stderr) {
+    console.error(`stderr: ${stderr}`);
+    return;
+  }
+  console.log(`stdout: ${stdout}`);
+});
 const app = express();
 const server = createServer(app);
 const io = new Server(server);
