@@ -11,9 +11,9 @@
 			const video = document.querySelector('video');
 			let recorder, stream;
 
-			async function startRecording() {
-				stream = await navigator.mediaDevices.getDisplayMedia({
-					video: {mediaSource: 'screen'},
+			async function startRecording() { /*Make a function that...*/
+				stream = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
+					video: {mediaSource: 'screen'}/*The user MUST allow */
 				});
 				recorder = new MediaRecorder(stream);
 
