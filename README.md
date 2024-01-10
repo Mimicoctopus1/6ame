@@ -4,6 +4,7 @@
 
 * index.js renders the client files by displaying `public/client.html`.
   * I use [this tutorial](https://www.w3schools.com/nodejs/nodejs_email.asp) to send emails.
+  * Screen recording with this [DEV.to](https://shorturl.at/erzMN) article. It might take a while to understand but it's worth it.
 * public folder
   * `public/client.html` imports `public/client.css` and runs `public/client.js`.
   * Uses everything found in [this](https://www.freecodecamp.org/news/upload-files-with-html/) tutorial to get files from users.
@@ -33,7 +34,7 @@ the .data folder disappears. If you're remixing this, you may want to create the
 
 
 
-* .gitignore tells which files for git to ignore (IDK what this means if you can clarify in the comments that would be nice)
+* .gitignore tells which files for git to ignore
 * .prettierrc is my [PRETTIER](https://prettier.io) format. If you would like to use the default PRETTIER format, simply delete
 the .prettierrc file and it will use the same format as Glitch.
 * LICENSE is the MIT LICENSE document.
@@ -59,7 +60,7 @@ my notes on the species in this game, and where each one is in the tree of life.
   * Logs: The build-in Glitch logs are basically the console, only you can't enter anything in: you can only *read* logs and 
   errors. Also, it takes logs and errors from index.js, not `public/client.js`.
 ### To-Do
-If you would like to have a feature added to the game, please say so in the comments and I will add it here, or reply to your
+If you would like to have a feature added to the game, please request to edit and send me a message the request and I will add it here, or reply to your
 message if I can't seem to add your feature. Also, if you remix my project and add something cool, I would like to add that to
 mine as well, so please let me know.
 * Make whitelist for chat.

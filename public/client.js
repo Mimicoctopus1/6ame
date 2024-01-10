@@ -192,8 +192,11 @@ var startRecording = async function(e) {
 		chunks.push(e.data);
 	};
 	recorder.onstop = function(e) { /*Do the following when the recording is stopped by the stopRecording function below*/
+    /*Make it so you can't stop it again until you start it again.*/
     mediaPreviewStop.disabled = true;
     mediaPreviewStart.disabled = false;
+    mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
+    
 		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
     mediaPreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
     var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
@@ -209,13 +212,8 @@ var startRecording = async function(e) {
 };
 
 var stopRecording = function(e) {
-	mediaPreviewStop.disabled = true;
-	mediaPreviewStart.disabled = false;
-
-	mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
-
-	recorder.stop();
-	stream.getVideoTracks()[0].stop();
+	recorder.stop();                  /*Stop the recording, automatically calling recorder.onstop();*/
+	stream.getVideoTracks()[0].stop();/*Stop the stream (I think). Go to https://shorturl.at/erzMN to find the real answer. Attempt to let me know if you do.*/
 };
 
 document.addEventListener('contextmenu', handlecontextmenu);
