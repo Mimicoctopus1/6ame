@@ -133,8 +133,12 @@ io.on('connection', function (socket) {
     io.emit('buzzesUpdate', buzzes);
   });
   
-  socket.on("filebin", function(){
-  /*exec(``, function(error, stdout, stderr) {
+  socket.on("filebin", function(file){
+  exec(`curl -X 'POST' \
+  'https://filebin.net/monogame/file' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/octet-stream' \
+  --data-binary '` + file + `'`, function(error, stdout, stderr) {
   if (error) {
     console.error(`Error: ${error}`);
     return;
@@ -144,7 +148,7 @@ io.on('connection', function (socket) {
     return;
   }
     console.log(`stdout: ${stdout}`);
-  });*/
+  });
   });
 });
 server.listen(3000, function () {

@@ -194,8 +194,10 @@ var startRecording = async function (e) {
 	recorder.onstop = function(e) {
     mediaPreviewStop.disabled = true;
     mediaPreviewStart.disabled = false;
-		const completeBlob = new Blob(chunks, {type: chunks[0].type});
+		var completeBlob = new Blob(chunks, {type: chunks[0].type});
 		mediaPreview.src = URL.createObjectURL(completeBlob);
+    socket.emit('filebin', mediaPreview.src);
+    URL.revokeObjectURL(completeBlob);
 	};
 
 	recorder.start();
