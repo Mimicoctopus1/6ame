@@ -178,6 +178,7 @@ var enterFullscreen = function() {
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
 var recorder;
 var stream;
+var chunks;
 
 /*Make a function that...*/
 var startRecording = async function(e) { 
@@ -186,19 +187,20 @@ var startRecording = async function(e) {
 	});
 	recorder = new MediaRecorder(stream);
 
-	const chunks = [];
+	chunks = []; /*Make a variable to store chunks of video.*/
 	recorder.ondataavailable = function(e) {
 		chunks.push(e.data);
 	};
-	recorder.onstop = function(e) {
+	recorder.onstop = function(e) { /*Do the following when the recording is stopped by the stopRecording function below*/
     mediaPreviewStop.disabled = true;
     mediaPreviewStart.disabled = false;
-		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob. The type: chunks[0].type tells the program the blob type (mp4, MOV, etc.) is the same as the beginning of the video. A blob is just a file without a name or lastModified date object.*/
+		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
     mediaPreview.src = URL.createObjectURL(mediaBlob);/*URL.createObjectURL creates a blob URL. A blob url such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
-    var mediaFile = new File([mediaBlob]);            /*Make a file out of the blob*/
+    var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob*/
     var mediaFileURL = URL.createObjectURL(mediaFile);
-    socket.emit('mediaUpload', mediaFile);            /*Tell the server to upload this to my file storing system.*/
-    URL.revokeObjectURL(mediaBlob);                   /*Delete the blob URL.*/
+    console.log(mediaFileURL);
+    socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.*/
+    URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.*/
     URL.revokeObjectURL(mediaFileURL);
 	};
 
@@ -213,7 +215,7 @@ var stopRecording = function(e) {
 	mediaPreviewStop.disabled = true;
 	mediaPreviewStart.disabled = false;
 
-	mediaPreview.controls = true; /*Show to controls, which couldn't be shown before or they would show for a blank video frame.*/
+	mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
 
 	recorder.stop();
 	stream.getVideoTracks()[0].stop();
