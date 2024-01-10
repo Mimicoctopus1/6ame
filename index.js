@@ -138,12 +138,12 @@ io.on('connection', function (socket) {
   'https://filebin.net/monogame/file' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/octet-stream' \
-  --data-binary '` + file + `'`, function(error, stdout, stderr) {
-  if (error) {
+  --data-binary @'` + file + `'`, function(error, stdout, stderr) {
+  if(error) {
     console.error(`Error: ${error}`);
     return;
   }
-  if (stderr) {
+  if(stderr) {
     console.error(`stderr: ${stderr}`);
     return;
   }
@@ -151,6 +151,7 @@ io.on('connection', function (socket) {
   });
   });
 });
+
 server.listen(3000, function () {
 	console.log('server running at http://localhost:3000');
 });
