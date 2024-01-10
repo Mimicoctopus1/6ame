@@ -94,8 +94,8 @@ io.on('connection', function (socket) {
         if(readJSON('.data/userdata.json')[messageWords[1]['password']] == undefined) {
           let userdata = readJSON('.data/userdata.json');
           userdata[messageWords[1]['password']] = messageWords[2];/*Add the password to the corresponding username.*/
-          writeJSON('.data/userdata.json', userdata);
-          socket.emit('usernameAndPasswordAddedToUserdata', [messageWords[1], readJSON('.data/userdata.json')[messageWords[1]['p]]);
+          writeJSON('.data/userdata.json', userdata);             /*Update userdata.json.*/
+          socket.emit('usernameAndPasswordAddedToUserdata', [messageWords[1], readJSON('.data/userdata.json')[messageWords[1]]['password']]);
         } else {
           socket.emit('signUpProcedureUsernameTaken');
         }

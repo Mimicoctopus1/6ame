@@ -16,9 +16,18 @@ make it show in the actual file.
 can get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, 
 the .data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file. The structure of the file looks something like this:
 {
-  "Username": "Password",
-  "Johndoe": "opensesame",
-  "bob": "qwerty"
+  "username": {
+    "password": "password",
+    "media": ['https://example.com/1.png']
+  },
+  "JohnDoe": {
+    "password": "ooga-booga",
+    "media": ['https://cdn.leech.com/adfu9eufiue9fuiidoasuf9euo/dancing%20video.mvk']
+  },
+  "Mimicoctopus1": {
+    "password": "abc123",
+    "media": ['https://example.com/NO, that is NOT my real password.']
+  }
 }
 
 
