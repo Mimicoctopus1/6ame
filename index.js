@@ -142,7 +142,7 @@ io.on('connection', function (socket) {
       }
     });
   
-    /*Run the string in the terminal*//*The string saves the file in my fairly badly hidden*/
+    /*Run the string in the terminal*//*The string saves the file in my fairly badly hidden database by its API.*/
     exec(`
       curl -X 'POST' \
       'https://filebin.net/monogame/` + `' \
