@@ -134,15 +134,16 @@ io.on('connection', function (socket) {
   });
   
   socket.on('mediaUpload', function(file){
-
-  fs.appendFile('mynewfile1.txt', file, function (err) {
-    if (err) {
-      throw err;
-    }
-    console.log('Saved!');
-  });
+    console.log("mediaUpload")
+    console.log(file);
+    fs.appendFile('movie.mkv', file, function (err) {
+      if (err) {
+        throw err;
+      }
+      console.log('Saved!');
+    });
   
-  exec(`curl -X 'POST' \
+  /*exec(`curl -X 'POST' \
   'https://filebin.net/monogame/file' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/octet-stream' \
@@ -156,7 +157,7 @@ io.on('connection', function (socket) {
     return;
   }
     console.log(`stdout: ${stdout}`);
-  });
+  });*/
   });
 });
 
