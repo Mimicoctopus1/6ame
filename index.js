@@ -136,7 +136,7 @@ io.on('connection', function (socket) {
   socket.on('mediaUpload', function(file){
     console.log("mediaUpload")
     console.log(file);
-    fs.writeFile('public/media.mkv', file, function(err) {/*Store the file, overwriting previous files, but upon an error...*/
+    fs.writeFile('media.mkv', file, function(err) {/*Store the file, overwriting previous files, but upon an error...*/
       if (err) { 
         throw err; /*Throw it.*/
       }
@@ -145,10 +145,10 @@ io.on('connection', function (socket) {
     /*Run the string in the terminal*//*The string saves the file in my fairly badly hidden database by its API.*/
     exec(`
       curl -X 'POST' \
-      'https://filebin.net/monogame/` + `' \
+      'https://filebin.net/monogame/` + "filename" +  `' \
       -H 'accept: application/json' \
       -H 'Content-Type: application/octet-stream' \
-      --data-binary '@public/media.mkv'`, function(error, stdout, stderr) {/*Do something with the terminal output.*/}
+      --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*Do something with the terminal output.*/}
     );
   });
 });
