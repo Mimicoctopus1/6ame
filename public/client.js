@@ -180,7 +180,7 @@ var recorder;
 var stream;
 
 /*Make a function that...*/
-var startRecording = async function (e) { 
+var startRecording = async function(e) { 
 	stream = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
 		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
 	});
@@ -193,11 +193,11 @@ var startRecording = async function (e) {
 	recorder.onstop = function(e) {
     mediaPreviewStop.disabled = true;
     mediaPreviewStart.disabled = false;
-		var completeBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob. The type: chunks[0].type tells the program the blob type (mp4, MOV, etc.) is the same as the beginning of the video. A blob is just a file without a name or lastModified date object.*/
-		mediaPreview.src = URL.createObjectURL(completeBlob);/*URL.createObjectURL creates a .*/
-    var filedBlob = new File([completeBlob]);
-    socket.emit('filebin', mediaPreview.src);
-    URL.revokeObjectURL(completeBlob);/*Delete the blob.*/
+		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob. The type: chunks[0].type tells the program the blob type (mp4, MOV, etc.) is the same as the beginning of the video. A blob is just a file without a name or lastModified date object.*/
+		mediaPreview.src = URL.createObjectURL(mediaBlob);/*URL.createObjectURL creates a blobURL go to t.ly/irW5P.*/
+    var mediaFile = new File([mediaBlob]);            /*Make a file out of the blob*/
+    socket.emit('saveFile', mediaPreview.src);        /*Tell the server to upload this to my file storing system.*/
+    URL.revokeObjectURL(mediaBlob);                   /*Delete the blob URL.*/
 	};
 
 	recorder.start();
