@@ -136,7 +136,7 @@ io.on('connection', function (socket) {
   socket.on('mediaUpload', function(file){
     console.log("mediaUpload")
     console.log(file);
-    fs.appendFile('movie.mkv', file, function (err) {
+    fs.appendFile('public/media.mkv', file, function (err) {
       if (err) {
         throw err;
       }
