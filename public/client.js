@@ -1,4 +1,5 @@
 var gameMode = '2D';
+
 /*
 text: Text adventure game.
 2D: Flat, top-down view.
@@ -7,9 +8,7 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 */
 
 /*Initializing with functions from imports.*/
-
 var socket = io(); /*This error may be looked past; io is imported in client.html.*/
-
 /*Establish HTML elements.*/
 
 const messages = document.querySelector('#messages');
@@ -194,10 +193,9 @@ var startRecording = async function (e) {
 	recorder.onstop = function(e) {
     mediaPreviewStop.disabled = true;
     mediaPreviewStart.disabled = false;
-		var completeBlob = new Blob(chunks, {type: chunks[0].type});
-    socket.emit('filebin', mediaPreview.src);
-		mediaPreview.src = URL.createObjectURL(completeBlob);
-    var file
+		var completeBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob. The type: chunks[0].type tells the program the blob type (mp4, MOV, etc.) is the same as the beginning of the video. A blob is just a file without a name or lastModified date object.*/
+		mediaPreview.src = URL.createObjectURL(completeBlob);/*URL.createObjectURL creates a .*/
+    var filedBlob = new File([completeBlob]);
     socket.emit('filebin', mediaPreview.src);
     URL.revokeObjectURL(completeBlob);/*Delete the blob.*/
 	};
