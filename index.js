@@ -142,21 +142,14 @@ io.on('connection', function (socket) {
       }
     });
   
-  exec(`curl -X 'POST' \
-  ='https://filebin.net/monogame/adsfh' \
-  -H 'accept: application/json' \
-  -H 'Content-Type: application/octet-stream' \
-  --data-binary '@public/media.mkv'`, function(error, stdout, stderr) {
-  if(error) {
-    console.error(`Error: ${error}`);
-    return;
-  }
-  if(stderr) {
-    console.error(`stderr: ${stderr}`);
-    return;
-  }
-    console.log(`stdout: ${stdout}`);
-  });
+    /*Run the string in the terminal*//*The string saves the file in my fairly badly hidden*/
+    exec(`
+      curl -X 'POST' \
+      'https://filebin.net/monogame/` + `' \
+      -H 'accept: application/json' \
+      -H 'Content-Type: application/octet-stream' \
+      --data-binary '@public/media.mkv'`, function(error, stdout, stderr) {/*Do something with the terminal output.*/}
+    );
   });
 });
 
