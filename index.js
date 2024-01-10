@@ -136,18 +136,17 @@ io.on('connection', function (socket) {
   socket.on('mediaUpload', function(file){
     console.log("mediaUpload")
     console.log(file);
-    fs.appendFile('public/media.mkv', file, function (err) {
-      if (err) {
-        throw err;
+    fs.writeFile('public/media.mkv', file, function(err) {/*Store the file, overwriting previous files, but upon an error...*/
+      if (err) { 
+        throw err; /*Throw it.*/
       }
-      console.log('Saved!');
     });
   
-  /*exec(`curl -X 'POST' \
-  'https://filebin.net/monogame/file' \
+  exec(`curl -X 'POST' \
+  ='https://filebin.net/monogame/adsfh' \
   -H 'accept: application/json' \
   -H 'Content-Type: application/octet-stream' \
-  --data-binary @'` + file + `'`, function(error, stdout, stderr) {
+  --data-binary '@public/media.mkv'`, function(error, stdout, stderr) {
   if(error) {
     console.error(`Error: ${error}`);
     return;
@@ -157,7 +156,7 @@ io.on('connection', function (socket) {
     return;
   }
     console.log(`stdout: ${stdout}`);
-  });*/
+  });
   });
 });
 
