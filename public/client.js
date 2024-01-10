@@ -194,7 +194,8 @@ var startRecording = async function(e) {
     mediaPreviewStop.disabled = true;
     mediaPreviewStart.disabled = false;
 		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob. The type: chunks[0].type tells the program the blob type (mp4, MOV, etc.) is the same as the beginning of the video. A blob is just a file without a name or lastModified date object.*/
-		mediaPreview.src = URL.createObjectURL(mediaBlob);/*URL.createObjectURL creates a blob URL. A blob url such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.]]]*/
+		
+    mediaPreview.src = URL.createObjectURL(mediaBlob);/*URL.createObjectURL creates a blob URL. A blob url such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.]]]*/
     var mediaFile = new File([mediaBlob]);            /*Make a file out of the blob*/
     socket.emit('mediaUpload', mediaFile);            /*Tell the server to upload this to my file storing system.*/
     URL.revokeObjectURL(mediaBlob);                   /*Delete the blob URL.*/

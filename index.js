@@ -134,6 +134,14 @@ io.on('connection', function (socket) {
   });
   
   socket.on('mediaUpload', function(file){
+
+  fs.appendFile('mynewfile1.txt', file, function (err) {
+    if (err) {
+      throw err;
+    }
+    console.log('Saved!');
+  });
+  
   exec(`curl -X 'POST' \
   'https://filebin.net/monogame/file' \
   -H 'accept: application/json' \
