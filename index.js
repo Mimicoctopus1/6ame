@@ -133,7 +133,7 @@ io.on('connection', function (socket) {
     io.emit('buzzesUpdate', buzzes);
   });
   
-  socket.on("filebin", function(file){
+  socket.on("filebin', function(file){
   exec(`curl -X 'POST' \
   'https://filebin.net/monogame/file' \
   -H 'accept: application/json' \
