@@ -81,8 +81,8 @@ io.on('connection', function (socket) {
 			}
 		}
     if(['signin'].includes(cmnd)) {
-      if(readJSON(".data/userdata.json")[messageWords[1]] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get the corresponding password. If it matches the password given by the */
-        socket.emit('signInGranted', [messageWords[1], messageWords[2]]);
+      if(readJSON(".data/userdata.json")[messageWords[1]['password']] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get its password. If it matches the password given by the user...*/
+        socket.emit('signInGranted', readJSON(".data/userdata.json")[messageWords[1]['password'], messageWords[2]]);/*Send the username and PW.*/
       } else {
         socket.emit('incorrectPasswordOrUsername');
       }
@@ -91,11 +91,11 @@ io.on('connection', function (socket) {
       if(messageWords[2] == undefined) {
         socket.emit('runSignUpProcedure'); 
       } else {
-        if(readJSON('.data/userdata.json')[messageWords[1]] == undefined) {
+        if(readJSON('.data/userdata.json')[messageWords[1]['password']] == undefined) {
           let userdata = readJSON('.data/userdata.json');
-          userdata[messageWords[1]] = messageWords[2];/*Add the password to the corresponding username.*/
+          userdata[messageWords[1]['password']] = messageWords[2];/*Add the password to the corresponding username.*/
           writeJSON('.data/userdata.json', userdata);
-          socket.emit('usernameAndPasswordAddedToUserdata', [messageWords[1], readJSON('.data/userdata.json')[messageWords[1]]]);
+          socket.emit('usernameAndPasswordAddedToUserdata', [messageWords[1], readJSON('.data/userdata.json')[messageWords[1]['p]]);
         } else {
           socket.emit('signUpProcedureUsernameTaken');
         }
