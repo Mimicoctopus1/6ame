@@ -4,10 +4,11 @@
 
 * index.js renders the client files by displaying `public/client.html`.
   * I use [this tutorial](https://www.w3schools.com/nodejs/nodejs_email.asp) to send emails.
-  * Screen recording with this [DEV.to](https://shorturl.at/erzMN) article. It might take a while to understand but it's worth it.
 * public folder
   * `public/client.html` imports `public/client.css` and runs `public/client.js`.
   * Uses everything found in [this](https://www.freecodecamp.org/news/upload-files-with-html/) tutorial to get files from users.
+  * Screen recording with this [DEV.to](https://shorturl.at/erzMN) article. It might take a while to understand but it's worth it.
+  * Pointer Lock API to lock the pointer, which doesn't freeze the pointer in place but hides it, allows it to go past the edges of the screen, makes all events go to a single element, and gives special data during the lock session.
 * Uses socket.io for websocket API (for lack of better resources). Brief socket.io explanation to make a chat app (yes, another 
 chat app) can be found in the [examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
@@ -49,6 +50,7 @@ up
 * manifest.json is like package.json but it only is used when you download the file as a 
 [Progressive Web App](https://glitch.com/edit/#!/glitch-hello-installable) (
 [TUTORIAL](https://dev.to/developertharun/convert-any-website-into-a-pwa-in-just-3-simple-steps-35pp)).
+* media.mkv is actually a video file. When you stream a video in the game, this is where it goes. If you click it, you won't be very impressed, because it's just binary data. Now you may be wondering, what's stopping me from just downloading this video and watching it? Nothing but honor code and the fact that it is overwriten with a *special* video whenever the 
 * package.json is the file in every Node.js repo that explains what you need to run it, how it imports, what it imports, its
 version number, name, and description.
 * species.json. Don't touch it unless you really are adding more species to this game in a remix. The species.json file is just 
