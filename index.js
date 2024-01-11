@@ -1,12 +1,12 @@
 import express from 'express';
 import * as fs from 'fs'; /*File Reader*/
-import {createServer} from 'node:http';
+import * as http from 'node:http';
 import {Server} from 'socket.io'; /*socket.io SERVER end*/
 import * as nodemailer from 'nodemailer';
 import { exec } from 'child_process';
 
 const app = express();
-const server = createServer(app);
+const server = http.createServer(app);
 const io = new Server(server);
 
 /*Make functions to read and write JSON*/
@@ -151,6 +151,15 @@ io.on('connection', function (socket) {
       --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*Do something with the terminal output.*/}
     );
   });
+});
+
+var file = fs.createWriteStream("media.mkv"); /*Create a file stream to get write out incoming data.*/
+var request = http.get("http://ia801509.us.archive.org/10/items/Rick_Astley_Never_Gonna_Give_You_Up/Rick_Astley_Never_Gonna_Give_You_Up.mp4", function(response) {                         /*Get the .mp4 file*/
+   response.pipe(file);
+
+   file.on("finish", function() {/*When the file is completed.*/
+       file.close();             /*Terminate the file stream to save space on the server.*/
+   });
 });
 
 server.listen(3000, function () {
