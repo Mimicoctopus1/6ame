@@ -13,7 +13,7 @@
 chat app) can be found in the [examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
 * .env is the environment variables (secrets) file. I don't use this for user data because when you edit it from JS, you can't
-make it show in the actual file.
+make it show in the actual file. However, I do store the password to my GMail forget-your-password emailer as well as the link to where I store all the user media.
 * You can't see the `.data` files because the .data folder is hidden and you can only access it from the terminal, only nobody 
 can get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, 
 the .data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file. The structure of the file looks something like this:
@@ -50,7 +50,7 @@ up
 * manifest.json is like package.json but it only is used when you download the file as a 
 [Progressive Web App](https://glitch.com/edit/#!/glitch-hello-installable) (
 [TUTORIAL](https://dev.to/developertharun/convert-any-website-into-a-pwa-in-just-3-simple-steps-35pp)).
-* media.mkv is actually a video file. When you stream a video in the game, this is where it goes. If you click it, you won't be very impressed, because it's just binary data. Now you may be wondering, what's stopping me from just downloading this video and watching it? Nothing but honor code and the fact that it is overwriten with a *special* video whenever the 
+* media.mkv is actually a video file. When you stream a video in the game, this is where it goes. If you click it, you won't be very impressed, because it's just binary data. Now you may be wondering, what's stopping you from just downloading this video and watching it? Nothing but honor code and the fact that it is overwriten with a *special* video whenever I don't need the old one. If you'd like, download this entire project and watch that video in awe. Now you may be wondering why I wouldn't need the old, user-made video. That's because I upload it to somewhere partially safe. What I mean by partially is that if you have a certain link, you can delete everything in it. That link is saved in .env.
 * package.json is the file in every Node.js repo that explains what you need to run it, how it imports, what it imports, its
 version number, name, and description.
 * species.json. Don't touch it unless you really are adding more species to this game in a remix. The species.json file is just 
