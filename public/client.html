@@ -20,15 +20,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <canvas class = "2dRenderer renderer"></canvas><!--The canvas for rendering in 2D-->
     <canvas class = "3dRenderer renderer"></canvas><!--The canvas for rendering in 3D-->
     
-    <div class = "PWATutorial">
-      <div style = "display: block; position: fixed; top: 50%">
+    <div style = "display: block; position: fixed; top: 50%" class = "PWATutorial">
+      <div>
         What device are you on?
         <form>
           <input type = "radio" required = "true" value = "Android"><label for = ""></label>
           <input type = "radio" required = "true" value = "iOS"><label for = ""></label>
-          <input type = "radio" required = "true" value = "Chromebook"><label for = ""></label>
-          <input type = "radio" required = "true" value = ""><label for = ""></label>
+          <input type = "radio" required = "true" value = "PC"><label for = ""></label>
+          <input type = "radio" required = "true" value = "I don't know."><label for = ""></label>
           <input class = "PWATutorialDeviceSubmit" type = "submit">
+        </form>
+      </div>
+      <div>
+        Does your device have a keyboard?
+        <form>
+          <input type = "radio" required = "true" value = "Yes">
+          <input type = "radio" required = "true" value = "No">
+          <input type = "radio" required = "true" value = "I don't know." onclick = "alert(`I'm sorry I don't know how to help you. Please get someone who knows properly what a keyboard is.`)">
+          <input type = "submit">
+        </form>
+      </div>
+      <div>
+        <form>
+          
         </form>
       </div>
     </div>
