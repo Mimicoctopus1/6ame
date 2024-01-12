@@ -57,7 +57,11 @@ if (localStorage.acceptedToS != 'true') {
 
 input.focus();
 
-/*Define functions*/
+/*Define useful variables.*/
+
+
+
+/*Define functions.*/
 
 var print = function (msgToPrint) {
 	let printItem = document.createElement('li');
