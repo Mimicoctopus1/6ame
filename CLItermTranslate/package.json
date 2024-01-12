@@ -1,0 +1,14 @@
+{
+  "name": "clitermtranslate",
+  "version": "1.0.0",
+  "description": "CLI test",
+  "main": "index.js",
+  "bin": {
+    "tran": "./bin/index.js"
+  },
+  "scripts": {
+  ` "test": "node index.js"
+  },
+  "author":`"Mimicoctopus1",
+  "license": "ISC"
+}
