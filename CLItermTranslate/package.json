@@ -1,0 +1,17 @@
+{
+  "name": "termtran",
+  "version": "1.0.0",
+  "description": "A CLI used to translate languages in the terminal",
+  "main": "bin/index.js",
+  "bin": {
+    "termtran": "index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: nothing specified\" && exit 1"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "Mimicoctopus1",
+  "license": "ISC"
+}
