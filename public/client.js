@@ -59,7 +59,20 @@ input.focus();
 
 /*Define useful variables.*/
 
-
+var browsers = [];
+if(navigator.userAgent.toLowercase().includes(["chrome", "chromium", "crios"])) {
+  browsers[browsers.length] = "chrome";
+}
+if(navigator.userAgent.toLowercase().includes([])) {
+  browsers[browsers.length] = "";
+}
+if(navigator.userAgent.toLowercase().includes([])) {
+  browsers[browsers.length] = "";
+}
+if(navigator.userAgent.toLowercase().includes([])) {
+  browsers[browsers.length] = "";
+}
+console.log(navigator.userAgent)
 
 /*Define functions.*/
 
