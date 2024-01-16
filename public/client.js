@@ -1,4 +1,5 @@
 var gameMode = '2D';
+
 /*
 gameMode values.
 text: Text adventure game.

@@ -5,6 +5,8 @@ import {Server} from 'socket.io'; /*socket.io SERVER end*/
 import * as nodemailer from 'nodemailer';
 import { exec } from 'child_process';
 
+console.log(fs.readFileSync("public/ToS/index.html"));
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
