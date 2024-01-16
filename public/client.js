@@ -43,7 +43,7 @@ socket.on("currentToS", function(currentToS) { /*When the server sends data with
   if (localStorage.acceptedToS != 'true') {
 	  /*If the client has never accepted the Terms of Service...*/
 	  input.style.display = 'none'; /*Hide the text-mode input.*/
-	  ToS.style.display = 'block'; /*Prompt the client to accept the Terms of Service.*/
+	  ToS.style.display = 'block'; /*Prompt the client to accept the Terms of Service.*/{}
 	  continueFromToS.addEventListener('click', function() {
 		  /*When the continue button is clicked...*/ if (ToSCheckbox.checked) {
 			  /*Then if the checkbox is checked...*/
