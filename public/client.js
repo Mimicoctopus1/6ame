@@ -68,9 +68,7 @@ var print = function (msgToPrint) {
 
 /*Socket event preperation*/
 
-socket.on('currentToS', function(currentToSHTML) {/**/
-  
-});
+/*The Socket event currentToS is defined above. Hint: use Ctrl + F to */
 
 socket.on('chat', function (msg) {
 	let printItem = document.createElement('li');
