@@ -56,7 +56,6 @@ socket.on("currentToS", function(currentToS) {           /*When the server sends
 });
 
 socket.emit("getCurrentToS"); /*Request the current ToS from the server, which will then send a message back to run the currentToS event above.*/
-
 input.focus();
 
 /*Define functions.*/
