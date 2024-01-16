@@ -9,6 +9,7 @@
   * Uses everything found in [this](https://www.freecodecamp.org/news/upload-files-with-html/) tutorial to get files from users.
   * Screen recording with this [DEV.to](https://shorturl.at/erzMN) article. It might take a while to understand but it's worth it.
   * Pointer Lock API to lock the pointer, which doesn't freeze the pointer in place but hides it, allows it to go past the edges of the screen, makes all events go to a single element, and gives special data during the lock session.
+  * If you'd like to know how my custom 3D rendering works, check out [`3D.md`](https://glitch.com/edit/#!/ojvjpj?path=examples%2F3D.md)
 * Uses socket.io for websocket API (for lack of better resources). Brief socket.io explanation to make a chat app (yes, another 
 chat app) can be found in the [examples/socket.io folder](https://glitch.com/edit/#!/ojvjpj?path=examples%2Fsocket.io%2Fserver.js%3A1%3A0) (new tab only. 
 CTRL + Click).
