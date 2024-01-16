@@ -39,12 +39,17 @@ if (localStorage.signedIntoGame != 'true') {
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';
 }
 
-input.style.display = 'none'; /*Hide the text-mode input. So the user can't run commands yet.*/
-ToS.style.display = 'block'; /*Prompt the client to accept the Terms of Service.*/
+input.style.display = 'none'; /*Hide the text-mode input So the user can't run commands yet.*/
+ToS.style.display = 'block';  /*Prompt the client to accept the Terms of Service.*/
 
-socket.on("currentToS", function(currentToS) {           /*When the server sends data with the current Terms of Sevice...*/
+socket.on("currentToS", function(currentToS) { /*When the server sends data with the current Terms of Sevice...*/
+  if(localStorage.acceptedToS == currentToS) { /*If the client has already accepted the current VERSION of the ToS...*/
+    input.style.display = 'inline';
+    ToS.style.display = "none";
+    input.focus(); /*Put the typing cursor in the text input.*/
+  }
   continueFromToS.addEventListener('click', function(e) {/*When the continue button is pressed...*/
-    if(ToSCheckbox.checked) {                            /*If the client checked off the I agree checkbox...*/
+    if(ToSCheckbox.checked) {                            /*If the client checked off the "I agree" checkbox...*/
   		localStorage.acceptedToS = currentToS;             /*Save the HTML string from the server in localStorage.*/
   		input.style.display = 'inline';                    /*Re-show the input.*/
   		ToS.style.display = 'none';                        /*Hide the Terms of Service.*/
@@ -56,7 +61,6 @@ socket.on("currentToS", function(currentToS) {           /*When the server sends
 });
 
 socket.emit("getCurrentToS"); /*Request the current ToS from the server, which will then send a message back to run the currentToS event above.*/
-input.focus();
 
 /*Define functions.*/
 
