@@ -5,8 +5,6 @@ import {Server} from 'socket.io'; /*socket.io SERVER end*/
 import * as nodemailer from 'nodemailer';
 import { exec } from 'child_process';
 
-console.log(fs.readFileSync("public/ToS/index.html"));
-
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
@@ -63,6 +61,10 @@ app.get('/', function (req, res) {
 var buzzes = [];
 
 io.on('connection', function (socket) {
+  socket.on("getCurrentToS", function() {
+    /*When the client requests to know the current Terms of Service...*/
+    socket.emit("currentToS", fs.readFileSync("public/ToS/index.html").toString())/*Send it to the client.*/
+  });
 	socket.on('message', function (msg) {
 		/*When an entry is received from the user...*/ let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
