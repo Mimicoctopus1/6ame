@@ -1,6 +1,6 @@
 var gameMode = '2D';
-
 /*
+gameMode values.
 text: Text adventure game.
 2D: Flat, top-down view.
 3D: 3D mode;
