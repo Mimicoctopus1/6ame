@@ -39,6 +39,8 @@ if (localStorage.signedIntoGame != 'true') {
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';
 }
 
+socket.on("currentToS", function(currentToS) {
+
 if (localStorage.acceptedToS != 'true') {
 	/*If the client has never accepted the Terms of Service...*/
 	input.style.display = 'none'; /*Hide the text-mode input.*/
@@ -55,6 +57,7 @@ if (localStorage.acceptedToS != 'true') {
 		}
 	});
 }
+};
 
 input.focus();
 
@@ -68,7 +71,7 @@ var print = function (msgToPrint) {
 
 /*Socket event preperation*/
 
-/*The Socket event currentToS is defined above. Hint: use Ctrl + F to */
+/*The Socket event currentToS is defined above. Hint: use Ctrl + F to find text.*/
 
 socket.on('chat', function (msg) {
 	let printItem = document.createElement('li');
