@@ -45,7 +45,7 @@ if (localStorage.acceptedToS != 'true') {
 	continueFromToS.addEventListener('click', function () {
 		/*When the continue button is clicked...*/ if (ToSCheckbox.checked) {
 			/*Then if the checkbox is checked...*/
-			localStorage.acceptedToS = true; /*Save the data in localStorage.*/
+			localStorage.acceptedToS = ToS.innerHTML; /*Save the data in localStorage.*/
 			input.style.display = 'inline'; /*Re-show the input.*/
 			ToS.style.display = 'none'; /*Hide the Terms of Service.*/
 		} else {
