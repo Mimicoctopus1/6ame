@@ -35,7 +35,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <thead>
         <tr>
           <td>
-            Milliseconds since (January 1, 1970, UTC)
+            Milliseconds since January 1, 1970, UTC
           </td>
           <td>
             Player Name
@@ -78,12 +78,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		</div>
 
 		<form id="form" action="">
-			<span class = "arrowSymbol">&nbsp&nbsp&nbsp&nbsp&gt&nbsp&nbsp</span>
-			<span id="input" autocomplete="off" contenteditable="true"></span>
+			<span class = "arrowSymbol">&nbsp&nbsp&nbsp&nbsp&gt&nbsp&nbsp</span><!--An arrow surrounded by spaces.-->
+			<span id="input" autocomplete="off" contenteditable="true"></span><!--The input for text-mode.-->
 		</form>
 		<script
 			src="https://cdn.socket.io/4.6.0/socket.io.min.js"
-			integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+"
 			crossorigin="anonymous"
     ></script>
     <!--I have to add type = "module" or I get a "Cannot use import statement outside module" error from the console when

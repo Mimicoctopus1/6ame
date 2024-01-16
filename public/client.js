@@ -44,15 +44,16 @@ ToS.style.display = 'block';  /*Prompt the client to accept the Terms of Service
 
 socket.on("currentToS", function(currentToS) { /*When the server sends data with the current Terms of Sevice...*/
   if(localStorage.acceptedToS == currentToS) { /*If the client has already accepted the current VERSION of the ToS...*/
-    input.style.display = 'inline';
-    ToS.style.display = "none";
-    input.focus(); /*Put the typing cursor in the text input.*/
+    input.style.display = 'inline';  /*Re-show the input.*/
+    ToS.style.display = "none";      /*Hide the Terms of Service.*/
+    input.focus();                   /*Put the typing cursor in the text input.*/
   }
   continueFromToS.addEventListener('click', function(e) {/*When the continue button is pressed...*/
     if(ToSCheckbox.checked) {                            /*If the client checked off the "I agree" checkbox...*/
   		localStorage.acceptedToS = currentToS;             /*Save the HTML string from the server in localStorage.*/
   		input.style.display = 'inline';                    /*Re-show the input.*/
   		ToS.style.display = 'none';                        /*Hide the Terms of Service.*/
+      input.focus();                                     /*Put the typing cursor in the text input.*/
   	} else {
   	  /*If the checkbox isn't checked...*/
   		alert("You haven't clicked the checkbox yet.");
