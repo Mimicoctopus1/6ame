@@ -39,25 +39,26 @@ if (localStorage.signedIntoGame != 'true') {
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';
 }
 
-socket.on("currentToS", function(currentToS) {
+socket.on("currentToS", function(currentToS) { /*When the server sends data with the current Terms of Sevice...*/
+  if (localStorage.acceptedToS != 'true') {
+	  /*If the client has never accepted the Terms of Service...*/
+	  input.style.display = 'none'; /*Hide the text-mode input.*/
+	  ToS.style.display = 'block'; /*Prompt the client to accept the Terms of Service.*/
+	  continueFromToS.addEventListener('click', function() {
+		  /*When the continue button is clicked...*/ if (ToSCheckbox.checked) {
+			  /*Then if the checkbox is checked...*/
+			  localStorage.acceptedToS = ToS.innerHTML; /*Save the data in localStorage.*/
+			  input.style.display = 'inline'; /*Re-show the input.*/
+			  ToS.style.display = 'none'; /*Hide the Terms of Service.*/
+		  } else {
+			  /*If the checkbox isn't checked...*/
+			  alert("You haven't clicked the checkbox yet.");
+		  }
+	  });
+  }
+});
 
-if (localStorage.acceptedToS != 'true') {
-	/*If the client has never accepted the Terms of Service...*/
-	input.style.display = 'none'; /*Hide the text-mode input.*/
-	ToS.style.display = 'block'; /*Prompt the client to accept the Terms of Service.*/
-	continueFromToS.addEventListener('click', function() {
-		/*When the continue button is clicked...*/ if (ToSCheckbox.checked) {
-			/*Then if the checkbox is checked...*/
-			localStorage.acceptedToS = ToS.innerHTML; /*Save the data in localStorage.*/
-			input.style.display = 'inline'; /*Re-show the input.*/
-			ToS.style.display = 'none'; /*Hide the Terms of Service.*/
-		} else {
-			/*If the checkbox isn't checked...*/
-			alert("You haven't clicked the checkbox yet.");
-		}
-	});
-}
-};
+socket.emit("getCurrentToS"); /*Request the current ToS from the server, which will then send a message back to run the currentToS event above.*/
 
 input.focus();
 
