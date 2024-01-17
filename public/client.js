@@ -165,8 +165,8 @@ socket.on('buzzesUpdate', function (array) {
 	console.log(buzzesTableBody.innerHTML + ' is the HTML');
 });
 
-socket.on('requestDownloadApp', function() {
-  print('To download the app, please go to <a href = "https://filetransfer.io/data-package/HUcbuP3X/download">https://filetransfer.io/data-package/HUcbuP3X/download</a>.')
+socket.on('presentAppDownload', function() {
+  print("Please follow the video at <a></a>")
 });
 
 /*Event Listeners*/

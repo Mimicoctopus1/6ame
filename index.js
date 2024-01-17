@@ -115,6 +115,9 @@ io.on('connection', function (socket) {
       socket.emit('buzzermode', true);
     }
     if(["download"].includes(cmnd)) {
+      if(["app"].includes(messageWords[1])){
+        socket.emit("presentAppDownload");
+      }
 		}
     
 		/*Blank template*/
