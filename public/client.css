@@ -28,6 +28,7 @@ body::backdrop { /*body::backdrop is a psuedo (theoretical) -element that is beh
   z-index: 1;
 }
 .arrowSymbol {
+  display: none;
   margin: 0px;
   border: 0px;
 }

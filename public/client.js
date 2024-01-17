@@ -17,6 +17,7 @@ var socket = io(); /*This error may be looked past; io is imported in client.htm
 const messages = document.querySelector('#messages');
 const form = document.querySelector('#form');
 const input = document.querySelector('#input');
+const arrowSymbol = document.querySelectorAll(".arrowSymbol")[0];
 const rcmenu = document.querySelectorAll('.rcmenu')[0];
 const ToS = document.querySelectorAll('.ToS')[0];
 const ToSCheckbox = document.querySelectorAll('.ToSCheckbox')[0];
@@ -68,7 +69,8 @@ socket.on("currentToS", function(currentToS) { /*When the server sends data with
 socket.emit("getCurrentToS"); /*Request the current ToS from the server, which will then send a message back to run the currentToS event above.*/
 
 if(gameMode == "text") {
-  input.style.display = "block";
+  arrowSymbol.style.display = "inline";
+  input.style.display = "inline";
 }
 if(gameMode == "2D") {
   renderer2.style.display = "block";
