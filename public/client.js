@@ -37,7 +37,7 @@ if (localStorage.signedIntoGame != 'true') {
 	/*If you aren't already signed into the game...*/
 	//messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
 	messages.innerHTML +=
-		"<li>Please type the word 'buzz' right after the arrow, then press enter. <a class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>";
+		"<li>Please type the word 'buzz' right after the arrow, then press enter. <a tabindex = \"-1\" class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>";
 } else {
 	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password); /*Automatically sign in*/
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';
