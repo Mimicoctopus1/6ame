@@ -166,7 +166,11 @@ socket.on('buzzesUpdate', function (array) {
 });
 
 socket.on('presentAppDownload', function() {
-  print("Please follow the video at <a></a>")
+  print("Click the link for your device. If you don't have any of these devices then I can't help you.");
+  setTimeout(function(){
+    print("Android");
+    print("Here are links you may need:<br><ol><li><a href = \"https://filetransfer.io/data-package/HUcbuP3X/download\"></a></li></ol>")
+  }, 3000);
 });
 
 /*Event Listeners*/
