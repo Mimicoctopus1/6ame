@@ -18,18 +18,18 @@ make it show in the actual file. However, I do store the password to my GMail fo
 * You can't see the `.data` files because the .data folder is hidden and you can only access it from the terminal, only nobody 
 can get to the terminal unless they're an editor, have the link, or have remixed the project, but when you remix the project, 
 the .data folder disappears. If you're remixing this, you may want to create the .data/userdata.json file. The structure of the file looks something like this:
-{
-  "username": {
-    "password": "password",
-    "media": ['https://example.com/1.png']
-  },
-  "JohnDoe": {
-    "password": "ooga-booga",
-    "media": ['https://cdn.leech.com/adfu9eufiue9fuiidoasuf9euo/dancing%20video.mvk']
-  },
-  "Mimicoctopus1": {
-    "password": "abc123",
-    "media": ['https://example.com/NO, that is NOT my real password.']
+{  
+  "username": {  
+    "password": "password",  
+    "media": ['https://example.com/one.png', "https://example.com/two.png"]  
+  },  
+  "JohnDoe": {  
+    "password": "ooga-booga",  
+    "media": ['https://cdn.leech.com/adfu9eufiue9fuiidoasuf9euo/dancing%20video.mvk']  
+  },  
+  "Mimicoctopus1": {  
+    "password": "abc123",  
+    "media": ['https://example.com/NO, that is NOT my real password.']  
   }
 }
 
