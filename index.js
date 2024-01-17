@@ -108,13 +108,14 @@ io.on('connection', function (socket) {
 		if(['trade'].includes(cmnd)) {
       trade([], socket);
 		}
-    
     if(['buzz'].includes(cmnd)) {
       socket.emit('buzzermode');
     }
     if(['buzzadmin'].includes(cmnd)) {
       socket.emit('buzzermode', true);
     }
+    if(["download"].includes(cmnd)) {
+		}
     
 		/*Blank template*/
 		if([].includes(cmnd)) {
