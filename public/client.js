@@ -26,9 +26,8 @@ const mediaPreview = document.querySelectorAll('.mediaPreview')[0];
 const mediaPreviewDownload = document.querySelectorAll('.mediaPreviewDownload')[0];
 const mediaPreviewStart = document.querySelectorAll('.mediaPreviewStart')[0];
 const mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
-const renderer = document.querySelectorAll('.2dRenderer');
-//const rendererTwo = document.querySelectorAll('.2dRenderer')[0];
-//const renderer3 = document.querySelectorAll('.3dRenderer')[0];
+const renderer2 = document.querySelectorAll('.renderer2')[0];
+const renderer3 = document.querySelectorAll('.renderer3')[0];
 
 /*HTML Setup*/
 
@@ -233,6 +232,7 @@ document.querySelectorAll('.buzzActivation')[0].addEventListener('click', enterB
 document.addEventListener('click', enterFullscreen);
 mediaPreviewStart.addEventListener('click', startRecording);
 mediaPreviewStop.addEventListener('click', stopRecording);
-//renderer2.addEventListener('click', function() {
-//  renderer2.requestPointerLock();
-//});
+var canvas = renderer2;
+canvas.addEventListener("click", async () => {
+  await canvas.requestPointerLock();
+});
