@@ -169,7 +169,6 @@ socket.on('presentAppDownload', function() {
   print("Follow the instructions for your device. If you don't have any of these devices then I can't help you.");
   setTimeout(function(){
     print("Android: Click the 1st link below. Allow everything and see if it starts downloading. If it doesn't, go to your settings and search up \"developer mode\". Make sure developer mode is on. Go to your files app and open up the file known as OJVJPJGame.apk. If it doesn't work I have no idea why, so make sure to delete the file because it's useless.");
-    print("ChromeOS/Chromebook: ");
     print("Here are links you may need:<br><ol><li><a href = \"https://filetransfer.io/data-package/HUcbuP3X/download\">https://filetransfer.io/data-package/HUcbuP3X/download</a></li></ol>")
   }, 2000);
 });
