@@ -26,6 +26,8 @@ const mediaPreview = document.querySelectorAll('.mediaPreview')[0];
 const mediaPreviewDownload = document.querySelectorAll('.mediaPreviewDownload')[0];
 const mediaPreviewStart = document.querySelectorAll('.mediaPreviewStart')[0];
 const mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
+const renderer2 = document.querySelectorAll('.2dRenderer')[0];
+const renderer3 = document.querySelectorAll('.3dRenderer')[0];
 
 /*HTML Setup*/
 
