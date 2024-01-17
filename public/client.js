@@ -1,4 +1,4 @@
-var gameMode = '2D';
+var gameMode = 'text';
 
 /*
 gameMode values.
@@ -9,7 +9,9 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 */
 
 /*Initializing with functions from imports.*/
+
 var socket = io(); /*This error may be looked past; io is imported in client.html.*/
+
 /*Establish HTML elements.*/
 
 const messages = document.querySelector('#messages');
@@ -64,6 +66,17 @@ socket.on("currentToS", function(currentToS) { /*When the server sends data with
 });
 
 socket.emit("getCurrentToS"); /*Request the current ToS from the server, which will then send a message back to run the currentToS event above.*/
+
+if(gameMode == "text") {
+  input.style.display = "block";
+}
+if(gameMode == "2D") {
+  renderer2.style.display = "block";
+}
+
+if(gameMode == "3D") {
+  renderer3.style.display = "block";
+}
 
 /*Define functions.*/
 

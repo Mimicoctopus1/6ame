@@ -15,6 +15,7 @@ body::backdrop { /*body::backdrop is a psuedo (theoretical) -element that is beh
   height: 100%;
   border: 0px solid black;
   margin: 0px;
+  display: none; /*The 2 and 3d renderers are displayed by client.js depending on what mode you are playing in.*/
 }
 .rcmenu menu li {
   width: 100px;
@@ -40,6 +41,7 @@ body::backdrop { /*body::backdrop is a psuedo (theoretical) -element that is beh
   border: 0px;
   margin: 0px;
   width: 100%;
+  display: none;
 }
 #input:focus {
   outline: none;
