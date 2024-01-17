@@ -226,13 +226,19 @@ var stopRecording = function(e) {
 	stream.getVideoTracks()[0].stop();/*Stop the stream (I think). Go to https://shorturl.at/erzMN to find the real answer. Attempt to let me know if you do.*/
 };
 
+var lockPointerRenderer2 = function() {
+  renderer2.requestPointerLock();
+};
+
+var lockPointerRenderer3 = function() {
+  renderer3.requestPointerLock();
+};
+
 document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.querySelectorAll('.buzzActivation')[0].addEventListener('click', enterBuzzMode);
 document.addEventListener('click', enterFullscreen);
 mediaPreviewStart.addEventListener('click', startRecording);
 mediaPreviewStop.addEventListener('click', stopRecording);
-var canvas = renderer2;
-canvas.addEventListener("click", async () => {
-  await canvas.requestPointerLock();
-});
+renderer2.addEventListener('click', lockPointerRenderer2);
+renderer3.addEventListener('click', lockPointerRenderer3);
