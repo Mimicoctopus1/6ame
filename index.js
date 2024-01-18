@@ -3,7 +3,7 @@ import * as fs from 'fs'; /*File Reader*/
 import * as http from 'node:http';
 import {Server} from 'socket.io'; /*socket.io SERVER end*/
 import * as nodemailer from 'nodemailer';
-import { exec } from 'child_process';
+import { exec } from 'child_process'; /*Allows you to run commands like from the terminal*/
 
 const app = express();
 const server = http.createServer(app);
