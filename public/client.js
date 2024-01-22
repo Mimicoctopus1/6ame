@@ -11,7 +11,7 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 /*Initializing with functions from imports.*/
 
 var socket = io(); /*This error may be looked past; io is imported in client.html.*/
-startUnimono3d();  /*Same here: script import from client.html.*/
+//startUnimono3d();  /*Same here: script import from client.html.*/
 
 /*Establish HTML elements.*/
 
