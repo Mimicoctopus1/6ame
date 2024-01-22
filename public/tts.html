@@ -9,6 +9,7 @@
       asdf
     </button>
     <script>
+      document.addEventListener("click", function() {})
       const utterance = new SpeechSynthesisUtterance("text");
       utterance.addEventListener('start', () => {
         console.log("Starting speak!");
@@ -22,7 +23,10 @@
       });
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utterance);});
-      document.querySelector("button").click();
+      setTimeout(function() {
+        console.log("...")
+        document.querySelector("button").click();
+      }, 2000);
     </script>
   </body>
 </html>
