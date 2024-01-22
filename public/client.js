@@ -33,6 +33,10 @@ const mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
 const renderer2 = document.querySelectorAll('.renderer2')[0];
 const renderer3 = document.querySelectorAll('.renderer3')[0];
 
+var to_speak = new SpeechSynthesisUtterance('Hello world!');
+window.speechSynthesis.speak(to_speak);
+console.log(window.speechSynthesis)
+
 /*HTML Setup*/
 
 if (localStorage.signedIntoGame != 'true') {
