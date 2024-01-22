@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
+    <title>hi</title>
+    <meta charset = "utf-8">
   </head>
   <body>
+    <button>
+      asdf
+    </button>
     <script>
       const utterance = new SpeechSynthesisUtterance("text");
       utterance.addEventListener('start', () => {
         console.log("Starting speak!");
       });
+      window.speechSynthesis.cancel();
       window.speechSynthesis.speak(utterance);
+      document.querySelector("button").addEventListener("click", function() {
+      const utterance = new SpeechSynthesisUtterance("text");
+      utterance.addEventListener('start', () => {
+        console.log("Starting speak!");
+      });
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(utterance);});
     </script>
   </body>
 </html>
