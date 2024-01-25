@@ -52,7 +52,7 @@ var trade = function(inv, socket, arrayMode) {
   socket.emit()
 };
 
-var moves = {/**/
+var moves = {/*wbfind <-- That is so that WorldBuilders can find this by using Ctrl+P and then wbfind.*/
   "Hit": {
     "icon": "https://unimono.sytes.net/Move%20Hit.png",
     "effect": function() {
