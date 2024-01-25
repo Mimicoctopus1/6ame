@@ -73,7 +73,7 @@ mine as well, so please let me know by requesting to edit and, again, putting a 
 
 
 ### Changelog
-01/25/2024: I started working on move icons. For worldbuilders, go to [https://magma.com/d/u21A19frN4](https://magma.com/d/u21A19frN4) and, on the right, there should be a resizing bar. 
+01/25/2024: I started working on move icons. For worldbuilders, go to [https://magma.com/d/u21A19frN4](https://magma.com/d/u21A19frN4) and, on the right, there should be a resizing bar. Make the layer panel larger and select the COPY LAYER. Right-click and duplicate it. In the new layer, 
 01/25/2024: Made colors (Yes, I merged Indigo and Violet since they are both in between Blue and Red.):
 * Grey:   127.5, 127.5, 127.5 (7e7e7e)
 * Brown:  200.0, 127.5, 000.0 (c87f00)
