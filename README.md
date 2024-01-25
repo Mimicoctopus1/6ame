@@ -74,24 +74,25 @@ mine as well, so please let me know by requesting to edit and, again, putting a 
 
 ### Changelog
 01/25/2024: I started working on move icons. For worldbuilders, go to aggie.io, click start drawing, press U for rectangle, change stroke width to 40px, change the mode to stroke, hold shift and make a square as tall as the canvas, press G for fill, color the stroke of the rectangle, color the inside of the rectangle and draw! For color guidance on what colors to use for the rectangle, here is a chart:
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
+* Red: Offense, Heat
+* Orange: Strength
+* Yellow: Healing, Speed
+* Green: Nature
+* Blue: Defense, Cold
+* Purple: Arcane
+* Grey: Armor
+* Black: Dark
+* White: Light
+* Khaki Brown: Gas
+* Clear: undefined (error)
+* Dirt Brown: Solid
+* Cinnamon Brown: Physical (Non-magical), Liquid
+* Pink: Magical (Non-physical)
 01/25/2024: Made colors (Yes, I merged Indigo and Violet since they are both in between Blue and Red.):
 * Grey:   127.5, 127.5, 127.5 (7e7e7e)
 * Brown:  200.0, 127.5, 000.0 (c87f00)
+* Khaki: TBD
+* Dirt: TBD
 * Red:    255.0, 000.0, 000.0 (ff0000)
 * Orange: 255.0, 127.5, 000.0 (ff7e05)
 * Yellow: 255.0, 255.0, 000.0 (ff0000)
