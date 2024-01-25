@@ -73,8 +73,14 @@ mine as well, so please let me know by requesting to edit and, again, putting a 
 
 
 ### Changelog
-01/25/2024: Made colors:
-* Brown: 200, 127.5, 0 (c87f00)
+01/25/2024: Made colors (Yes, I merged Indigo and Violet since they are both in between Blue and Red.):
+* Brown:  200.0, 127.5, 000.0 (c87f00)
+* Red:    255.0, 000.0, 000.0 (ff0000)
+* Orange:
+* Yellow:
+* Green:
+* Blue:
+* Purple:
 01/24/2024: FINISHED BUZZERS!
 12/21/2023: Working on signin and signup features.
 12/11/2023: Added tell, chat, and yell to the text command list.
