@@ -7,8 +7,9 @@
 					"Mimicoctopus1": {
 						"vp": "Infinity",
 						"moves": [
-              "hit"
+              "Hit"
             ],
+            "COMMENT": "Unfortunately, you can't store functions in JSON files, so custom moves must be stored in the moves object in index.js.",
             "inventory": {
               
             },

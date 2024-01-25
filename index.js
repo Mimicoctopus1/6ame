@@ -42,7 +42,13 @@ var trade = function(inv, socket, arrayMode) {
     }
   }
   socket.emit()
-}
+};
+
+var moves = {
+  "Hit": {
+    
+  }
+};
 
 var emailer = nodemailer.createTransport({/*Setup the account recovery emailer in case you forget your password or something.*/
   service: 'gmail',
@@ -151,7 +157,7 @@ io.on('connection', function (socket) {
     });
   
     /*Run the string in the terminal*//*The string saves the file in my fairly badly hidden database by its API.*/
-    exec(`
+    exec(/*The following is some terminal thing that sends a message to my data storage telling it to save the data.*/`
       curl -X 'POST' \
       '` + process.env.fileStorageURL + "filename" +  `' \
       -H 'accept: application/json' \
@@ -162,7 +168,7 @@ io.on('connection', function (socket) {
 });
 
 var file = fs.createWriteStream("media.mkv"); /*Create a file stream to get write out incoming data. Also, this mp4 doesn't look odd 🡇, right?
-                                PS: Rick Astley is a popular gardener who never gives you his plants for fear they'll die.           🡇*/
+                    PS: Rick Astley might also be the name of a popular gardener who never gives you his plants for fear they'll die.🡇*/
 var request = http.get("http://ia801509.us.archive.org/10/items/Rick_Astley_Never_Gonna_Give_You_Up/Rick_Astley_Never_Gonna_Give_You_Up.mp4", function(response) {   /*Get the .mp4 file.*/
    response.pipe(file);/*Take the response, which is going to be the data in the URL, and pipe (send) it over into the stream, which writes it.*/
 
