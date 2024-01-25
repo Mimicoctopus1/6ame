@@ -9,6 +9,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+/*Declare useful functions.*/
 /*Make functions to read and write JSON*/
 var readJSON = function (jsonFileName) {
 	try {
@@ -51,9 +52,12 @@ var trade = function(inv, socket, arrayMode) {
   socket.emit()
 };
 
-var moves = {
+var moves = {/**/
   "Hit": {
-    
+    "icon": "https://unimono.sytes.net/Move%20Hit.png",
+    "effect": function() {
+      
+    }
   }
 };
 
