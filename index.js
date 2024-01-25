@@ -12,8 +12,12 @@ const io = new Server(server);
 /*Make functions to read and write JSON*/
 var readJSON = function (jsonFileName) {
 	try {
-		let returnData = JSON.parse(fs.readFileSync(jsonFileName));
+    let JSONFile = fs.readFileSync(jsonFileName)
+		let returnData = JSON.parse(JSONFile);
 		return returnData;
+    fs.close(JSONFile, function(error) {
+      throw(error);
+    });
 	} catch (error) {
 		throw error; /*Send an error to the terminal*/
 		console.error(error); /*Send an error to the user console and the Glitch logs.*/
@@ -22,7 +26,10 @@ var readJSON = function (jsonFileName) {
 
 var writeJSON = function (jsonFileName, dataToSave) {
 	try {
-		fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
+		var JSONFile = fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
+    fs.close(JSONFile, function(error) {
+      throw(error);
+    });
 		return true; /*Return that the data save was successful.*/
 	} catch (error) {
 		throw error; /*Send an error to the Glitch logs.*/
@@ -105,6 +112,11 @@ io.on('connection', function (socket) {
           let userdata = readJSON('.data/userdata.json');
           userdata[messageWords[1]['password']] = messageWords[2];/*Add the password to the corresponding username.*/
           writeJSON('.data/userdata.json', userdata);             /*Update userdata.json.*/
+          
+          /*Repeat for game.json.*/
+          let game = readJSON('game.json');
+          game[messageWords[1]]
+          
           socket.emit('usernameAndPasswordAddedToUserdata', [messageWords[1], readJSON('.data/userdata.json')[messageWords[1]]['password']]);
         } else {
           socket.emit('signUpProcedureUsernameTaken');
@@ -150,9 +162,9 @@ io.on('connection', function (socket) {
   socket.on('mediaUpload', function(file){
     console.log("mediaUpload")
     console.log(file);
-    fs.writeFile('media.mkv', file, function(err) {/*Store the file, overwriting previous files, but upon an error...*/
-      if (err) { 
-        throw err; /*Throw it.*/
+    fs.writeFile('media.mkv', file, function(error) {/*Store the file, overwriting previous files, but upon an error...*/
+      if(error) { 
+        throw(error); /*Throw it.*/
       }
     });
   
