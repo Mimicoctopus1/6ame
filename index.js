@@ -25,7 +25,7 @@ var readJSON = function (jsonFileName) {
 	}
 };
 
-var writeJSON = function (jsonFileName, dataToSave) {
+var writeJSON = function(jsonFileName, dataToSave) {
 	try {
 		var JSONFile = fs.writeFileSync(jsonFileName, JSON.stringify(dataToSave));
     fs.close(JSONFile, function(error) {
@@ -37,6 +37,17 @@ var writeJSON = function (jsonFileName, dataToSave) {
 		console.error(error); /*Send an error to the user console and the Glitch logs.*/
 		return false; /*Return that the data save was unsuccessful.*/
 	}
+};
+
+var objToJSON = function(objFileName) {
+  if(objFileName.includes("http")/*If the file isn't local...*/) {
+    
+  } else {
+    let localObj = fs.readFileSync(objFileName);
+    fs.close(localObj, function(error) {
+      throw(error);
+    });
+  }
 };
 
 var trade = function(inv, socket, arrayMode) {
@@ -52,6 +63,7 @@ var trade = function(inv, socket, arrayMode) {
   socket.emit()
 };
 
+/*Declare moves for players to use.*/
 var moves = {/*wbfind <-- That is so that WorldBuilders can find this by using Ctrl+P and then wbfind.*/
   "Hit": {
     "icon": "https://unimono.sytes.net/Move%20Hit.png",
