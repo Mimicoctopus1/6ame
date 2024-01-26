@@ -10,8 +10,8 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 
 /*Initializing imports.*/
 
-import * as unimono3d from "https://unimono.sytes.net/3/index.js";
-console.log(unimono3d.globalize);
+import unimono3d from "https://unimono.sytes.net/3/index.js";
+console.log(unimono3d);
 
 var socket = io(); /*This error may be looked past; io is imported in client.html.*/
 
