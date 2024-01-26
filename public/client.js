@@ -8,10 +8,12 @@ text: Text adventure game.
 blind: Text adventure, only text-to-speech reads out output and voice recognition reads input.
 */
 
-/*Initializing with functions from imports.*/
+/*Initializing imports.*/
+
+import * as unimono3d from "https://unimono.sytes.net/3/index.js";
 
 var socket = io(); /*This error may be looked past; io is imported in client.html.*/
-//startUnimono3d();  /*Same here: script import from client.html.*/
+//var u3d = startUnimono3d();  /*Same here: script import from client.html.*/
 
 /*Establish HTML elements.*/
 
