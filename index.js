@@ -11,7 +11,7 @@ const io = new Server(server);
 
 /*Declare useful functions.*/
 /*Make functions to read and write JSON*/
-var readJSON = function (jsonFileName) {
+var readJSON = function(jsonFileName) {
 	try {
     let JSONFile = fs.readFileSync(jsonFileName)
 		let returnData = JSON.parse(JSONFile);
