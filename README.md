@@ -79,6 +79,7 @@ mine as well, so please let me know by requesting to edit and, again, putting a 
 
 
 ### Changelog
+01/30/2024: I made an app out of this game that updates with the webpage. I just went on GitHub, made my username.github.io site into an iframe to this page, and went on [appmaker](https://appmaker.xyz/webapp) and made it into an app, and no, it's not a scam! It's absolutely free as of the date shown on the changelog dates column. The only catch is that when it says "Building, please wait...", it does mean to wait. Mine took about 10 minutes, so take a nap or do something else while you wait. Do note that the app
 01/25/2024: I started working on move icons. For worldbuilders who want to make their own, go to aggie.io, click the arrow near start drawing and select 4000 x 4000, press U for rectangle, change stroke width to 100px, change the mode to stroke, hold shift and make a square as tall as the canvas, press G for fill, color the stroke of the rectangle, color the inside of the rectangle and draw the icon image (fist, sword, arrow, etc.) in black! Then, use the fill tool to fill in your icon image. Ctrl+S to download and go to [remove.bg](remove.bg) to remove the backgroundFor color guidance on what colors to use for the rectangle, here is a chart:
 * Red: Offense, Heat
 * Orange: Strength
