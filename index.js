@@ -35,7 +35,7 @@ var writeJSON = function(jsonFileName, dataToSave) {
 	} catch (error) {
 		throw error; /*Send an error to the Glitch logs.*/
 		console.error(error); /*Send an error to the user console and the Glitch logs.*/
-		return false; /*Return that the data save was unsuccessful.*/
+		return(false); /*Return that the data save was unsuccessful.*/
 	}
 };
 
