@@ -25,6 +25,32 @@
 		},
 		"animation": "idle"
 	},
+  {
+    "name": "JellyBee",
+		"vp": "5",
+		"moves": ["hit"],
+		"inventory": {},
+		"friends": ["Mimicoctopus1"],
+		"dead": false,
+		"buffs": {},
+		"class": "Noob",
+		"settings": {},
+		"position": {},
+		"velocity": {},
+		"acceleration": {},
+		"anglePosition": {},
+		"angleVelocity": {},
+		"angleAcceleration": {},
+		"species": "human",
+		"drops": {
+			"Human Corpse": {}
+		},
+		"shape": {
+			"idle": "URL GOES HERE",
+			"walking": "URL GOES HERE"
+		},
+		"animation": "idle"
+	},
 	{
     "name": "DEFAULT PLAYER",
 		"vp": "5",
