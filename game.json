@@ -1,143 +1,54 @@
-{
-	"Monoverse": {
-		"Monogalaxy": {
-			"Monosystem": {
-				"Monoplanet": {
-					"Monomoon": {},
-					"Mimicoctopus1": {
-						"vp": "Infinity",
-						"moves": [
-              "Hit"
-            ],
-            "COMMENT": "Unfortunately, you can't store functions in JSON files, so custom moves must be stored in the moves object in index.js.",
-            "inventory": {
-              
-            },
-            
-            "friends": [],
-            "dead": false,
-            "buffs": {
-              
-            },
-            "class": "Noob",
-            "settings": {},
-            "position": {
-              
-            },
-            "velocity": {
-              
-            },
-            "acceleration": {
-              
-            },
-            "anglePosition": {
-              
-            },
-            "angleVelocity": {
-              
-            },
-            "angleAcceleration": {
-              
-            },
-            "species": "human",
-            "drops": {
-              "Human Corpse": {}
-            }, 
-            "shape": {
-              "idle": "URL GOES HERE",
-              "walking": "URL GOES HERE"
-            },
-            "animation": "idle"
-					},
-          "JellyBee": {
-						"vp": "10",
-						"moves": [
-              "hit"
-            ],
-            "inventory": {
-              
-            },
-            "friends": ["Mimicoctopus1"],
-            "dead": false,
-            "buffs": {
-              
-            },
-            "class": "Noob",
-            "settings": {},
-            "position": {
-              
-            },
-            "velocity": {
-              
-            },
-            "acceleration": {
-              
-            },
-            "anglePosition": {
-              
-            },
-            "angleVelocity": {
-              
-            },
-            "angleAcceleration": {
-              
-            },
-            "species": "human",
-            "drops": {
-              "Human Corpse": {}
-            }, 
-            "shape": {
-              "idle": "URL GOES HERE",
-              "walking": "URL GOES HERE"
-            },
-            "animation": "idle"
-					},
-          "DEFAULT CHARACTER": {
-						"vp": "Infinity",
-						"moves": [
-              "hit"
-            ],
-            "inventory": {
-              
-            },
-            
-            "friends": [],
-            "dead": false,
-            "buffs": {
-              
-            },
-            "class": "Noob",
-            "settings": {},
-            "position": {
-              
-            },
-            "velocity": {
-              
-            },
-            "acceleration": {
-              
-            },
-            "anglePosition": {
-              
-            },
-            "angleVelocity": {
-              
-            },
-            "angleAcceleration": {
-              
-            },
-            "species": "human",
-            "drops": {
-              "Human Corpse": {}
-            }, 
-            "shape": {
-              "idle": "URL GOES HERE",
-              "walking": "URL GOES HERE"
-            },
-            "animation": "idle"
-					}
-				}
-			}
-		}
+[
+  {
+    "name": "Mimicoctopus1",
+		"vp": "Infinity",
+		"moves": ["hit"],
+		"inventory": {},
+		"friends": ["JellyBee"],
+		"dead": false,
+		"buffs": {},
+		"class": "Noob",
+		"settings": {},
+		"position": {},
+		"velocity": {},
+		"acceleration": {},
+		"anglePosition": {},
+		"angleVelocity": {},
+		"angleAcceleration": {},
+		"species": "human",
+		"drops": {
+			"Human Corpse": {}
+		},
+		"shape": {
+			"idle": "URL GOES HERE",
+			"walking": "URL GOES HERE"
+		},
+		"animation": "idle"
+	},
+	{
+    "name": "DEFAULT PLAYER",
+		"vp": "5",
+		"moves": ["hit"],
+		"inventory": {},
+		"friends": [],
+		"dead": false,
+		"buffs": {},
+		"class": "Noob",
+		"settings": {},
+		"position": {},
+		"velocity": {},
+		"acceleration": {},
+		"anglePosition": {},
+		"angleVelocity": {},
+		"angleAcceleration": {},
+		"species": "human",
+		"drops": {
+			"Human Corpse": {}
+		},
+		"shape": {
+			"idle": "URL GOES HERE",
+			"walking": "URL GOES HERE"
+		},
+		"animation": "idle"
 	}
-}
+]
