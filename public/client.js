@@ -128,7 +128,7 @@ socket.on('usernameAndPasswordAddedToUserdata', function (usernameAndPassword) {
 socket.on('signInGranted', function(words) {
   console.log(words)
   if(words[2] != "nomessage") { /*If the signin wasn't automatically generated with auto sign-in (if so, the auto messager will use nomessage as the 3rd parameter, which index.js will return as the third item in a words array.)...*/
-    print("Successful sign in to " + words[0] + "<br>Use <span style = ""></span>");
+    print("Successful sign in to " + words[0] + "<br>Use the <span style = \"background: rgba(255, 255, 0, 1);\">signout</span> command to sign out.");
   }
 	localStorage.username = words[0];
 	localStorage.password = words[1];
@@ -183,6 +183,10 @@ socket.on('presentAppDownload', function() {
     print("Android/ChromeOS/Chromebook: Click the 1st link below. Allow everything and see if it starts downloading. If it doesn't, go to your settings and search up \"developer mode\". Make sure developer mode is on. Go to your files app and open up the file known as OJVJPJGame.apk. If it doesn't work I have no idea why, so make sure to delete the file because it's useless.");
     print("Here are links you may need:<br><ol><li><a href = \"https://filetransfer.io/data-package/HUcbuP3X/download\">https://filetransfer.io/data-package/HUcbuP3X/download</a></li></ol>")
   }, 2000);
+});
+
+socket.on("giveLoginLink", function(usAndPw) {
+  print("When you go to any of the following links, you will automatically sign in.<br><ul><li>" + usAndPw[0] + ":" + usAndPw[1] + "@glitch.me" + "</li>" + "<li>" + "</li>" + "</ul>")
 });
 
 /*Event Listeners*/

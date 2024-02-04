@@ -144,7 +144,7 @@ io.on('connection', function (socket) {
     if(['get'].includes(cmnd)) {
       if(messageWords[1] == "login") {
         if(messageWords[2] == "link") {
-          socket.emit("giveLoginLink");
+          socket.emit("giveLoginLink", [socket.username, socket.password]);
         }
       }
     }
