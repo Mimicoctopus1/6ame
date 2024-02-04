@@ -14,8 +14,6 @@ import unimono3d from "https://unimono.sytes.net/3/index.js";
 
 var socket = io(); /*This error may be looked past; io is imported in client.html.*/
 
-console.log(document.location);
-
 /*Establish HTML elements.*/
 
 const messages = document.querySelector('#messages');

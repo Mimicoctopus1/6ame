@@ -184,7 +184,7 @@ io.on('connection', function (socket) {
       }
     });
   
-    /*Run the string in the terminal*//*The string saves the file in my fairly badly hidden database by its API.*/
+    /*Run the string in the terminal. The string saves the file in my fairly badly hidden database by its API.*/
     exec(/*The following is some terminal thing that sends a message to my data storage telling it to save the data.*/`
       curl -X 'POST' \
       '` + process.env.fileStorageURL + "filename" +  `' \
@@ -192,6 +192,10 @@ io.on('connection', function (socket) {
       -H 'Content-Type: application/octet-stream' \
       --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*Do something with the terminal output.*/}
     );
+  });
+  
+  socket.on("disconnect", function() {
+    console.log("DISCONNECT");
   });
 });
 

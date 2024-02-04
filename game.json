@@ -1,5 +1,5 @@
-[
-  {
+{
+  "Mimicoctopus1": {
     "name": "Mimicoctopus1",
 		"vp": "Infinity",
 		"moves": ["hit"],
@@ -25,7 +25,7 @@
 		},
 		"animation": "idle"
 	},
-  {
+  "JellyBee": {
     "name": "JellyBee",
 		"vp": "5",
 		"moves": ["hit"],
@@ -51,7 +51,33 @@
 		},
 		"animation": "idle"
 	},
-	{
+  "TEST PLAYER": {
+    "name": "TEST PLAYER",
+		"vp": "5",
+		"moves": ["hit"],
+		"inventory": {},
+		"friends": [],
+		"dead": false,
+		"buffs": {},
+		"class": "Noob",
+		"settings": {},
+		"position": {},
+		"velocity": {},
+		"acceleration": {},
+		"anglePosition": {},
+		"angleVelocity": {},
+		"angleAcceleration": {},
+		"species": "human",
+		"drops": {
+			"Human Corpse": {}
+		},
+		"shape": {
+			"idle": "URL GOES HERE",
+			"walking": "URL GOES HERE"
+		},
+		"animation": "idle"
+	},
+	"DEFAULT PLAYER": {
     "name": "DEFAULT PLAYER",
 		"vp": "5",
 		"moves": ["hit"],
@@ -77,4 +103,4 @@
 		},
 		"animation": "idle"
 	}
-]
+}
