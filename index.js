@@ -115,7 +115,9 @@ io.on('connection', function (socket) {
 		}
     if(['signin'].includes(cmnd)) {
       if(readJSON(".data/userdata.json")[messageWords[1]['password']] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get its password. If it matches the password given by the user...*/
-        socket.emit('signInGranted', readJSON(".data/userdata.json")[messageWords[1]['password'], messageWords[2]]);/*Send the username and PW.*/
+        socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"]]);/*Send the username and PW.*/
+        socket.username = messageWords[1];
+        socket.password = readJSON(".data/userdata.json")[messageWords[1]]["password"];
       } else {
         socket.emit('incorrectPasswordOrUsername');
       }
@@ -140,8 +142,10 @@ io.on('connection', function (socket) {
       }
     }
     if(['get'].includes(cmnd)) {
-      if(messageWords[1] == "") {
-        
+      if(messageWords[1] == "login") {
+        if(messageWords[2] == "link") {
+          socket.emit("giveLoginLink");
+        }
       }
     }
 		if(['trade'].includes(cmnd)) {
@@ -200,7 +204,9 @@ io.on('connection', function (socket) {
   });
   
   socket.on("disconnect", function() {
-    
+    /*Clear the username and password for the next user.*/
+    socket.username = undefined;
+    socket.password = undefined;
   });
 });
 
