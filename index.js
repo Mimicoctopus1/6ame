@@ -139,6 +139,11 @@ io.on('connection', function (socket) {
         }
       }
     }
+    if(['get'].includes(cmnd)) {
+      if(messageWords[1] == "") {
+        
+      }
+    }
 		if(['trade'].includes(cmnd)) {
       trade([], socket);
 		}

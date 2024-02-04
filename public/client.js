@@ -10,7 +10,7 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 
 /*Initializing imports.*/
 
-//import unimono3d from "https://unimono.sytes.net/3/index.js";
+import unimono3d from "https://unimono.sytes.net/3/index.js";
 
 var socket = io(); /*This error may be looked past; io is imported in client.html.*/
 
@@ -133,6 +133,8 @@ socket.on('usernameAndPasswordAddedToUserdata', function (usernameAndPassword) {
 socket.on('signInGranted', function (words) {
 	localStorage.username = words[0];
 	localStorage.password = words[1];
+  sessionStorage.username = words[0];
+  sessionStorage.password = words[1];
 	localStorage.signedIntoGame = 'true';
 });
 
