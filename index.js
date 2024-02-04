@@ -115,11 +115,11 @@ io.on('connection', function (socket) {
 		}
     if(['signin'].includes(cmnd)) {
       if(readJSON(".data/userdata.json")[messageWords[1]]["password"] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get its password. If it matches the password given by the user...*/
-        socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"], messageWords[3]]);/*Send the username and PW. messageWords[3] is an optional parameter given. When I auto-s*/
+        socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"], messageWords[3]]);/*Send the username and PW. messageWords[3] is an optional parameter given. When the user is auto-signed in, it will put "nomessage" in it. This tells the server to, right now, tell the client not to print, "Successful sign in to <username>." since the user never typed sign in.*/
         socket.username = messageWords[1];
         socket.password = readJSON(".data/userdata.json")[messageWords[1]]["password"];
       } else {
-        socket.emit('incorrectPasswordOrUsername');
+        socket.emit('incorrectPasswordOrUsername', messageWords);
       }
     }
     if(['signup'].includes(cmnd)) {

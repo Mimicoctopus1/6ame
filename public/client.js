@@ -37,9 +37,8 @@ const renderer3 = document.querySelectorAll('.renderer3')[0];
 /*HTML Setup*/
 
 if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
-	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + "nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
+	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + " nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';
-	
 } else {/*If you aren't already signed into the game...*/
 	//messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
 	messages.innerHTML += "<li>Please type the word 'buzz' right after the arrow, then press enter. <a tabindex = \"-1\" class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>";
@@ -120,17 +119,17 @@ socket.on('signUpProcedureUsernameTaken', function () {
 });
 
 socket.on('usernameAndPasswordAddedToUserdata', function (usernameAndPassword) {
-	print(
-		'Great! Your username and password have been added to the system.<br>Username: ' +
-			usernameAndPassword[0] +
-			'<br>Password: ' +
-			usernameAndPassword[1],
+	print('Great! Your username and password have been added to the system.<br>Username: ' + usernameAndPassword[0] +
+		  '<br>Password: ' + usernameAndPassword[1],
 	);
 	print('To sign into your new account, please type in signin ' + usernameAndPassword[0] + ' ' + usernameAndPassword[1]);
 });
 
 socket.on('signInGranted', function(words) {
-  print("Successful sign in to " + words[0]);
+  console.log(words)
+  if(words[2] != "nomessage") { /*If the signin wasn't automatically generated with auto sign-in (if so, the auto messager will use nomessage as the 3rd parameter, which index.js will return as the third item in a words array.)...*/
+    print("Successful sign in to " + words[0] + "<br>Use <span style = ""></span>");
+  }
 	localStorage.username = words[0];
 	localStorage.password = words[1];
   sessionStorage.username = words[0];
@@ -146,8 +145,9 @@ socket.on('signOut', function() {
 	localStorage.signedIntoGame = 'false';
 });
 
-socket.on('incorrectPasswordOrUsername', function () {
+socket.on('incorrectPasswordOrUsername', function(words) {
 	print('That password-username combination is incorrect! Please try again.');
+  console.log(words);
 });
 
 socket.on('buzzermode', function (adminOrNot) {
