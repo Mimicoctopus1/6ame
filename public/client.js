@@ -36,14 +36,13 @@ const renderer3 = document.querySelectorAll('.renderer3')[0];
 
 /*HTML Setup*/
 
-if (localStorage.signedIntoGame != 'true') {
-	/*If you aren't already signed into the game...*/
-	//messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
-	messages.innerHTML +=
-		"<li>Please type the word 'buzz' right after the arrow, then press enter. <a tabindex = \"-1\" class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>";
-} else {
-	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password); /*Automatically sign in*/
+if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
+	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + "nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';
+	
+} else {/*If you aren't already signed into the game...*/
+	//messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
+	messages.innerHTML += "<li>Please type the word 'buzz' right after the arrow, then press enter. <a tabindex = \"-1\" class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>";
 }
 
 input.style.display = 'none'; /*Hide the text-mode input So the user can't run commands yet.*/
@@ -130,12 +129,21 @@ socket.on('usernameAndPasswordAddedToUserdata', function (usernameAndPassword) {
 	print('To sign into your new account, please type in signin ' + usernameAndPassword[0] + ' ' + usernameAndPassword[1]);
 });
 
-socket.on('signInGranted', function (words) {
+socket.on('signInGranted', function(words) {
+  print("Successful sign in to " + words[0]);
 	localStorage.username = words[0];
 	localStorage.password = words[1];
   sessionStorage.username = words[0];
   sessionStorage.password = words[1];
 	localStorage.signedIntoGame = 'true';
+});
+
+socket.on('signOut', function() {
+	localStorage.username = undefined;
+	localStorage.password = undefined;
+  sessionStorage.username = undefined;
+  sessionStorage.password = undefined;
+	localStorage.signedIntoGame = 'false';
 });
 
 socket.on('incorrectPasswordOrUsername', function () {
@@ -191,7 +199,7 @@ var handlecontextmenu = function (e) {
 	rcmenu.style.top = e.pageY - 20 + 'px';
 };
 
-var handleInputKeyup = function (e) {
+var handleInputKeyup = function(e) {
 	if (e.key === 'Enter' || e.keyCode === 13) {
 		/*When enter is pressed...*/
 		socket.emit(
@@ -199,10 +207,10 @@ var handleInputKeyup = function (e) {
 			input.firstChild.textContent,
 		); /*Send a message to the server, index.js. The program seems to always put the message in a div, so I'm selecting the 
     textContent of the firstChild (the div).*/
-		input.innerHTML = ''; /*Clear the entry area.*/
 		let printItem = document.createElement('li');
-		printItem.innerHTML = '------------------------------------------------NEW------------------------------------------------';
-		messages.appendChild(printItem);
+		printItem.innerHTML = input.firstChild.textContent + '<br>------------------------------------------------NEW------------------------------------------------'; /*Print back the user input and add a new messages line.*/
+    messages.appendChild(printItem);
+		input.innerHTML = ''; /*Clear the entry area.*/
 	}
 };
 

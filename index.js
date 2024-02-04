@@ -114,8 +114,8 @@ io.on('connection', function (socket) {
 			}
 		}
     if(['signin'].includes(cmnd)) {
-      if(readJSON(".data/userdata.json")[messageWords[1]['password']] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get its password. If it matches the password given by the user...*/
-        socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"]]);/*Send the username and PW.*/
+      if(readJSON(".data/userdata.json")[messageWords[1]]["password"] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get its password. If it matches the password given by the user...*/
+        socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"], messageWords[3]]);/*Send the username and PW. messageWords[3] is an optional parameter given. When I auto-s*/
         socket.username = messageWords[1];
         socket.password = readJSON(".data/userdata.json")[messageWords[1]]["password"];
       } else {
@@ -161,6 +161,9 @@ io.on('connection', function (socket) {
       if(["app"].includes(messageWords[1])){
         socket.emit("presentAppDownload");
       }
+		}
+    if(["signout"].includes(cmnd)) {
+      socket.emit("signOut")
 		}
     
 		/*Blank template*/
