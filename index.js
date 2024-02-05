@@ -39,17 +39,6 @@ var writeJSON = function(jsonFileName, dataToSave) {
 	}
 };
 
-var objToJSON = function(objFileName) {
-  if(objFileName.includes("http")/*If the file isn't local...*/) {
-    
-  } else {
-    let localObj = fs.readFileSync(objFileName);
-    fs.close(localObj, function(error) {
-      throw(error);
-    });
-  }
-};
-
 var trade = function(inv, socket, arrayMode) {
   if(arrayMode) {
     for(let i in inv) {
