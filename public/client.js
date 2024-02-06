@@ -45,7 +45,7 @@ if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';
 } else {/*If you aren't already signed into the game...*/
 	//messages.innerHTML += "<li>Welcome to the OJVJPJ game. To sign in, type <code>signin</code>. For help, type <code>help</code>. You can type right after the <code>&gt</code> symbol</li>";
-	messages.innerHTML += "<li>Please type the word 'buzz' right after the arrow, then press enter. <a tabindex = \"-1\" class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>";
+	messages.innerHTML += "<li>Please type the word 'buzz' right after the arrow, then press enter. <a tabindex = \"-1\" onclick = \"socket.emit('message', 'buzz');/*Simulate the 'buzz' command.*/\" class = 'buzzActivation' href = '#');\">Not working? Click here!</a></li>";
 }
 
 input.style.display = 'none'; /*Hide the text-mode input So the user can't run commands yet.*/
@@ -130,7 +130,6 @@ socket.on('usernameAndPasswordAddedToUserdata', function (usernameAndPassword) {
 });
 
 socket.on('signInGranted', function(words) {
-  console.log(words)
   if(words[2] != "nomessage") { /*If the signin wasn't automatically generated with auto sign-in (if so, the auto messager will use nomessage as the 3rd parameter, which index.js will return as the third item in a words array.)...*/
     print("Successful sign in to " + words[0] + "<br>Use the <span style = \"background: rgba(255, 255, 0, 1);\">signout</span> command to sign out.");
   }
@@ -222,10 +221,6 @@ var handleInputKeyup = function(e) {
 	}
 };
 
-var enterBuzzMode = function() {
-	socket.emit('message', 'buzz');
-};
-
 var enterFullscreen = function() {
 	socket.emit('fullscreenCheck'); /*Tell the server to check if it's a good idea to fullscreen or not.*/
 };
@@ -281,7 +276,6 @@ var lockPointerRenderer3 = function() {
 
 document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
-document.querySelectorAll('.buzzActivation')[0].addEventListener('click', enterBuzzMode);
 document.addEventListener('click', enterFullscreen);
 mediaPreviewStart.addEventListener('click', startRecording);
 mediaPreviewStop.addEventListener('click', stopRecording);
