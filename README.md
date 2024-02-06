@@ -67,6 +67,13 @@ my notes on the species in this game, and where each one is in the tree of life.
 If you'd like to worldbuild, use Ctrl+P or click the search bar above and then type wbfind. Select search files for "wbfind" to find the places you should edit if you're a worldbuilder
 * Moves: To make your own moves, find the wbfind tag in index.js with the moves JS object. Feel free to add as needed. The key: value pair should have the key as the move name as specified in the list of moves in game.json.
 * Map: To make your own maps, go to game.json and put in your own OBJ and MTL urls as neccessary. Look to my [TinkerCad profile](https://www.tinkercad.com/users/b1G2lcK1dyz) to find my own models.
+* If you would like users to use their OJVJPJ.glitch.me account with your own domain or subdomain, insert this into your html file:
+`
+<iframe style = "display: none; position: fixed; left: -100; top: -100"></iframe>
+<script>
+
+</script>
+`
 
 ### To-Do
 If you would like to have a feature added to the game, please request to edit and send me a message the request and I will add it here, but it doesn't pop up, I'm sorry but that means I can't figure it out. Also, if you remix my project and add something cool, I would like to add that to
