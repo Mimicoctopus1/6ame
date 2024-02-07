@@ -150,7 +150,9 @@ io.on('connection', function (socket) {
     if(["signout"].includes(cmnd)) {
       socket.emit("signOut")
 		}
-    
+    if(readJSON["game.json"][socket.username]["moves"][cmnd] != undefined)/*Go into game.json, then the user's account, then that person's moves, and check if it contains the command.*/ {
+      
+    }
 		/*Blank template*/
 		if([].includes(cmnd)) {
 		}
@@ -193,8 +195,8 @@ io.on('connection', function (socket) {
   
   socket.on("disconnect", function() {
     /*Clear the username and password for the next user.*/
-    socket.username = undefined;
-    socket.password = undefined;
+    delete(socket.username);
+    delete(socket.password);
   });
 });
 
