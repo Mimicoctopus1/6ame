@@ -2,7 +2,13 @@
   "Mimicoctopus1": {
     "name": "Mimicoctopus1",
 		"vp": "Infinity",
-		"moves": ["hit"],
+		"moves": {
+      "Hit": {
+        "name": "Hit",
+        "icon": "https://unimono.sytes.net/Move%20Hit.png",
+        "effect": "console.log('It worked')"
+      }
+    },
 		"inventory": {},
 		"friends": ["JellyBee"],
 		"dead": false,

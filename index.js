@@ -150,8 +150,8 @@ io.on('connection', function (socket) {
     if(["signout"].includes(cmnd)) {
       socket.emit("signOut")
 		}
-    if(readJSON["game.json"][socket.username]["moves"][cmnd] != undefined)/*Go into game.json, then the user's account, then that person's moves, and check if it contains the command.*/ {
-      
+    if(readJSON("game.json")[socket.username]["moves"][cmnd] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
+      runString((readJSON("game.json")[socket.username]["moves"][cmnd]));/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
     }
 		/*Blank template*/
 		if([].includes(cmnd)) {
