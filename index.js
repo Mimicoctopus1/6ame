@@ -58,16 +58,6 @@ var trade = function(inv, socket, arrayMode) {
   socket.emit()
 };
 
-/*Declare moves for players to use.*/
-var moves = {/*wbfind <-- That is so that WorldBuilders can find this by using Ctrl+P and then wbfind.*/
-  "Hit": {
-    "icon": "https://unimono.sytes.net/Move%20Hit.png",
-    "effect": function() {
-      
-    }
-  }
-};
-
 var emailer = nodemailer.createTransport({/*Setup the account recovery emailer in case you forget your password or something.*/
   service: 'gmail',
   auth: {

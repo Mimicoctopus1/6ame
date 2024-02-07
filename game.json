@@ -80,15 +80,12 @@
 	"DEFAULT PLAYER": {
     "name": "Guest",
     "level": "1",
-    "moves": [
-      {
+    "moves": {
+      "Hit": {
         "name": "Hit",
         "icon": "https://unimono.sytes.net/Move%20Hit.png",
-        "effect": ""
-      },
-      {
-      
+        "effect": "console.log('It worked')"
       }
-    ]
+    }
 	}
 }
