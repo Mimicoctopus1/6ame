@@ -12,10 +12,9 @@ const io = new Server(server);
 /*Declare useful functions.*/
 
 var runString = function(stringToRun, parametersArray) {
-  console.log(stringToRun);
   let functionToRun = new Function(stringToRun); /*Make a function from the string.*/
   if(parametersArray != undefined) {
-    //functionToRun.apply(parametersArray); /*Run the function with the parameters given.*/
+    functionToRun.apply(parametersArray); /*Run the function with the parameters given.*/
   }
 };
 
@@ -46,19 +45,6 @@ var writeJSON = function(jsonFileName, dataToSave) {
 		console.error(error); /*Send an error to the user console and the Glitch logs.*/
 		return(false); /*Return that the data save was unsuccessful.*/
 	}
-};
-
-var trade = function(inv, socket, arrayMode) {
-  if(arrayMode) {
-    for(let i in inv) {
-      let newI = {};
-      for(let item in i) {
-        newI[item] += 1;
-      }
-      i = newI;
-    }
-  }
-  socket.emit()
 };
 
 var emailer = nodemailer.createTransport({/*Setup the account recovery emailer in case you forget your password or something.*/
@@ -136,9 +122,6 @@ io.on('connection', function (socket) {
         }
       }
     }
-		if(['trade'].includes(cmnd)) {
-      trade([], socket);
-		}
     if(['buzz'].includes(cmnd)) {
       socket.emit('buzzermode');
     }
@@ -153,8 +136,8 @@ io.on('connection', function (socket) {
     if(["signout"].includes(cmnd)) {
       socket.emit("signOut")
 		}
-    if(readJSON("game.json")[socket.username]["moves"] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
-      runString((readJSON("game.json")[socket.username]["moves"][cmnd]));/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
+    if(readJSON("game.json")[socket.username]["moves"][cmnd] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
+      runString((readJSON("game.json")[socket.username]["moves"][cmnd]["effect"]), readJSON("game.json"));/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
     }
 		/*Blank template*/
 		if([].includes(cmnd)) {
