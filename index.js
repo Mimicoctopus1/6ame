@@ -10,6 +10,12 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 /*Declare useful functions.*/
+
+var runString = function(stringToRun, parametersArray) {
+  let functionToRun = new Function(stringToRun); /*Make a function from the string.*/
+  functionToRun.apply(parametersArray); /*Run the function with the parameters given.*/
+};
+
 /*Make functions to read and write JSON*/
 var readJSON = function(jsonFileName) {
 	try {
