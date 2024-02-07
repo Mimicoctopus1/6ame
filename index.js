@@ -12,8 +12,11 @@ const io = new Server(server);
 /*Declare useful functions.*/
 
 var runString = function(stringToRun, parametersArray) {
+  console.log(stringToRun);
   let functionToRun = new Function(stringToRun); /*Make a function from the string.*/
-  functionToRun.apply(parametersArray); /*Run the function with the parameters given.*/
+  if(parametersArray != undefined) {
+    //functionToRun.apply(parametersArray); /*Run the function with the parameters given.*/
+  }
 };
 
 /*Make functions to read and write JSON*/
@@ -150,7 +153,7 @@ io.on('connection', function (socket) {
     if(["signout"].includes(cmnd)) {
       socket.emit("signOut")
 		}
-    if(readJSON("game.json")[socket.username]["moves"][cmnd] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
+    if(readJSON("game.json")[socket.username]["moves"] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
       runString((readJSON("game.json")[socket.username]["moves"][cmnd]));/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
     }
 		/*Blank template*/
