@@ -6,7 +6,7 @@
       "Hit": {
         "name": "Hit",
         "icon": "https://unimono.sytes.net/Move%20Hit.png",
-        "effect": ""
+        "effect": "console.log('used the hit move')"
       }
     },
 		"inventory": {},
