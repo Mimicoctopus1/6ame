@@ -139,11 +139,11 @@ io.on('connection', function (socket) {
     if(["signout"].includes(cmnd)) {
       socket.emit("signOut")
 		}
-    // console.log(readJSON("game.json")[socket.username]);
-    if(readJSON("game.json")[socket.username]["moves"][cmnd]["effect"] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
-      // runString((readJSON("game.json")[socket.username]["moves"][cmnd]["effect"]), readJSON("game.json"));/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
+    console.log(readJSON("game.json")[socket.username]["moves"]);
+    if(readJSON("game.json")[socket.username]["moves"][messageWords[1]]) {/*If the command is in the user's move property (if the user knows the move).*/
+      runString((readJSON("game.json")[socket.username]["moves"]["Hit"]["effect"]), [readJSON("game.json")]);/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
     }
-		/*Blank template*/
+		// Blank template
 		if([].includes(cmnd)) {
 		}
 		/*Blank template*/
