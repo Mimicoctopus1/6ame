@@ -71,6 +71,9 @@ io.on('connection', function (socket) {
 	socket.on('message', function (msg) {
 		/*When an entry is received from the user...*/ let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
+    /*Do the same thing in lowercase.*/
+    let lMessageWords = msg.toLowerCase().split(' ');
+    let lCmnd = lMessageWords[0];
 		if (['help'].includes(cmnd)) {
       
     }
@@ -136,8 +139,9 @@ io.on('connection', function (socket) {
     if(["signout"].includes(cmnd)) {
       socket.emit("signOut")
 		}
-    if(readJSON("game.json")[socket.username]["moves"][cmnd] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
-      runString((readJSON("game.json")[socket.username]["moves"][cmnd]["effect"]), readJSON("game.json"));/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
+    // console.log(readJSON("game.json")[socket.username]);
+    if(readJSON("game.json")[socket.username]["moves"][cmnd]["effect"] != undefined) {/*If the command is in the user's move property (if the user knows the move).*/
+      // runString((readJSON("game.json")[socket.username]["moves"][cmnd]["effect"]), readJSON("game.json"));/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
     }
 		/*Blank template*/
 		if([].includes(cmnd)) {
