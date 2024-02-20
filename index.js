@@ -137,7 +137,9 @@ io.on('connection', function (socket) {
       }
 		}
     if(["signout"].includes(cmnd)) {
-      socket.emit("signOut")
+      socket.emit("signOut");
+      delete(socket.username);
+      delete(socket.password);
 		}
     let moveKeys = Object.keys(readJSON("game.json")[socket.username]["moves"]);/*Get an array of all the moves.*/
     if(readJSON("game.json")[socket.username]["moves"][cmnd]) {/*If the command is in the user's move property (if the user knows the move).*/
