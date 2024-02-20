@@ -142,7 +142,6 @@ socket.on('signOut', function() {
   sessionStorage.username = undefined;
   sessionStorage.password = undefined;
 	localStorage.signedIntoGame = 'false';
-  socket.emit('signOut')
 });
 
 socket.on('incorrectPasswordOrUsername', function(words) {
