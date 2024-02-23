@@ -73,9 +73,21 @@ my notes on the species in this game, and where each one is in the tree of life.
 "hit": "punch"  
 }`  
 and then hit does the same thing as punch)
-* If you would like users to use their OJVJPJ.glitch.me account with your own domain or subdomain, insert this into your JS file:
+* If you would like users to use their OJVJPJ.glitch.me account with your own remix of this game, insert this into your JS file:
 `
-import account
+import account from "https://unimono.sytes.net/account.js";
+` 
+and then you can use
+`
+account.requestAccess(function() {
+  /*Do something*/
+}, function() {
+  /*Do something else*/
+});
+`
+to open a popup. If the user accepts, the first function will run, otherwise the second will. Then, you can use 
+`
+account.account to return an object of user info.
 `
 
 ### To-Do
