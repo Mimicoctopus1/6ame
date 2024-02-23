@@ -65,13 +65,17 @@ my notes on the species in this game, and where each one is in the tree of life.
   
 ### Worldbuilders
 * Map: To make your own maps, go to game.json and put in your own OBJ and MTL urls as neccessary. Look to my [TinkerCad profile](https://www.tinkercad.com/users/b1G2lcK1dyz) to find my own models.
-* Moves: When making your own move, name is the name of the move, effect is a string containing the code you'd like to run when the move is activated (in the string you can reference)
-* If you would like users to use their OJVJPJ.glitch.me account with your own domain or subdomain, insert this into your html file:
+* Moves: When making your own move, effect is a string containing the code you'd like to run when the move is activated (you can also reference a different move like so:  
+`"moves": {  
+"punch": {  
+  "effect": "something goes here."  
+}  
+"hit": "punch"  
+}`  
+and then hit does the same thing as punch)
+* If you would like users to use their OJVJPJ.glitch.me account with your own domain or subdomain, insert this into your JS file:
 `
-<iframe style = "display: none; position: fixed; left: -100; top: -100"></iframe>
-<script>
-ACTUALLY, THIS IS UNFINISHED. DON'T USE IT.
-</script>
+import account
 `
 
 ### To-Do
