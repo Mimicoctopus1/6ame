@@ -149,7 +149,6 @@ socket.on('incorrectPasswordOrUsername', function(words) {
 });
 
 socket.on('buzzermode', function(adminOrNot) {
-  alert("buzzermode activate")
 	buzzerButton.style.display = 'block';
   gameMode = "buzz";
 	if (adminOrNot) {
