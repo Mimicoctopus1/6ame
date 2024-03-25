@@ -129,12 +129,14 @@ io.on('connection', function (socket) {
       socket.emit("signOut");
       delete(socket.username);
       delete(socket.password);
-		} else if(socket.username != && readJSON("game.json")[socket.username]["moves"][cmnd]) {/*If the command is in the user's move property (if the user knows the move).*/
+		} else if(socket.username != undefined && readJSON("game.json")[socket.username]["moves"][cmnd]) {/*If the command is in the user's move property (if the user knows the move) and the user is signed in...*/
       var moveEntryInGameJSON = readJSON("game.json")[socket.username]["moves"][cmnd];
       while(typeof(moveEntryInGameJSON) == "string") {/*While the move is a reference to run a different move instead (so probably never)...*/
         var moveEntryInGameJSON = readJSON("game.json")[socket.username]["moves"][moveEntryInGameJSON];
       }
       runString(moveEntryInGameJSON.effect, [readJSON("game.json")]);/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
+    } else if(["move", "m"].includes(cmnd)) {
+      
     }
     
     
@@ -142,7 +144,6 @@ io.on('connection', function (socket) {
     
     else { /*Catch for if the command given is not in the list above*/
       socket.emit("unknownCommand");
-      console.log("asdf");
     }
 	});
 
