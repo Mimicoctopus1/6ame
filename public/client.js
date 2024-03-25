@@ -187,6 +187,10 @@ socket.on("giveLoginLink", function(usAndPw) {
   print("When you go to any of the following links, you will automatically sign in.<br><ul><li>" + usAndPw[0] + ":" + usAndPw[1] + "@glitch.me" + "</li>" + "<li>" + "</li>" + "</ul>")
 });
 
+socket.on("unknownCommand", function() {
+  print("Sorry, that command is not valid.");
+});
+
 /*Event Listeners*/
 
 /*Edit the right click menu*/

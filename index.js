@@ -76,21 +76,16 @@ io.on('connection', function (socket) {
     let lCmnd = lMessageWords[0];
 		if (['help'].includes(cmnd)) {
       
-    }
-			if (['chat', 'c', 'say', 'talk'].includes(cmnd)) {
-				/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
-				/*Take all the words except the first, join them together by spaces (the opposite of .split), and send to the clients.*/
-				io.emit('chat', messageWords.slice(1).join(' '));
-			}
-		if (['whisperto', 'sayto', 'talkto', 'tell', 't'].includes(cmnd)) {
-		}
-		if (['yell', 'y', 'scream', 'shout'].includes(cmnd)) {
-		}
-		if (['settings'].includes(cmnd)) {
+    } else if (['chat', 'c', 'say', 'talk'].includes(cmnd)) {
+			/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
+			/*Take all the words except the first, join them together by spaces (the opposite of .split), and send to the clients.*/
+			io.emit('chat', messageWords.slice(1).join(' '));
+		} else if (['whisperto', 'sayto', 'talkto', 'tell', 't'].includes(cmnd)) {
+		} else if (['yell', 'y', 'scream', 'shout'].includes(cmnd)) {
+		} else if (['settings'].includes(cmnd)) {
 			if (['notifications'].includes(messageWords[1])) {
 			}
-		}
-    if(['signin'].includes(cmnd)) {
+		} else if(['signin'].includes(cmnd)) {
       if(readJSON(".data/userdata.json")[messageWords[1]]["password"] == messageWords[2]) {/*Open up the hidden userdata file and search through it for the username, AKA the 2nd word in the command given from the client input. Get its password. If it matches the password given by the user...*/
         socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"], messageWords[3]]);/*Send the username and PW. messageWords[3] is an optional parameter given. When the user is auto-signed in, it will put "nomessage" in it. This tells the server to, right now, tell the client not to print, "Successful sign in to <username>." since the user never typed sign in.*/
         socket.username = messageWords[1];
@@ -98,8 +93,7 @@ io.on('connection', function (socket) {
       } else {
         socket.emit('incorrectPasswordOrUsername', messageWords);
       }
-    }
-    if(['signup'].includes(cmnd)) {
+    } else if(['signup'].includes(cmnd)) {
       if(messageWords[2] == undefined) {
         socket.emit('runSignUpProcedure'); 
       } else {
@@ -117,42 +111,39 @@ io.on('connection', function (socket) {
           socket.emit('signUpProcedureUsernameTaken');
         }
       }
-    }
-    if(['get'].includes(cmnd)) {
+    } else if(['get'].includes(cmnd)) {
       if(messageWords[1] == "login") {
         if(messageWords[2] == "link") {
           socket.emit("giveLoginLink", [socket.username, socket.password]);
         }
       }
-    }
-    if(['buzz'].includes(cmnd)) {
+    } else if(['buzz'].includes(cmnd)) {
       socket.emit('buzzermode');
-    }
-    if(['buzzadmin'].includes(cmnd)) {
+    } else if(['buzzadmin'].includes(cmnd)) {
       socket.emit('buzzermode', true);
-    }
-    if(["download"].includes(cmnd)) {
+    } else if(["download"].includes(cmnd)) {
       if(["app"].includes(messageWords[1])){
         socket.emit("presentAppDownload");
       }
-		}
-    if(["signout"].includes(cmnd)) {
+		} else if(["signout"].includes(cmnd)) {
       socket.emit("signOut");
       delete(socket.username);
       delete(socket.password);
-		}
-    let moveKeys = Object.keys(readJSON("game.json")[socket.username]["moves"]);/*Get an array of all the moves.*/
-    if(readJSON("game.json")[socket.username]["moves"][cmnd]) {/*If the command is in the user's move property (if the user knows the move).*/
+		} else if(socket.username != && readJSON("game.json")[socket.username]["moves"][cmnd]) {/*If the command is in the user's move property (if the user knows the move).*/
       var moveEntryInGameJSON = readJSON("game.json")[socket.username]["moves"][cmnd];
       while(typeof(moveEntryInGameJSON) == "string") {/*While the move is a reference to run a different move instead (so probably never)...*/
         var moveEntryInGameJSON = readJSON("game.json")[socket.username]["moves"][moveEntryInGameJSON];
       }
       runString(moveEntryInGameJSON.effect, [readJSON("game.json")]);/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
     }
-		// Blank template
-		if([].includes(cmnd)) {
-		}
-		/*Blank template*/
+    
+    
+    
+    
+    else { /*Catch for if the command given is not in the list above*/
+      socket.emit("unknownCommand");
+      console.log("asdf");
+    }
 	});
 
   socket.on("buzzDetected", function(timeStamp, name) {
