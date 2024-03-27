@@ -137,6 +137,8 @@ io.on('connection', function (socket) {
       runString(moveEntryInGameJSON.effect, [readJSON("game.json")]);/*Run the code for the move, entering game.json in case the move needs the data. game.json is like the "event" parameter you take in an event listener.*/
     } else if(["move", "m"].includes(cmnd)) {
       
+    } else if(["changemode"].includes(cmnd)) {
+      socket.emit("changeMode", messageWords[1]);
     }
     
     

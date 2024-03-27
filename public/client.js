@@ -67,18 +67,19 @@ socket.on("currentToS", function(currentToS) { /*When the server sends data with
 
 socket.emit("getCurrentToS"); /*Request the current ToS from the server, which will then send a message back to run the currentToS event above.*/
 
-if(gameMode == "text") {
-  arrowSymbol.style.display = "inline";
-  input.style.display = "inline";
+var updateGameMode = function() {
+  if(gameMode == "text") {
+    arrowSymbol.style.display = "inline";
+    input.style.display = "inline";
+  }
+  if(gameMode == "2D") {
+    renderer2.style.display = "block";
+  }
+  
+  if(gameMode == "3D") {
+    renderer3.style.display = "block";
+  }
 }
-if(gameMode == "2D") {
-  renderer2.style.display = "block";
-}
-
-if(gameMode == "3D") {
-  renderer3.style.display = "block";
-}
-
 /*Define functions.*/
 
 var print = function (msgToPrint) {
@@ -187,8 +188,15 @@ socket.on("giveLoginLink", function(usAndPw) {
   print("When you go to any of the following links, you will automatically sign in.<br><ul><li>" + usAndPw[0] + ":" + usAndPw[1] + "@glitch.me" + "</li>" + "<li>" + "</li>" + "</ul>")
 });
 
+socket.on("changeMode", function(mode) {
+  gameMode = mode;
+  if(mode == "text") {
+    print("You already are in text mode!");
+  }
+});
+
 socket.on("unknownCommand", function() {
-  print("Sorry, that command is not valid.");
+  print("Sorry, that command is not valid. Type <code class = 'argument'>help</code> for a list of commands.");
 });
 
 /*Event Listeners*/
