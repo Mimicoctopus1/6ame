@@ -68,6 +68,10 @@ socket.on("currentToS", function(currentToS) { /*When the server sends data with
 socket.emit("getCurrentToS"); /*Request the current ToS from the server, which will then send a message back to run the currentToS event above.*/
 
 var updateGameMode = function() {
+  arrowSymbol.style.display = "none";
+  renderer2.style.display = "none";
+  renderer3.style.display = "none";
+  
   if(gameMode == "text") {
     arrowSymbol.style.display = "inline";
     input.style.display = "inline";
@@ -80,6 +84,9 @@ var updateGameMode = function() {
     renderer3.style.display = "block";
   }
 }
+
+updateGameMode();
+
 /*Define functions.*/
 
 var print = function (msgToPrint) {
@@ -193,6 +200,7 @@ socket.on("changeMode", function(mode) {
   if(mode == "text") {
     print("You already are in text mode!");
   }
+  updateGameMode();
 });
 
 socket.on("unknownCommand", function() {
