@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title> Gallery </title>
+		<title>
+      Gallery
+    </title>
 		<meta charset="utf-8" />
 	</head>
 	<body>
-		<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script><!--Import the model viewer designed at modelviewer.dev-->
-		<h1>
-      The Gallery
-    </h1>
-<!--
-alt is the text that a screenreader will read. On an image it pops up when you hover your mouse over it.
-src is the file to get the 3D model from
--->
-    <div>
-      <model-viewer
-		  	alt="Environment Practice"
-		  	src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb"
-		  	ar = "true"
-		  	environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
-		  	poster="https://modelviewer.dev/shared-assets/models/NeilArmstrong.webp"
-		  	shadow-intensity="1"
-		  ></model-viewer>
-    </div>
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <!--Import the model viewer designed at modelviewer.dev-->
+    <h1>The Gallery</h1>
+		<!--
+alt is the text that a screenreader will read. On an image it pops up when you hover your mouse over it. src is the file to get the 3D model from
+src is the URL for the 3D model. <model-viewer> only accepts .glb and .gltf files.
+    -->
+		<div>
+			<model-viewer
+				alt="Neil Armstrong's Spacesuit from the Smithsonian Digitization Programs Office and National Air and Space Museum"
+				src="https://modelviewer.dev/shared-assets/models/NeilArmstrong.glb"
+				ar="true"
+        skybox-image="https://"
+				environment-image="https://modelviewer.dev/shared-assets/environments/moon_1k.hdr"
+				poster="https://modelviewer.dev/shared-assets/models/NeilArmstrong.webp"
+				shadow-intensity="1"
+				camera-controls
+				touch-action="pan-y"
+			></model-viewer>
+		</div>
 	</body>
 </html>
