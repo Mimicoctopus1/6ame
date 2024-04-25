@@ -157,6 +157,10 @@ socket.on('incorrectPasswordOrUsername', function(words) {
   console.log(words);
 });
 
+socket.on('signInByFace', function() {
+  
+});
+
 socket.on('buzzermode', function(adminOrNot) {
 	buzzerButton.style.display = 'block';
   gameMode = "buzz";
