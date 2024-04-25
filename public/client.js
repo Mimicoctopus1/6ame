@@ -103,28 +103,21 @@ var faceRecorder;
 var faceRecording;
 var faceRecordingChunks;
 
-var startFaceScanner = async function(e) { 
-	faceRecording = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
-		video: true, /*The user must allow camera access.*/
-    audio: true, /*The user must allow microphone access.*/
-	});
+var startFaceScanner = async function(e) {
   
-	faceRecorder = new MediaRecorder(faceRecording);/*Make a recorder that sends stuff to the faceRecording displayer.*/
-
-	faceRecordingChunks = []; /*Make a variable to store chunks of video.*/
-	faceRecorder.ondataavailable = function(e) {
-		faceRecordingChunks.push(e.data);
-	};
-	faceRecorder.onstop = function(e) { /*Do the following when the recording is stopped by the stopRecording function below*/
-    /*Make it so you can't stop it again until you start it again.*/
-    facePreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
-    
-		var faceRecordingBlob = new Blob(faceRecordingChunks, {type: faceRecordingChunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
-    facePreview.src = URL.createObjectURL(faceRecordingBlob); /*Create a blob URL and throw it in the facePreview. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the URL again.*/
-    URL.revokeObjectURL(faceRecordingBlob); /*Delete the blob URL.*/
-	};
-
-	faceRecorder.start(); /*Now that everything is set up, start recording!*/
+  /* Setting up the constraint */
+  var facingMode = "user"; // Can be 'user' or 'environment' to access back or front camera (NEAT!)
+  var constraints = {
+    audio: false,
+    video: {
+     facingMode: facingMode
+    }
+  };
+  
+  /* Stream it to video element */
+  navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
+    video.srcObject = stream;
+  });
 };
 startFaceScanner();
 
