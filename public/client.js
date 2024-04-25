@@ -105,10 +105,10 @@ var faceRecording;
 var faceRecordingChunks;
 
 var startFaceScanner = async function(e) {
-  /* Stream it to video element */
   navigator.mediaDevices.getUserMedia({
     video: true /*Ask for video, not audio or anything else.*/
   }).then(function(stream) {
+    console.log(stream.getTracks());
     facePreview.srcObject = stream;
   });
 };
@@ -312,8 +312,7 @@ var handleInputKeyup = function(e) {
 };
 
 var stopFaceScanner = function(e) {
-  facePreview.srcObject = "";/*Stop running the video.*/
-  faceScanner.style.display = "none";
+  faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
 }
 
 document.addEventListener('contextmenu', handlecontextmenu);
