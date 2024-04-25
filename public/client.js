@@ -98,14 +98,15 @@ var print = function (msgToPrint) {
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
 var faceRecorder;
-var stream;
+var faceRecording;
 var chunks;
 
 var startFaceScanner = async function(e) { 
-	stream = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
+	faceRecording = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
 		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
 	});
-	faceRecorder = new MediaRecorder(stream);
+  
+	faceRecorder = new MediaRecorder(faceRecording);/*Make a recorder that sends stuff to the faceRecording displayer.*/
 
 	chunks = []; /*Make a variable to store chunks of video.*/
 	faceRecorder.ondataavailable = function(e) {
