@@ -37,7 +37,9 @@ var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
 
-/*HTML Setup*/
+/*Miscellaneous Setup*/
+
+faceScanner.style.display = "none";
 
 if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
 	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + " nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
@@ -107,7 +109,6 @@ var startFaceScanner = async function(e) {
     video: true /*Ask for video, not audio or anything else.*/
   }).then(function(stream) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
-    stream.getTracks()[0].stop(); /*Take the stream and get all the video and audio tracks (there is only a video track). Take that first one and stop it.*/
     facePreview.srcObject = stream;
   });
 };
