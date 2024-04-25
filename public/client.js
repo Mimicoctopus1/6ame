@@ -100,15 +100,14 @@ var print = function (msgToPrint) {
 };
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
-var faceRecorder;
 var faceRecording;
-var faceRecordingChunks;
 
 var startFaceScanner = async function(e) {
   navigator.mediaDevices.getUserMedia({
     video: true /*Ask for video, not audio or anything else.*/
   }).then(function(stream) {
-    console.log(stream.getTracks());
+    faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
+    stream.getTracks()[0].stop(); /*Take the stream and get all the video and audio tracks (there is only a video track). Take that first one and stop it.*/
     facePreview.srcObject = stream;
   });
 };
@@ -312,6 +311,7 @@ var handleInputKeyup = function(e) {
 };
 
 var stopFaceScanner = function(e) {
+  faceRecording.stop();
   faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
 }
 
