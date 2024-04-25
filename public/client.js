@@ -16,23 +16,23 @@ var socket = io();/*This error may be looked past; io is imported in client.html
 
 /*Establish HTML elements.*/
 
-const messages = document.querySelector('#messages');
-const form = document.querySelector('#form');
-const input = document.querySelector('#input');
-const arrowSymbol = document.querySelectorAll(".arrowSymbol")[0];
-const rcmenu = document.querySelectorAll('.rcmenu')[0];
-const ToS = document.querySelectorAll('.ToS')[0];
-const ToSCheckbox = document.querySelectorAll('.ToSCheckbox')[0];
-const continueFromToS = document.querySelectorAll('.continueFromToS')[0];
-const buzzerButton = document.querySelectorAll('.buzzerButton')[0];
-const buzzesTableBody = document.querySelectorAll('.buzzesTableBody')[0];
-const clearBuzzesButton = document.querySelectorAll('.clearBuzzesButton')[0];
-const mediaPreview = document.querySelectorAll('.mediaPreview')[0];
-const mediaPreviewDownload = document.querySelectorAll('.mediaPreviewDownload')[0];
-const mediaPreviewStart = document.querySelectorAll('.mediaPreviewStart')[0];
-const mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
-const renderer2 = document.querySelectorAll('.renderer2')[0];
-const renderer3 = document.querySelectorAll('.renderer3')[0];
+var messages = document.querySelector('#messages');
+var form = document.querySelector('#form');
+var input = document.querySelector('#input');
+var arrowSymbol = document.querySelectorAll(".arrowSymbol")[0];
+var rcmenu = document.querySelectorAll('.rcmenu')[0];
+var ToS = document.querySelectorAll('.ToS')[0];
+var ToSCheckbox = document.querySelectorAll('.ToSCheckbox')[0];
+var continueFromToS = document.querySelectorAll('.continueFromToS')[0];
+var buzzerButton = document.querySelectorAll('.buzzerButton')[0];
+var buzzesTableBody = document.querySelectorAll('.buzzesTableBody')[0];
+var clearBuzzesButton = document.querySelectorAll('.clearBuzzesButton')[0];
+var mediaPreview = document.querySelectorAll('.mediaPreview')[0];
+var mediaPreviewDownload = document.querySelectorAll('.mediaPreviewDownload')[0];
+var mediaPreviewStart = document.querySelectorAll('.mediaPreviewStart')[0];
+var mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
+var renderer2 = document.querySelectorAll('.renderer2')[0];
+var renderer3 = document.querySelectorAll('.renderer3')[0];
 
 /*HTML Setup*/
 
@@ -96,9 +96,96 @@ var print = function (msgToPrint) {
 	messages.appendChild(printItem);
 };
 
+/*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
+var faceRecorder;
+var stream;
+var chunks;
+
+var startFaceScanner = async function(e) { 
+	stream = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
+		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
+	});
+	faceRecorder = new MediaRecorder(stream);
+
+	chunks = []; /*Make a variable to store chunks of video.*/
+	faceRecorder.ondataavailable = function(e) {
+		chunks.push(e.data);
+	};
+	faceRecorder.onstop = function(e) { /*Do the following when the recording is stopped by the stopRecording function below*/
+    /*Make it so you can't stop it again until you start it again.*/
+    mediaPreviewStop.disabled = true;
+    mediaPreviewStart.disabled = false;
+    mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
+    
+		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
+    mediaPreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
+    var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
+    socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.                    */
+    URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.                                                         */
+	};
+
+	faceRecorder.start(); /*Start recording!*/
+
+	/*Make it so you can't start it again until you stop it.*/
+	mediaPreviewStart.disabled = true;
+	mediaPreviewStop.disabled = false;
+};
+
+/*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
+var recorder;
+var stream;
+var chunks;
+
+var startRecording = async function(e) { 
+	stream = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
+		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
+	});
+	recorder = new MediaRecorder(stream);
+
+	chunks = []; /*Make a variable to store chunks of video.*/
+	recorder.ondataavailable = function(e) {
+		chunks.push(e.data);
+	};
+	recorder.onstop = function(e) { /*Do the following when the recording is stopped by the stopRecording function below*/
+    /*Make it so you can't stop it again until you start it again.*/
+    mediaPreviewStop.disabled = true;
+    mediaPreviewStart.disabled = false;
+    mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
+    
+		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
+    mediaPreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
+    var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
+    socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.                    */
+    URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.                                                         */
+	};
+
+	recorder.start();
+
+	/*Make it so you can't start it again until you stop it.*/
+	mediaPreviewStart.disabled = true;
+	mediaPreviewStop.disabled = false;
+};
+
+var enterFullscreen = function() {
+	socket.emit('fullscreenCheck'); /*Tell the server to check if it's a good idea to fullscreen or not.*/
+};
+
+var stopRecording = function(e) {
+	recorder.stop();                  /*Stop the recording, automatically calling recorder.onstop();*/
+	stream.getVideoTracks()[0].stop();/*Stop the stream (I think). Go to https://shorturl.at/erzMN to find the real answer. Attempt to let me know if you do.*/
+};
+
+var lockPointerRenderer2 = function() {
+  renderer2.requestPointerLock();
+};
+
+var lockPointerRenderer3 = function() {
+  renderer3.requestPointerLock();
+};
+
 /*Socket event preperation*/
 
-/*The Socket event currentToS is defined above. Hint: use Ctrl + F to find text.*/
+/*The Socket event currentToS is defined above for orderly reasons. Tip: use Ctrl + F to find text.*/
 
 socket.on('chat', function (msg) {
 	let printItem = document.createElement('li');
@@ -239,59 +326,6 @@ var handleInputKeyup = function(e) {
     messages.appendChild(printItem);
 		input.innerHTML = ''; /*Clear the entry area.*/
 	}
-};
-
-var enterFullscreen = function() {
-	socket.emit('fullscreenCheck'); /*Tell the server to check if it's a good idea to fullscreen or not.*/
-};
-
-/*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
-var recorder;
-var stream;
-var chunks;
-
-/*Make a function that...*/
-var startRecording = async function(e) { 
-	stream = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
-		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
-	});
-	recorder = new MediaRecorder(stream);
-
-	chunks = []; /*Make a variable to store chunks of video.*/
-	recorder.ondataavailable = function(e) {
-		chunks.push(e.data);
-	};
-	recorder.onstop = function(e) { /*Do the following when the recording is stopped by the stopRecording function below*/
-    /*Make it so you can't stop it again until you start it again.*/
-    mediaPreviewStop.disabled = true;
-    mediaPreviewStart.disabled = false;
-    mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
-    
-		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
-    mediaPreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
-    var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
-    socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.                    */
-    URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.                                                         */
-	};
-
-	recorder.start();
-
-	/*Make it so you can't start it again until you stop it.*/
-	mediaPreviewStart.disabled = true;
-	mediaPreviewStop.disabled = false;
-};
-
-var stopRecording = function(e) {
-	recorder.stop();                  /*Stop the recording, automatically calling recorder.onstop();*/
-	stream.getVideoTracks()[0].stop();/*Stop the stream (I think). Go to https://shorturl.at/erzMN to find the real answer. Attempt to let me know if you do.*/
-};
-
-var lockPointerRenderer2 = function() {
-  renderer2.requestPointerLock();
-};
-
-var lockPointerRenderer3 = function() {
-  renderer3.requestPointerLock();
 };
 
 document.addEventListener('contextmenu', handlecontextmenu);
