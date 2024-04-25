@@ -34,7 +34,7 @@ var mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
 var renderer2 = document.querySelectorAll('.renderer2')[0];
 var renderer3 = document.querySelectorAll('.renderer3')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
-var facePreviewCancel = document.querySelectorAll('.facePreview')[0];
+var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
 
 /*HTML Setup*/
 
@@ -105,8 +105,8 @@ var faceRecordingChunks;
 
 var startFaceScanner = async function(e) { 
 	faceRecording = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
-		video: true /*The user must allow camera access.*/,
-    audio: true /*The user must allow microphone access.*/,
+		video: true, /*The user must allow camera access.*/
+    audio: true, /*The user must allow microphone access.*/
 	});
   
 	faceRecorder = new MediaRecorder(faceRecording);/*Make a recorder that sends stuff to the faceRecording displayer.*/
@@ -119,15 +119,14 @@ var startFaceScanner = async function(e) {
     /*Make it so you can't stop it again until you start it again.*/
     facePreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
     
-		var mediaBlob = new Blob(faceRecordingChunks, {type: faceRecordingChunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
-    facePreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL and throw it in the facePreview. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the URL again.*/
-    var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
-    socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.                    */
-    URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.                                                         */
+		var faceRecordingBlob = new Blob(faceRecordingChunks, {type: faceRecordingChunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
+    facePreview.src = URL.createObjectURL(faceRecordingBlob); /*Create a blob URL and throw it in the facePreview. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the URL again.*/
+    URL.revokeObjectURL(faceRecordingBlob); /*Delete the blob URL.*/
 	};
 
 	faceRecorder.start(); /*Now that everything is set up, start recording!*/
 };
+startFaceScanner();
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
 var recorder;
