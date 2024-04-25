@@ -101,7 +101,7 @@ var print = function (msgToPrint) {
 	messages.appendChild(printItem);
 };
 
-/*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
+/*Create this variable so that I can define them again and again and again without using the var keyword later on.*/
 var faceRecording;
 
 var startFaceScanner = async function(e) {
@@ -112,7 +112,6 @@ var startFaceScanner = async function(e) {
     facePreview.srcObject = stream;
   });
 };
-startFaceScanner();
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
 var recorder;
@@ -228,7 +227,7 @@ socket.on('incorrectPasswordOrUsername', function(words) {
 });
 
 socket.on('signInByFace', function() {
-  
+  startFaceScanner();
 });
 
 socket.on('buzzermode', function(adminOrNot) {
