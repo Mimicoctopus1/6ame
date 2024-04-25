@@ -33,6 +33,7 @@ var mediaPreviewStart = document.querySelectorAll('.mediaPreviewStart')[0];
 var mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
 var renderer2 = document.querySelectorAll('.renderer2')[0];
 var renderer3 = document.querySelectorAll('.renderer3')[0];
+var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
 
@@ -104,19 +105,11 @@ var faceRecording;
 var faceRecordingChunks;
 
 var startFaceScanner = async function(e) {
-  
-  /* Setting up the constraint */
-  var facingMode = "user"; // Can be 'user' or 'environment' to access back or front camera (NEAT!)
-  var constraints = {
-    audio: false,
-    video: {
-     facingMode: facingMode
-    }
-  };
-  
   /* Stream it to video element */
-  navigator.mediaDevices.getUserMedia(constraints).then(function success(stream) {
-    video.srcObject = stream;
+  navigator.mediaDevices.getUserMedia({
+    video: true /*Ask for video, not audio or anything else.*/
+  }).then(function(stream) {
+    facePreview.srcObject = stream;
   });
 };
 startFaceScanner();
@@ -318,6 +311,11 @@ var handleInputKeyup = function(e) {
 	}
 };
 
+var stopFaceScanner = function(e) {
+  facePreview.srcObject = "";/*Stop running the video.*/
+  faceScanner.style.display = "none";
+}
+
 document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.addEventListener('click', enterFullscreen);
@@ -325,3 +323,4 @@ mediaPreviewStart.addEventListener('click', startRecording);
 mediaPreviewStop.addEventListener('click', stopRecording);
 renderer2.addEventListener('click', lockPointerRenderer2);
 renderer3.addEventListener('click', lockPointerRenderer3);
+facePreviewCancel.addEventListener('click', stopFaceScanner);
