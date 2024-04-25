@@ -33,6 +33,8 @@ var mediaPreviewStart = document.querySelectorAll('.mediaPreviewStart')[0];
 var mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
 var renderer2 = document.querySelectorAll('.renderer2')[0];
 var renderer3 = document.querySelectorAll('.renderer3')[0];
+var facePreview = document.querySelectorAll('.facePreview')[0];
+var facePreviewCancel = document.querySelectorAll('.facePreview')[0];
 
 /*HTML Setup*/
 
@@ -99,37 +101,32 @@ var print = function (msgToPrint) {
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
 var faceRecorder;
 var faceRecording;
-var chunks;
+var faceRecordingChunks;
 
 var startFaceScanner = async function(e) { 
 	faceRecording = await navigator.mediaDevices.getDisplayMedia({ /*This built-in function gets permission from the browser */
-		video: {mediaSource: 'screen'} /*The user must allow screen recording, not audio or camera or something.*/,
+		video: true /*The user must allow camera access.*/,
+    audio: true /*The user must allow microphone access.*/,
 	});
   
 	faceRecorder = new MediaRecorder(faceRecording);/*Make a recorder that sends stuff to the faceRecording displayer.*/
 
-	chunks = []; /*Make a variable to store chunks of video.*/
+	faceRecordingChunks = []; /*Make a variable to store chunks of video.*/
 	faceRecorder.ondataavailable = function(e) {
-		chunks.push(e.data);
+		faceRecordingChunks.push(e.data);
 	};
 	faceRecorder.onstop = function(e) { /*Do the following when the recording is stopped by the stopRecording function below*/
     /*Make it so you can't stop it again until you start it again.*/
-    mediaPreviewStop.disabled = true;
-    mediaPreviewStart.disabled = false;
-    mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
+    facePreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
     
-		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
-    mediaPreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
+		var mediaBlob = new Blob(faceRecordingChunks, {type: faceRecordingChunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
+    facePreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL and throw it in the facePreview. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the URL again.*/
     var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
     socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.                    */
     URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.                                                         */
 	};
 
-	faceRecorder.start(); /*Start recording!*/
-
-	/*Make it so you can't start it again until you stop it.*/
-	mediaPreviewStart.disabled = true;
-	mediaPreviewStop.disabled = false;
+	faceRecorder.start(); /*Now that everything is set up, start recording!*/
 };
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
