@@ -107,19 +107,25 @@ var print = function (msgToPrint) {
 /*Create this variable so that I can define them again and again and again without using the var keyword later on.*/
 var faceRecording;
 
-var scanFace = function() {
+var scanFace = function(timeBeforeLoop) {
   facePreviewCanvasContext.drawImage(facePreview, 0, 0, facePreview.videoWidth, facePreview.videoHeight);/*Take a picture of facePreview and present it.*/
-  console.log(facePreviewCanvasContext.toDataURL("image/png"));
+  console.log(facePreviewCanvas.toDataURL("image/png"));
+  if(typeof(timeBeforeLoop) === "number") {
+    setTimeout(function() {
+      scanFace();
+    }, timeBeforeLoop);
+  }
 };
 
 var startFaceScanner = async function(e) {
+  faceScanner.style.display = "block";
   navigator.mediaDevices.getUserMedia({
     video: true /*Ask for video, not audio or anything else.*/
   }).then(function(stream) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
     facePreview.srcObject = stream;
   });
-  scanFace();
+  scanFace(500);
 };
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/

@@ -20,10 +20,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <canvas class = "renderer2 renderer"></canvas><!--The canvas for rendering in 2D-->
     <canvas class = "renderer3 renderer"></canvas><!--The canvas for rendering in 3D-->
     
-    <div class = "faceScanner">
+    <div class = "faceScanner" style = "border: 1px solid black; position: fixed; left: 5%; top: 5%; width: 90%; height: 90%;">
       <input class = "facePreviewCancel" style = "background: rgba(0, 0, 0, 1); color: rgba(255, 255, 255, 1);" type = "button" value = "x">
       <video class = "facePreview" playsinline = "" autoplay = "" muted = "" width = "200" height = "200"></video>
-      <canvas class = "facePreviewCanvas" style = "display: none;"><!--This canvas is just a picture version facePreview.--></canvas>
+      <canvas class = "facePreviewCanvas" style = "display: none; width: 90%; height: 90%;"><!--This canvas is just a picture version facePreview.--></canvas>
     </div>
     
     <div class = "pausePanels" style = "display: none;">
@@ -56,7 +56,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       CLEAR
     </div>
     
-    <div class = "ToS" style = " background: rgba(0, 0, 0, 0.3); display: none; position: fixed; left: 0px; top: 0px; height: 100%; width: 100%;"><!--This div covers the entier screen so you can't click anything behind it, although the input has to be blocked from client.js for some reason. It is hidden and only shows if activated from client.js-->
+    <div class = "ToS" style = "background: rgba(0, 0, 0, 0.3); display: none; position: fixed; left: 0px; top: 0px; height: 100%; width: 100%;"><!--This div covers the entier screen so you can't click anything behind it, although the input has to be blocked from client.js for some reason. It is hidden and only shows if activated from client.js-->
     <div style = "background: rgba(240, 240, 240, 1); border: 1px solid black; padding: 1%; position: fixed; left: 10%; top: 10%; height: 80%; width: 80%; z-index: 2147483647;"><!--This is the largest z-index allowed in HTML, so this should be in front of everything else.-->
       <h1>
         Terms of Service
