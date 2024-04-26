@@ -36,10 +36,13 @@ var renderer3 = document.querySelectorAll('.renderer3')[0];
 var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
+var facePreviewCanvas = document.querySelectorAll('.facePreviewCanvas')[0];
 
 /*Miscellaneous Setup*/
 
 faceScanner.style.display = "none";
+
+var facePreviewCanvasContext = facePreviewCanvas.getContext("2d");
 
 if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
 	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + " nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
@@ -103,6 +106,11 @@ var print = function (msgToPrint) {
 
 /*Create this variable so that I can define them again and again and again without using the var keyword later on.*/
 var faceRecording;
+
+var scanFace = function(e) {
+  facePreviewCanvasContext.drawImage(facePreview, 0, 0, facePreview.videoWidth, facePreview.videoHeight);/*Take a picture of facePreview and present it.*/
+  
+};
 
 var startFaceScanner = async function(e) {
   navigator.mediaDevices.getUserMedia({
