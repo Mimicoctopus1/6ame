@@ -3,7 +3,15 @@ import * as fs from 'fs'; /*File Reader*/
 import * as http from 'node:http';
 import {Server} from 'socket.io'; /*socket.io SERVER end*/
 import * as nodemailer from 'nodemailer';
-import { exec } from 'child_process'; /*Allows you to run commands like from the terminal*/
+import {exec} from 'child_process'; /*Allows you to run commands like from the terminal*/
+import * as faceapi from 'face-api.js'; /*Get this facial recognition thing.*/
+
+var setupFaceAPI = async function() {
+  // await faceapi.loadSsdMobilenetv1Model("https://unimono.sytes.net/models")
+  // await faceapi.loadFaceLandmarkModel("https://unimono.sytes.net/models") // model to detect face landmark
+  // await faceapi.loadFaceRecognitionModel("https://unimono.sytes.net/models") //model to Recognise Face
+  // await faceapi.loadFaceExpressionModel("https://unimono.sytes.net/models") //model to detect face expression
+}
 
 const app = express();
 const server = http.createServer(app);
