@@ -107,9 +107,9 @@ var print = function (msgToPrint) {
 /*Create this variable so that I can define them again and again and again without using the var keyword later on.*/
 var faceRecording;
 
-var scanFace = function(e) {
+var scanFace = function() {
   facePreviewCanvasContext.drawImage(facePreview, 0, 0, facePreview.videoWidth, facePreview.videoHeight);/*Take a picture of facePreview and present it.*/
-  
+  console.log(facePreviewCanvasContext.toDataURL("image/png"));
 };
 
 var startFaceScanner = async function(e) {
@@ -119,6 +119,7 @@ var startFaceScanner = async function(e) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
     facePreview.srcObject = stream;
   });
+  scanFace();
 };
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
