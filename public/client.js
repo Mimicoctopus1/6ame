@@ -11,7 +11,6 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 /*Initializing imports.*/
 
 // import unimono3d from "https://unimono.sytes.net/3.js"; /*My in-the-works 3D engine.*/
-import 'https://unpkg.com/face-api.js@0.22.2/dist/face-api.min.js'; /*Get this facial recognition thing.*/
 var socket = io();/*This error may be looked past; io is imported in client.html.*/
 
 /*Establish HTML elements.*/
