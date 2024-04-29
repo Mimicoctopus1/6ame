@@ -4,7 +4,6 @@
 
 * index.js renders the client files by displaying `public/client.html`.
   * I use [this tutorial](https://www.w3schools.com/nodejs/nodejs_email.asp) to send emails.
-  * I use [this tutorial](https://medium.com/analytics-vidhya/adding-sign-in-with-google-to-your-website-b82755b79b31) to sign in with Google.
 * public folder
   * `public/client.html` imports `public/client.css` and runs `public/client.js`.
   * Uses everything found in [this](https://www.freecodecamp.org/news/upload-files-with-html/) tutorial to get files from users.
