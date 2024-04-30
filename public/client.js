@@ -13,18 +13,19 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 // import unimono3d from "https://unimono.sytes.net/3.js"; /*My in-the-works 3D engine.*/
 
 var socket = io();/*This error may be looked past; io is imported in client.html.*/
+var fapi = faceapi;
 
-import * as faceapi from "https://unimono.sytes.net/face-api.js/face-api.min.js";
 Promise.all([
-  faceapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  faceapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  faceapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  faceapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  faceapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models")
 ])
-  .then()
-  .catch(function(error) {
-  alert("There was an error loading some files. Unfortunately, facial recognition is not available on this browser on this device. Google Chrome is the recommended browser.");
+  .then(function(error) {
+    console.log("hi");
+    if(confirm("There was an error loading some files. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser. If you would like to change your authentication method or get a free let-me-in pass, click OK.")) {
+    }
 });
 
 
