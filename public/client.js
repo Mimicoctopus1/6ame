@@ -158,17 +158,32 @@ var startFaceScanner = async function(e) {
   });
   
   setInterval(async () => {
-    let detections = await fapi
+    let whatToDetect = await fapi
       .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
       .withFaceLandmarks()
       .withFaceExpressions()
       .withAgeAndGender();
     
-    facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, canvas.height);
-    detectionsDraw(facePreviewCanvas, fapi.resizeResults(detections, {
+    
+    let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
       width: facePreview.width,
       height: facePreview.height
-    }));
+    }))
+    
+    facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);/*Erase the canvas.*/
+    
+    
+    fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
+    fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
+    fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
+
+    detectionConfig.forEach(function(detection) {
+      let box = detection.detection.box;
+      let drawBox = new fapi.draw.DrawBox(box, {
+        label: `${Math.round(detection.age)}y, ${detection.gender}`,
+      });
+      drawBox.draw(facePreviewCanvas);
+    });
   }, 10);
 };
 
