@@ -14,7 +14,7 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 
 var socket = io();/*This error may be looked past; io is imported in client.html.*/
 
-import("https://unimono.sytes.net/face-api.js/face-api.min.js");
+import * as faceapi from "https://unimono.sytes.net/face-api.js/face-api.min.js";
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
   faceapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
