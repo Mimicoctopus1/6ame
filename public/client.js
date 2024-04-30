@@ -157,6 +157,7 @@ var startFaceScanner = async function(e) {
       );
     }
     
+    chooseWhatToDetect();
     setInterval(async function() {
       /*
       
