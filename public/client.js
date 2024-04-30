@@ -8,11 +8,13 @@ text: Text adventure game.
 blind: Text adventure, only text-to-speech reads out output and voice recognition reads input.
 */
 
-/*Initializing imports.*/
+/*Initializing imports.
+Any errors may be looked past; these modules imported in client.html.*/
+
 
 // import unimono3d from "https://unimono.sytes.net/3.js"; /*My in-the-works 3D engine.*/
 
-var socket = io();/*This error may be looked past; io is imported in client.html.*/
+var socket = io();
 var fapi = faceapi;
 
 Promise.all([
@@ -23,6 +25,11 @@ Promise.all([
   fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models")
 ])
   .catch(function(error) {
+    if(faceAPIErrors){
+      var faceAPIErrors[faceAPIErrors.length] = error;
+    } else {
+      faceAPIErrors[faceAPIErrors.]
+    }
     if(confirm("There was an error loading some files. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
       /*TODO: Tell the server to nodemail an verification email.*/
     }
@@ -138,7 +145,7 @@ var scanFace = function(timeBeforeLoop) {
 var startFaceScanner = async function(e) {
   faceScanner.style.display = "block";
   if(!navigator.mediaDevices) {
-    alert();[]
+    alert("Sorry, this browser doesn't support");
     return;
   }
   navigator.mediaDevices.getUserMedia({
