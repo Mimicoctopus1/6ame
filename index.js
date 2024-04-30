@@ -88,15 +88,18 @@ io.on('connection', function (socket) {
 		} else if(['signin'].includes(cmnd)) {
       let user = readJSON(".data/userdata.json")[messageWords[1]];
       let incorrectAuthentication = function() {
-        socket.emit('incorrectPasswordOrUsername', messageWords);
-        return("incorrectPassword");
       }
       
       if(!(user.password === undefined || user.password === messageWords[2])) {/*If the password is NOT correct or bypassed.*/
-        
+        socket.emit('incorrectPasswordOrUsername', messageWords);
+        return("incorrectPassword");
       }
-      if(!(user.faceAuthentication === undefined)) {
+      if(!(user.faces === undefined)) {
         socket.emit("loginWithFace");
+        /*if(thatDidntWork) {
+          socket.emit('incorrectPasswordOrUsername', messageWords);
+          return("incorrectPassword");
+        }*/
       }
       
       socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"], messageWords[3]]);/*Send the username and PW. messageWords[3] is an optional parameter given. When the user is auto-signed in, it will put "nomessage" in it. This tells the server to, right now, tell the client not to print, "Successful sign in to <username>." since the user never typed sign in.*/
