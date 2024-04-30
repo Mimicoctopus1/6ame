@@ -147,8 +147,7 @@ var startFaceScanner = async function(e) {
   }).then(function(stream) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
     facePreview.srcObject = stream;
-    console.log(facePreview.srcObject);
-    facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
+    facePreviewCanvas = fapi.createCanvas(facePreview);/*Take the video and make a canvas version.*/
     faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
     fapi.matchDimensions(facePreviewCanvas, {
       width: facePreview.width,
@@ -164,7 +163,7 @@ var startFaceScanner = async function(e) {
       .withAgeAndGender();
     
     
-    let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
+    /*let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
       width: facePreview.width,
       height: facePreview.height
     }))
@@ -172,7 +171,7 @@ var startFaceScanner = async function(e) {
     facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);/*Erase the canvas.*/
     
     
-    fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
+    /*fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
     fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
     fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
 
@@ -182,7 +181,7 @@ var startFaceScanner = async function(e) {
         label: `${Math.round(detection.age)}y, ${detection.gender}`,
       });
       drawBox.draw(facePreviewCanvas);
-    });
+    });*/
   }, 10);
 };
 
