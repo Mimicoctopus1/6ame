@@ -147,15 +147,20 @@ var startFaceScanner = async function(e) {
       });
     });
     
+    var chooseWhatToDetect = async function() {
+      return(
+        await fapi
+          .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
+          .withFaceLandmarks()
+          .withFaceExpressions()
+          .withAgeAndGender()
+      );
+    }
+    
     setInterval(async function() {
-      let whatToDetect = await fapi
-        .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
-        .withFaceLandmarks()
-        .withFaceExpressions()
-        .withAgeAndGender();
+      /*
       
-      
-      /*let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
+      let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
         width: facePreview.width,
         height: facePreview.height
       }))
@@ -166,15 +171,15 @@ var startFaceScanner = async function(e) {
       /*fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
       fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
       fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
-  
+    
       detectionConfig.forEach(function(detection) {
-      let box = detection.detection.box;
-      let drawBox = new fapi.draw.DrawBox(box, {
-        label: `${Math.round(detection.age)}y, ${detection.gender}`,
-      });
-      drawBox.draw(facePreviewCanvas);
-    });*/
-  }, 10);
+        let box = detection.detection.box;
+        let drawBox = new fapi.draw.DrawBox(box, {
+          label: `${Math.round(detection.age)}y, ${detection.gender}`,
+        });
+        drawBox.draw(facePreviewCanvas);
+      });*/
+    }, 10);
   })
     .catch(function(error) {
       if(faceAPIErrors){
