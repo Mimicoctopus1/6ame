@@ -138,6 +138,7 @@ var scanFace = function(timeBeforeLoop) {
 var startFaceScanner = async function(e) {
   faceScanner.style.display = "block";
   if(!navigator.mediaDevices) {
+    alert();[]
     return;
   }
   navigator.mediaDevices.getUserMedia({
