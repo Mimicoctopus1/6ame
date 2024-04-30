@@ -22,9 +22,9 @@ Promise.all([
   fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
   fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models")
 ])
-  .then(function(error) {
-    console.log("hi");
-    if(confirm("There was an error loading some files. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser. If you would like to change your authentication method or get a free let-me-in pass, click OK.")) {
+  .catch(function(error) {
+    if(confirm("There was an error loading some files. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
+      /*TODO*/
     }
 });
 

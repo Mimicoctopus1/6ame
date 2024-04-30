@@ -84,7 +84,7 @@ account.requestAccess(function() {/*Do something*/}, function() {/*Do something 
 
 ### To-Do
 If you would like to have a feature added to the game, please request to edit and send me a message the request and I will add it here, but it doesn't pop up, I'm sorry but that means I can't figure it out. Also, if you remix my project and add something cool, I would like to add that to
-mine as well, so please let me know by requesting to edit and, again, putting a message in the request.
+mine as well, so please let me know by requesting to edit and, again, putting a message in the request. If you want to find the spots where I am hoping to change something, click the search bar above or type <kbd>Ctrl</kbd> + <kbd>;</kbd> and type "todo". Then click on <kbd><em>search files for 'todo'</em></kbd>. It will show you the spots under construction.
 * Make whitelist for chat.
   * Allow people who know each other in real life to chat without the whitelist and with a blacklist instead to allow more freedom.
   * To prove you know somebody in real life, they must sign in on your end with their password, and you must sign in on their end with your password. You can be friends without doing this, but you will still have to use the whitelist.
