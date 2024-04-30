@@ -26,12 +26,9 @@ Promise.all([
 ])
   .catch(function(error) {
     if(faceAPIErrors){
-      var faceAPIErrors[faceAPIErrors.length] = error;
+      faceAPIErrors[faceAPIErrors.length] = "We can't load some stuff: " + error;
     } else {
-      faceAPIErrors[faceAPIErrors.]
-    }
-    if(confirm("There was an error loading some files. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
-      /*TODO: Tell the server to nodemail an verification email.*/
+      var faceAPIErrors = ["We can't load some stuff: " + error];
     }
 });
 
@@ -58,14 +55,11 @@ var renderer3 = document.querySelectorAll('.renderer3')[0];
 var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
-var facePreviewCanvas = document.querySelectorAll('.facePreviewCanvas')[0];
 var facePreviewImage = document.querySelectorAll('.facePreviewImage')[0];
 
 /*Miscellaneous Setup*/
 
 faceScanner.style.display = "none";
-
-var facePreviewCanvasContext = facePreviewCanvas.getContext("2d");
 
 if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
 	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + " nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
@@ -144,12 +138,22 @@ var scanFace = function(timeBeforeLoop) {
 
 var startFaceScanner = async function(e) {
   faceScanner.style.display = "block";
-  if(!navigator.mediaDevices) {
-    alert("Sorry, this browser doesn't support");
-    return;
+  if(!navigator.mediaDevices.getUserMedia) {
+    if(faceAPIErrors){
+      faceAPIErrors[faceAPIErrors.length] = "Camera access is not working.";
+    } else {
+      var faceAPIErrors = ["Camera access is not working."];
+    }
   }
+  if(faceAPIErrors) {
+    if(alert("There was an error. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser. If you know what the \"Developer Console\" is, the errors have ben logged there." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
+      /*TODO: Tell the server to nodemail an verification email.*/
+    }
+  }
+  
   navigator.mediaDevices.getUserMedia({
-    video: true /*Ask for video, not audio or anything else.*/
+    video: true, /*Ask for video, not audio or anything else.*/
+    audio: false
   }).then(function(stream) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
     facePreview.srcObject = stream;
