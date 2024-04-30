@@ -24,7 +24,7 @@ Promise.all([
 ])
   .catch(function(error) {
     if(confirm("There was an error loading some files. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
-      /*TODO*/
+      /*TODO: Tell the server to nodemail an verification email.*/
     }
 });
 
@@ -137,6 +137,9 @@ var scanFace = function(timeBeforeLoop) {
 
 var startFaceScanner = async function(e) {
   faceScanner.style.display = "block";
+  if(!navigator.mediaDevices) {
+    return;
+  }
   navigator.mediaDevices.getUserMedia({
     video: true /*Ask for video, not audio or anything else.*/
   }).then(function(stream) {
