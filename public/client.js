@@ -55,7 +55,6 @@ var renderer3 = document.querySelectorAll('.renderer3')[0];
 var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
-var facePreviewImage = document.querySelectorAll('.facePreviewImage')[0];
 var facePreviewCanvas = undefined; /*This is an uncreated element that will be filled later by the startRecording function. Use Ctrl + ; and type startRecording async function to find it.*/
 
 
@@ -148,16 +147,16 @@ var startFaceScanner = async function(e) {
   }).then(function(stream) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
     facePreview.srcObject = stream;
+    console.log(facePreview.srcObject);
+    facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
+    faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
+    fapi.matchDimensions(facePreviewCanvas, {
+      width: facePreview.width,
+      height: facePreview.height
+    });
   });
   
-  facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
-  faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
-  fapi.matchDimensions(facePreviewCanvas, {
-    width: facePreview.width,
-    height: facePreview.height
-  });
-  
-  setInterval(async () => {
+  setInterval(async function() {
     let whatToDetect = await fapi
       .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
       .withFaceLandmarks()
