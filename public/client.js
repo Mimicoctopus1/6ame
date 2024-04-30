@@ -122,19 +122,7 @@ var print = function (msgToPrint) {
 };
 
 /*Create this variable so that I can define them again and again and again without using the var keyword later on.*/
-var faceRecording;
-
-var scanFace = function(timeBeforeLoop) {
-  facePreviewCanvas.width = facePreview.videoWidth;
-  facePreviewCanvas.height = facePreview.videoHeight;
-  facePreviewCanvasContext.drawImage(facePreview, 0, 0, facePreview.videoWidth, facePreview.videoHeight);/*Take a picture of facePreview and present it.*/
-  facePreviewImage.src = facePreviewCanvas.toDataURL("image/png");
-  if(typeof(timeBeforeLoop) === "number" && faceScanner.style.display != "none") {
-    setTimeout(function() {
-      scanFace(timeBeforeLoop);
-    }, timeBeforeLoop);
-  }
-};
+var faceRecording = false;
 
 var startFaceScanner = async function(e) {
   faceScanner.style.display = "block";
@@ -158,7 +146,9 @@ var startFaceScanner = async function(e) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
     facePreview.srcObject = stream;
   });
-  scanFace(5);
+  while(faceRecording !== false) {
+    
+  }
 };
 
 startFaceScanner();
@@ -362,6 +352,7 @@ var handleInputKeyup = function(e) {
 
 var stopFaceScanner = function(e) {
   faceRecording.stop();
+  faceRecording = false;
   faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
 }
 
