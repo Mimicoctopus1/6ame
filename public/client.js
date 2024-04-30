@@ -22,10 +22,10 @@ Promise.all([
   faceapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
   faceapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
 ])
-  .then(playVideo)
-  .catch((err) => {
-    console.log(err);
-  });
+  .then()
+  .catch(function(error) {
+  alert("There was an error loading some files. Unfortunately, facial recognition is not available on this browser on this device. Google Chrome is the recommended browser.");
+});
 
 
 /*Establish HTML elements.*/
