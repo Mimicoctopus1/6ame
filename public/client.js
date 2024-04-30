@@ -128,6 +128,7 @@ var faceRecording = false;
 
 var startFaceScanner = async function(e) {
   faceScanner.style.display = "block";
+  
   if(!navigator.mediaDevices.getUserMedia) {
     if(faceAPIErrors){
       faceAPIErrors[faceAPIErrors.length] = "Camera access is not working.";
@@ -148,9 +149,27 @@ var startFaceScanner = async function(e) {
     faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
     facePreview.srcObject = stream;
   });
-  while(faceRecording !== false) {
+  
+  facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
+  faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
+  fapi.matchDimensions(facePreviewCanvas, {
+    width: facePreview.width,
+    height: facePreview.height
+  });
+  
+  setInterval(async () => {
+    let detections = await fapi
+      .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
+      .withFaceLandmarks()
+      .withFaceExpressions()
+      .withAgeAndGender();
     
-  }
+    facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, canvas.height);
+    detectionsDraw(facePreviewCanvas, fapi.resizeResults(detections, {
+      width: facePreview.width,
+      height: facePreview.height
+    }));
+  }, 10);
 };
 
 startFaceScanner();
