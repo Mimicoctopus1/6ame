@@ -56,6 +56,8 @@ var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
 var facePreviewImage = document.querySelectorAll('.facePreviewImage')[0];
+var facePreviewCanvas = undefined; /*This is an uncreated element that will be filled later by the startRecording function. Use Ctrl + ; and type startRecording async function to find it.*/
+
 
 /*Miscellaneous Setup*/
 
