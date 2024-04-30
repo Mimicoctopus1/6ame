@@ -96,7 +96,7 @@ io.on('connection', function (socket) {
       }
       if(!(user.faces === undefined)) {
         socket.emit("loginWithFace");
-        /*if(thatDidntWork) {
+        /*TODO: if(thatDidntWork) {
           socket.emit('incorrectPasswordOrUsername', messageWords);
           return("incorrectPassword");
         }*/
