@@ -141,9 +141,15 @@ var startFaceScanner = async function(e) {
         facePreview.srcObject = stream;/*Put the video in the preview object.*/
         
         let facePreviewCanvasCreated = false;
-        while(!facePreviewCanvasCreated) {
+        let timeToCreateFacePreviewCanvas = 10;
+        while(!facePreviewCanvasCreated) {/*Setup a watcher that creates facePreviewCanvas once the facePreview sourceObject is loaded.*/
           if(facePreview.srcObject) {
-            
+            timeToCreateFacePreviewCanvas -= 1;
+            console.log(facePreview.srcObject);
+            if(timeToCreateFacePreviewCanvas <= 0) {
+              var facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
+            }
+            facePreviewCanvasCreated = true;
           }
         }
         
