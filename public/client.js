@@ -118,70 +118,71 @@ var startFaceScanner = async function(e) {
     fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models")
   ])
     .then(function() {
-    faceScanner.style.display = "block";
-    
-    if(!navigator.mediaDevices.getUserMedia) {
-      if(faceAPIErrors){
-        faceAPIErrors[faceAPIErrors.length] = "Camera access is not working.";
-      } else {
-        var faceAPIErrors = ["Camera access is not working."];
+      faceScanner.style.display = "block";
+      
+      if(!navigator.mediaDevices.getUserMedia) {
+        if(faceAPIErrors){
+          faceAPIErrors[faceAPIErrors.length] = "Camera access is not working.";
+        } else {
+          var faceAPIErrors = ["Camera access is not working."];
+        }
       }
-    }
-    if(faceAPIErrors) {
-      if(alert("There was an error. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser. If you know what the \"Developer Console\" is, the errors have ben logged there." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
-        /*TODO: Tell the server to nodemail an verification email.*/
+      if(faceAPIErrors) {
+        if(alert("There was an error. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser. If you know what the \"Developer Console\" is, the errors have ben logged there." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
+          /*TODO: Tell the server to nodemail an verification email.*/
+        }
       }
-    }
-    
-    navigator.mediaDevices.getUserMedia({
-      video: true, /*Ask for video, not audio or anything else.*/
-      audio: false
-    }).then(function(stream) {
-      faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
-      facePreview.srcObject = stream;
-      facePreviewCanvas = fapi.createCanvas(facePreview);/*Take the video and make a canvas version.*/
-      faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
-      fapi.matchDimensions(facePreviewCanvas, {
-        width: facePreview.width,
-        height: facePreview.height
-      });
-    });
-    
-    var chooseWhatToDetect = async function() {
-      return(
-        await(fapi
-          .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
-          .withFaceLandmarks()
-          .withFaceExpressions()
-          .withAgeAndGender()
-      ));
-    }
-    
-    chooseWhatToDetect();
-    setInterval(async function() {
-      /*
       
-      let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
-        width: facePreview.width,
-        height: facePreview.height
-      }))
-      
-      facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);/*Erase the canvas.*/
-      
-      
-      /*fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
-      fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
-      fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
-    
-      detectionConfig.forEach(function(detection) {
-        let box = detection.detection.box;
-        let drawBox = new fapi.draw.DrawBox(box, {
-          label: `${Math.round(detection.age)}y, ${detection.gender}`,
+      navigator.mediaDevices.getUserMedia({
+        video: true, /*Ask for video, not audio or anything else.*/
+        audio: false
+      }).then(function(stream) {
+        faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
+        facePreview.srcObject = stream;
+        facePreviewCanvas = fapi.createCanvas(facePreview);/*Take the video and make a canvas version.*/
+        faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
+        fapi.matchDimensions(facePreviewCanvas, {
+          width: facePreview.width,
+          height: facePreview.height
         });
-        drawBox.draw(facePreviewCanvas);
-      });*/
-    }, 10);
-  })
+      });
+      
+      var chooseWhatToDetect = async function() {
+        let whatToDetect = 
+          await(fapi
+            .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
+            .withFaceLandmarks()
+            .withFaceExpressions()
+            .withAgeAndGender()
+          );
+        
+        
+        
+        setInterval(async function() {
+          /*
+          
+          let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
+            width: facePreview.width,
+            height: facePreview.height
+          }))
+          
+          facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);/*Erase the canvas.*/
+          
+          
+          /*fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
+          fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
+          fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
+        
+          detectionConfig.forEach(function(detection) {
+            let box = detection.detection.box;
+            let drawBox = new fapi.draw.DrawBox(box, {
+              label: `${Math.round(detection.age)}y, ${detection.gender}`,
+            });
+            drawBox.draw(facePreviewCanvas);
+          });*/
+        }, 10);
+      }
+    })  
     .catch(function(error) {
       if(faceAPIErrors){
         faceAPIErrors[faceAPIErrors.length] = "We can't load some stuff: " + error;
