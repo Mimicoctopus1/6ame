@@ -148,7 +148,7 @@ var startFaceScanner = async function(e) {
     });
     
     var chooseWhatToDetect = async function() {
-      console.log(
+      return(
         await(fapi
           .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
           .withFaceLandmarks()
