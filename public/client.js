@@ -139,15 +139,23 @@ var startFaceScanner = async function(e) {
       }).then(function(stream) {
         faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
         facePreview.srcObject = stream;
-        setTimeout(function() {
-        facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Take the video and make a canvas version.*/}, 2000);
-        faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
-        fapi.matchDimensions(facePreviewCanvas, {
-          width: facePreview.width,
-          height: facePreview.height
-        });
+        facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Take the video and make a canvas version*/
+        let stillSettingUpCanvasDetails = 
+        while(!stillSettingUpCanvasDetails) {
+          if(facePreviewCanvas) {/*If facePreviewCanvas is loaded...*/
+            facePreviewCanvas.style.position = "absolute";
+            facePreviewCanvas.style.left = "0px";
+            facePreviewCanvas.style.top = "0px";
+            faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
+            fapi.matchDimensions(facePreviewCanvas, {
+              width: facePreview.width,
+              height: facePreview.height
+            });
+            let stillSettingUpCanvasDetails = false;
+          }
+        }
       });
-      
+        
       var chooseWhatToDetect = async function() {
         let whatToDetect = fapi
             .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
