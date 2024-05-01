@@ -139,7 +139,8 @@ var startFaceScanner = async function(e) {
       }).then(function(stream) {
         faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
         facePreview.srcObject = stream;
-        facePreviewCanvas = fapi.createCanvas(facePreview);/*Take the video and make a canvas version.*/
+        setTimeout(function() {
+        facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Take the video and make a canvas version.*/}, 2000);
         faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
         fapi.matchDimensions(facePreviewCanvas, {
           width: facePreview.width,
@@ -148,38 +149,36 @@ var startFaceScanner = async function(e) {
       });
       
       var chooseWhatToDetect = async function() {
-        let whatToDetect = 
-          await(fapi
+        let whatToDetect = fapi
             .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
             .withFaceLandmarks()
             .withFaceExpressions()
-            .withAgeAndGender()
-          );
+            .withAgeAndGender();
         
         
         
         setInterval(async function() {
-          /*
+          if(whatToDetect) {/*Only run the following if whatToDetect has finished loading.*/
+            let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
+              width: facePreview.width,
+              height: facePreview.height
+            }));
+            
+            facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);/*Erase the canvas.*/
+            
+            
+            fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
+            fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
+            fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
           
-          let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
-            width: facePreview.width,
-            height: facePreview.height
-          }))
-          
-          facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);/*Erase the canvas.*/
-          
-          
-          /*fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
-          fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
-          fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
-        
-          detectionConfig.forEach(function(detection) {
-            let box = detection.detection.box;
-            let drawBox = new fapi.draw.DrawBox(box, {
-              label: `${Math.round(detection.age)}y, ${detection.gender}`,
+            detectionConfig.forEach(function(detection) {
+              let box = detection.detection.box;
+              let drawBox = new fapi.draw.DrawBox(box, {
+                label: `${Math.round(detection.age)}y, ${detection.gender}`,
+              });
+              drawBox.draw(facePreviewCanvas);
             });
-            drawBox.draw(facePreviewCanvas);
-          });*/
+          }
         }, 10);
       }
     })  
