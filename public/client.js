@@ -140,14 +140,14 @@ var startFaceScanner = async function(e) {
         faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
         facePreview.srcObject = stream;/*Put the video in the preview object.*/
         
-        var facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
+        var facePreviewCanvas = fapi.createCanvasFromMedia(facePreview.srcObject);
         
         let canvasDetailsSetupComplete = false;
         while(!canvasDetailsSetupComplete) {
           if(facePreviewCanvas) {/*If facePreviewCanvas is loaded...*/
-            facePreviewCanvas.style.position = "absolute";
-            facePreviewCanvas.style.left = "0px";
-            facePreviewCanvas.style.top = "0px";
+            //facePreviewCanvas.style.position = "absolute";
+            //facePreviewCanvas.style.left = "0px";
+            // facePreviewCanvas.style.top = "0px";
             faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
             fapi.matchDimensions(facePreviewCanvas, {
               width: facePreview.width,
