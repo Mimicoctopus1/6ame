@@ -148,13 +148,13 @@ var startFaceScanner = async function(e) {
     });
     
     var chooseWhatToDetect = async function() {
-      return(
-        await fapi
+      console.log(
+        await(fapi
           .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
           .withFaceLandmarks()
           .withFaceExpressions()
           .withAgeAndGender()
-      );
+      ));
     }
     
     chooseWhatToDetect();
