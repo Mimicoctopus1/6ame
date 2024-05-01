@@ -148,8 +148,8 @@ var startFaceScanner = async function(e) {
             console.log(facePreview.srcObject);
             if(timeToCreateFacePreviewCanvas <= 0) {
               var facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
+              facePreviewCanvasCreated = true;
             }
-            facePreviewCanvasCreated = true;
           }
         }
         
