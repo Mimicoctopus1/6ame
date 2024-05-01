@@ -138,10 +138,17 @@ var startFaceScanner = async function(e) {
         audio: false
       }).then(function(stream) {
         faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
-        facePreview.srcObject = stream;
-        facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Take the video and make a canvas version*/
-        let stillSettingUpCanvasDetails = 
-        while(!stillSettingUpCanvasDetails) {
+        facePreview.srcObject = stream;/*Put the video in the preview object.*/
+        
+        let facePreviewCanvasCreated = false;
+        while(!facePreviewCanvasCreated) {
+          if(facePreview.srcObject) {
+            
+          }
+        }
+        
+        let canvasDetailsSetupComplete = false;
+        while(!canvasDetailsSetupComplete) {
           if(facePreviewCanvas) {/*If facePreviewCanvas is loaded...*/
             facePreviewCanvas.style.position = "absolute";
             facePreviewCanvas.style.left = "0px";
@@ -151,7 +158,7 @@ var startFaceScanner = async function(e) {
               width: facePreview.width,
               height: facePreview.height
             });
-            let stillSettingUpCanvasDetails = false;
+            canvasDetailsSetupComplete = true;
           }
         }
       });
