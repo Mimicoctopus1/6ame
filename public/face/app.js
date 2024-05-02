@@ -1,6 +1,6 @@
 const video = document.getElementById("video");
 const videoContainer = document.getElementById("video-container");
-const MODEL_URI = "/models";
+const MODEL_URI = "https://unimono.sytes.net/face-api.js/models";
 Promise.all([
   faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URI),
   faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URI),

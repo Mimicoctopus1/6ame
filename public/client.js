@@ -11,11 +11,9 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 /*Initializing imports.
 Any errors may be looked past; these modules imported in client.html.*/
 
-
 // import unimono3d from "https://unimono.sytes.net/3.js"; /*My in-the-works 3D engine.*/
-
 var socket = io();
-var fapi = faceapi;
+var fapi = faceapi;/*Make a shortcut.*/
 
 /*Establish HTML elements.*/
 
@@ -105,106 +103,6 @@ var print = function (msgToPrint) {
 	printItem.innerHTML = msgToPrint;
 	messages.appendChild(printItem);
 };
-
-/*Create this variable so that I can define them again and again and again without using the var keyword later on.*/
-var faceRecording = false;
-
-var startFaceScanner = async function(e) {
-  Promise.all([
-    fapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models")
-  ])
-    .then(function() {
-      faceScanner.style.display = "block";
-      
-      if(!navigator.mediaDevices.getUserMedia) {
-        if(faceAPIErrors){
-          faceAPIErrors[faceAPIErrors.length] = "Camera access is not working.";
-        } else {
-          var faceAPIErrors = ["Camera access is not working."];
-        }
-      }
-      if(faceAPIErrors) {
-        if(alert("There was an error. Unfortunately, facial recognition will not be available on this browser on this device. Google Chrome is the recommended browser. If you know what the \"Developer Console\" is, the errors have ben logged there." /*+ " If you would like to change your authentication method or get a free let-me-in pass, click OK."*/)) {
-          /*TODO: Tell the server to nodemail an verification email.*/
-        }
-      }
-      
-      navigator.mediaDevices.getUserMedia({
-        video: true, /*Ask for video, not audio or anything else.*/
-        audio: false
-      }).then(function(stream) {
-        faceRecording = stream.getTracks()[0];/*Take the stream, get the tracks, and take the video, which will be first since there is no audio.*/
-        facePreview.srcObject = stream;/*Put the video in the preview object.*/
-        
-        // var facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
-        var facePreviewCanvas = fapi.createCanvas(facePreview);
-        
-        let canvasDetailsSetupComplete = false;
-        while(!canvasDetailsSetupComplete) {
-          if(facePreviewCanvas) {/*If facePreviewCanvas is loaded...*/
-            //facePreviewCanvas.style.position = "absolute";
-            //facePreviewCanvas.style.left = "0px";
-            // facePreviewCanvas.style.top = "0px";
-            faceScanner.appendChild(facePreviewCanvas);/*Put this canvas in the faceScanner div.*/
-            fapi.matchDimensions(facePreviewCanvas, {
-              width: facePreview.width,
-              height: facePreview.height
-            });
-            canvasDetailsSetupComplete = true;
-          }
-        }
-      });
-        
-      var startDetecting = async function() {
-        let whatToDetect = fapi
-            .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
-            .withFaceLandmarks()
-            .withFaceExpressions()
-            .withAgeAndGender();
-        
-        
-        
-        setInterval(async function() {
-          if(whatToDetect) {/*Only run the following if whatToDetect has finished loading.*/
-            let detectionConfig = fapi.resizeResults(whatToDetect, fapi.resizeResults(whatToDetect, {
-              width: facePreview.width,
-              height: facePreview.height
-            }));
-            
-            facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);/*Erase the canvas.*/
-            
-            
-            fapi.draw.drawDetections(facePreviewCanvas, detectionConfig);
-            fapi.draw.drawFaceLandmarks(facePreviewCanvas, detectionConfig);
-            fapi.draw.drawFaceExpressions(facePreviewCanvas, detectionConfig);
-          
-            detectionConfig.forEach(function(detection) {
-              let box = detection.detection.box;
-              let drawBox = new fapi.draw.DrawBox(box, {
-                label: `${Math.round(detection.age)}y, ${detection.gender}`,
-              });
-              drawBox.draw(facePreviewCanvas);
-            });
-          }
-        }, 10);
-      }
-      
-      startDetecting();
-    })  
-    .catch(function(error) {
-      if(faceAPIErrors){
-        faceAPIErrors[faceAPIErrors.length] = "We can't load some stuff: " + error;
-      } else {
-        var faceAPIErrors = ["We can't load some stuff: " + error];
-      }
-  })
-};
-
-startFaceScanner();
 
 /*Create these variables so that I can define them again and again and again without using the var keyword later on.*/
 var recorder;
@@ -320,7 +218,84 @@ socket.on('incorrectPasswordOrUsername', function(words) {
 });
 
 socket.on('signInByFace', function() {
-  startFaceScanner();
+const video = facePreview;
+const videoContainer = faceScanner;
+const MODEL_URI = "https://unimono.sytes.net/face-api.js/models";
+Promise.all([
+  fapi.nets.tinyFaceDetector.loadFromUri(MODEL_URI),
+  fapi.nets.faceLandmark68Net.loadFromUri(MODEL_URI),
+  fapi.nets.faceRecognitionNet.loadFromUri(MODEL_URI),
+  fapi.nets.faceExpressionNet.loadFromUri(MODEL_URI),
+  fapi.nets.ageGenderNet.loadFromUri(MODEL_URI),
+])
+  .then(playVideo)
+  .catch(function(error) {
+    console.log(error);
+  });
+
+function playVideo() {
+  if (!navigator.mediaDevices) {
+    console.error("mediaDevices not supported");
+    return;
+  }
+  navigator.mediaDevices
+    .getUserMedia({
+      video: {
+        width: { min: 640, ideal: 1280, max: 1920 },
+        height: { min: 360, ideal: 720, max: 1080 },
+      },
+      audio: false,
+    })
+    .then(function (stream) {
+      video.srcObject = stream;
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+}
+video.addEventListener("play", () => {
+  // Creating the canvas
+  const canvas = fapi.createCanvasFromMedia(video);
+
+  // This will force the use of a software (instead of hardware accelerated)
+  // Enable only for low configurations
+  canvas.willReadFrequently = true;
+  videoContainer.appendChild(canvas);
+
+  // Resizing the canvas to cover the video element
+  const canvasSize = { width: video.width, height: video.height };
+  fapi.matchDimensions(canvas, canvasSize);
+
+  setInterval(async () => {
+    const detections = await fapi
+      .detectAllFaces(video, new fapi.TinyFaceDetectorOptions())
+      .withFaceLandmarks()
+      .withFaceExpressions()
+      .withAgeAndGender();
+
+    // Set detections size to the canvas size
+    const DetectionsArray = fapi.resizeResults(detections, canvasSize);
+    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+    detectionsDraw(canvas, DetectionsArray);
+  }, 10);
+});
+
+// Drawing our detections above the video
+function detectionsDraw(canvas, DetectionsArray) {
+  // Adjust the size of the detection canvas
+  fapi.draw.drawDetections(canvas, DetectionsArray);
+  fapi.draw.drawFaceLandmarks(canvas, DetectionsArray);
+  fapi.draw.drawFaceExpressions(canvas, DetectionsArray);
+
+  // Drawing AGE and GENDER
+  DetectionsArray.forEach((detection) => {
+    const box = detection.detection.box;
+    const drawBox = new fapi.draw.DrawBox(box, {
+      label: `${Math.round(detection.age)}y, ${detection.gender}`,
+    });
+    drawBox.draw(canvas);
+  });
+}
 });
 
 socket.on('buzzermode', function(adminOrNot) {
