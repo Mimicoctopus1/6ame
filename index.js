@@ -71,7 +71,7 @@ io.on('connection', function (socket) {
   
   
   
-  soket.emit("")
+  socket.emit("")
   
   
   
