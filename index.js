@@ -68,6 +68,14 @@ io.on('connection', function (socket) {
     /*When the client requests to know the current Terms of Service...*/
     socket.emit("currentToS", fs.readFileSync("public/ToS/index.html").toString())/*Send it to the client.*/
   });
+  
+  
+  
+  soket.emit("")
+  
+  
+  
+  
 	socket.on('message', function (msg) {
 		/*When an entry is received from the user...*/ let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/
