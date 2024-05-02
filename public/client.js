@@ -251,48 +251,44 @@ Promise.all([
 
 
 facePreview.addEventListener("play", function() {
-  // Creating the canvas
-  const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
+  const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Create a canvas.*/
+  
+  facePreviewCanvas.willReadFrequently = true;/*This makes it so the device does not use hardware acceleration.*/
+  fapi.matchDimensions(facePreviewCanvas, /*Size the canvas to fit the facePreview video element.*/
+    { 
+      width: facePreview.width, height: facePreview.height 
+    });
+  faceScanner.appendChild(facePreviewCanvas);/*Put the canvas in the faceScanner.*/
 
-  // This will force the use of a software (instead of hardware accelerated)
-  // Enable only for low configurations
-  facePreviewCanvas.willReadFrequently = true;
-  faceScanner.appendChild(facePreviewCanvas);
-
-  // Resizing the canvas to cover the video element
-  const canvasSize = { width: facePreview.width, height: facePreview.height };
-  fapi.matchDimensions(facePreviewCanvas, canvasSize);
-
-  setInterval(async () => {
-    const detections = await fapi
+  setInterval(async function() {/**/
+    let detections = await fapi
       .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
       .withFaceLandmarks()
       .withFaceExpressions()
       .withAgeAndGender();
 
     // Set detections size to the canvas size
-    const DetectionsArray = fapi.resizeResults(detections, canvasSize);
+    let resizedDetections = fapi.resizeResults(detections, 
+      { 
+        width: facePreview.width, height: facePreview.height 
+      });
     facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);
    
     // Adjust the size of the detection canvas
-    fapi.draw.drawDetections(facePreviewCanvas, DetectionsArray);
-    fapi.draw.drawFaceLandmarks(facePreviewCanvas, DetectionsArray);
-    fapi.draw.drawFaceExpressions(facePreviewCanvas, DetectionsArray);
+    fapi.draw.drawDetections(facePreviewCanvas, resizedDetections);
+    fapi.draw.drawFaceLandmarks(facePreviewCanvas, resizedDetections);
+    fapi.draw.drawFaceExpressions(facePreviewCanvas, resizedDetections);
   
     // Drawing AGE and GENDER
-    DetectionsArray.forEach((detection) => {
+    resizedDetections.forEach(function(detection) {
       const box = detection.detection.box;
       const drawBox = new fapi.draw.DrawBox(box, {
         label: `${Math.round(detection.age)}y, ${detection.gender}`,
       });
       drawBox.draw(facePreviewCanvas);
     });
-  }, 10);
+  }, 1000);
 });
-
-// Drawing our detections above the video
-function detectionsDraw(canvas, DetectionsArray) {
-}
 });
 
 socket.on('buzzermode', function(adminOrNot) {
