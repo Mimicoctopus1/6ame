@@ -71,7 +71,7 @@ io.on('connection', function (socket) {
   
   
   
-  socket.emit("")
+  socket.emit("signInByFace")
   
   
   

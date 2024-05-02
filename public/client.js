@@ -218,83 +218,80 @@ socket.on('incorrectPasswordOrUsername', function(words) {
 });
 
 socket.on('signInByFace', function() {
-const video = facePreview;
-const videoContainer = faceScanner;
-const MODEL_URI = "https://unimono.sytes.net/face-api.js/models";
+faceScanner.style.display = "block";
 Promise.all([
-  fapi.nets.tinyFaceDetector.loadFromUri(MODEL_URI),
-  fapi.nets.faceLandmark68Net.loadFromUri(MODEL_URI),
-  fapi.nets.faceRecognitionNet.loadFromUri(MODEL_URI),
-  fapi.nets.faceExpressionNet.loadFromUri(MODEL_URI),
-  fapi.nets.ageGenderNet.loadFromUri(MODEL_URI),
+  fapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
 ])
-  .then(playVideo)
-  .catch(function(error) {
+  .then(function() {
+    if (!navigator.mediaDevices) {
+      console.error("mediaDevices not supported");
+      return;
+    }
+    navigator.mediaDevices
+      .getUserMedia({
+        video: {
+          width: { min: 640, ideal: 1280, max: 1920 },
+          height: { min: 360, ideal: 720, max: 1080 },
+        },
+        audio: false,
+      })
+      .then(function(stream) {
+        facePreview.srcObject = stream;
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  }).catch(function(error) {
     console.log(error);
   });
 
-function playVideo() {
-  if (!navigator.mediaDevices) {
-    console.error("mediaDevices not supported");
-    return;
-  }
-  navigator.mediaDevices
-    .getUserMedia({
-      video: {
-        width: { min: 640, ideal: 1280, max: 1920 },
-        height: { min: 360, ideal: 720, max: 1080 },
-      },
-      audio: false,
-    })
-    .then(function (stream) {
-      video.srcObject = stream;
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-}
-video.addEventListener("play", () => {
+
+facePreview.addEventListener("play", function() {
   // Creating the canvas
-  const canvas = fapi.createCanvasFromMedia(video);
+  const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);
 
   // This will force the use of a software (instead of hardware accelerated)
   // Enable only for low configurations
-  canvas.willReadFrequently = true;
-  videoContainer.appendChild(canvas);
+  facePreviewCanvas.willReadFrequently = true;
+  faceScanner.appendChild(facePreviewCanvas);
 
   // Resizing the canvas to cover the video element
-  const canvasSize = { width: video.width, height: video.height };
-  fapi.matchDimensions(canvas, canvasSize);
+  const canvasSize = { width: facePreview.width, height: facePreview.height };
+  fapi.matchDimensions(facePreviewCanvas, canvasSize);
 
   setInterval(async () => {
     const detections = await fapi
-      .detectAllFaces(video, new fapi.TinyFaceDetectorOptions())
+      .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
       .withFaceLandmarks()
       .withFaceExpressions()
       .withAgeAndGender();
 
     // Set detections size to the canvas size
     const DetectionsArray = fapi.resizeResults(detections, canvasSize);
-    canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
-    detectionsDraw(canvas, DetectionsArray);
+    facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);
+   
+    // Adjust the size of the detection canvas
+    fapi.draw.drawDetections(facePreviewCanvas, DetectionsArray);
+    fapi.draw.drawFaceLandmarks(facePreviewCanvas, DetectionsArray);
+    fapi.draw.drawFaceExpressions(facePreviewCanvas, DetectionsArray);
+  
+    // Drawing AGE and GENDER
+    DetectionsArray.forEach((detection) => {
+      const box = detection.detection.box;
+      const drawBox = new fapi.draw.DrawBox(box, {
+        label: `${Math.round(detection.age)}y, ${detection.gender}`,
+      });
+      drawBox.draw(facePreviewCanvas);
+    });
   }, 10);
 });
 
 // Drawing our detections above the video
 function detectionsDraw(canvas, DetectionsArray) {
-  // Adjust the size of the detection canvas
-  fapi.draw.drawDetections(canvas, DetectionsArray);
-  fapi.draw.drawFaceLandmarks(canvas, DetectionsArray);
-  fapi.draw.drawFaceExpressions(canvas, DetectionsArray);
-
-  // Drawing AGE and GENDER
-  DetectionsArray.forEach((detection) => {
-    const box = detection.detection.box;
-    const drawBox = new fapi.draw.DrawBox(box, {
-      label: `${Math.round(detection.age)}y, ${detection.gender}`,
-    });
-    drawBox.draw(canvas);
-  });
 }
 });
 
