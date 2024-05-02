@@ -219,6 +219,7 @@ socket.on('incorrectPasswordOrUsername', function(words) {
 
 socket.on('signInByFace', function() {
 faceScanner.style.display = "block";
+  
 Promise.all([
   fapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
   fapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
@@ -254,20 +255,23 @@ facePreview.addEventListener("play", function() {
   const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Create a canvas.*/
   
   facePreviewCanvas.willReadFrequently = true;/*This makes it so the device does not use hardware acceleration.*/
+  facePreviewCanvas.style.position = "absolute";
+  facePreviewCanvas.style.left = "0%";
+  facePreviewCanvas.style.top = "0%";
   fapi.matchDimensions(facePreviewCanvas, /*Size the canvas to fit the facePreview video element.*/
     { 
       width: facePreview.width, height: facePreview.height 
     });
   faceScanner.appendChild(facePreviewCanvas);/*Put the canvas in the faceScanner.*/
 
-  setInterval(async function() {/**/
-    let detections = await fapi
+  setInterval(async function() {
+    let detections = await fapi /*Pause this function while face-api.js detects faces.*/
       .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
       .withFaceLandmarks()
       .withFaceExpressions()
       .withAgeAndGender();
 
-    // Set detections size to the canvas size
+    /*Let face-api.js know that we only want detections in this size.*/
     let resizedDetections = fapi.resizeResults(detections, 
       { 
         width: facePreview.width, height: facePreview.height 
@@ -287,7 +291,7 @@ facePreview.addEventListener("play", function() {
       });
       drawBox.draw(facePreviewCanvas);
     });
-  }, 1000);
+  }, 1000/24 /*24 FPS is fast enough to trick your mind into seeing motion without crashing your computer.*/);
 });
 });
 
