@@ -159,7 +159,7 @@ var startFaceScanner = async function(e) {
         }
       });
         
-      var chooseWhatToDetect = async function() {
+      var startDetecting = async function() {
         let whatToDetect = fapi
             .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
             .withFaceLandmarks()
@@ -192,6 +192,8 @@ var startFaceScanner = async function(e) {
           }
         }, 10);
       }
+      
+      startDetecting();
     })  
     .catch(function(error) {
       if(faceAPIErrors){
