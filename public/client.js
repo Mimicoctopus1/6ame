@@ -288,7 +288,7 @@ facePreview.addEventListener("play", function() {
     resizedDetections.forEach(function(detection) {
       const box = detection.detection.box;
       const drawBox = new fapi.draw.DrawBox(box, {
-        label: "About" + Math.round(detection.age) + " years old, " + detection.gender,
+        label: "About" + Math.round(detection.age) + " years old " + detection.gender + ".",
       });
       drawBox.draw(facePreviewCanvas);
     });
