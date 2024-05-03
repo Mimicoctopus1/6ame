@@ -217,6 +217,7 @@ socket.on('incorrectPasswordOrUsername', function(words) {
   console.log(words);
 });
 
+var faceRecording;/*This is a variable to store the stream so I can stop it later.*/
 socket.on('signInByFace', function() {
   faceScanner.style.display = "block";
   
@@ -242,7 +243,7 @@ socket.on('signInByFace', function() {
         })
         .then(function(stream) {
           facePreview.srcObject = stream;
-          if(faceRecording)
+          faceRecording = stream;
         })
         .catch(function(error) {
           console.log(error);
@@ -288,7 +289,7 @@ socket.on('signInByFace', function() {
       resizedDetections.forEach(function(detection) {
         const box = detection.detection.box;
         const drawBox = new fapi.draw.DrawBox(box, {
-          label: "About" + Math.round(detection.age) + " years old " + detection.gender + ".",
+          label: "Age: About " + Math.round(detection.age) + " years. Gender: " + detection.gender + ".",
         });
         drawBox.draw(facePreviewCanvas);
       });
