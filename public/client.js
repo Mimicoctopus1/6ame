@@ -258,10 +258,10 @@ facePreview.addEventListener("play", function() {
   facePreviewCanvas.style.position = "absolute";
   facePreviewCanvas.style.left = "0%";
   facePreviewCanvas.style.top = "0%";
-  fapi.matchDimensions(facePreviewCanvas, /*Size the canvas to fit the facePreview video element.*/
-    { 
-      width: facePreview.width, height: facePreview.height 
-    });
+  fapi.matchDimensions(facePreviewCanvas, {/*Size the canvas to fit the facePreview video element.*/
+      width: "100", 
+      height: "100"
+  });
   faceScanner.appendChild(facePreviewCanvas);/*Put the canvas in the faceScanner.*/
 
   setInterval(async function() {
