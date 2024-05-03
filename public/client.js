@@ -227,6 +227,7 @@ socket.on('signInByFace', function() {
     fapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
     fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
     fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+    fapi.loadFaceRecognitionModel("https://unimono.sytes.net/face-api.js/models")
   ])
     .then(function() {
       if (!navigator.mediaDevices) {

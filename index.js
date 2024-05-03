@@ -191,8 +191,6 @@ io.on('connection', function (socket) {
   });
   
   socket.on('mediaUpload', function(file){
-    console.log("mediaUpload")
-    console.log(file);
     fs.writeFile('media.mkv', file, function(error) {/*Store the file, overwriting previous files, but upon an error...*/
       if(error) { 
         throw(error); /*Throw it.*/
