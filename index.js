@@ -203,7 +203,7 @@ io.on('connection', function (socket) {
       '` + process.env.fileStorageURL + "filename" +  `' \
       -H 'accept: application/json' \
       -H 'Content-Type: application/octet-stream' \
-      --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*Do something with the terminal output.*/}
+      --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*TODO: Do something with the terminal output.*/}
     );
   });
   
