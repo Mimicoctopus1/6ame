@@ -258,11 +258,11 @@ facePreview.addEventListener("play", function() {
   facePreviewCanvas.style.position = "absolute";
   facePreviewCanvas.style.left = "0%";
   facePreviewCanvas.style.top = "0%";
-  fapi.matchDimensions(facePreviewCanvas, {/*Size the canvas to fit the facePreview video element.*/
-      width: "100", 
-      height: "100"
+  fapi.matchDimensions(facePreviewCanvas, {/*Size the canvas to fit the facePreview video element. I'm using window.inner... because faceapi.matchDimensions doesn't support % notation.*/
+      width: window.innerWidth * (9/10), 
+      height: window.innerHeight * (9/10)
   });
-  faceScanner.appendChild(facePreviewCanvas);/*Put the canvas in the faceScanner.*/
+  faceScanner.insertBefore(facePreviewCanvas, facePreviewCancel);/*Put the canvas in the faceScanner, right before facePreviewCancel.*/
 
   setInterval(async function() {
     let detections = await fapi /*Pause this function while face-api.js detects faces.*/
@@ -272,9 +272,10 @@ facePreview.addEventListener("play", function() {
       .withAgeAndGender();
 
     /*Let face-api.js know that we only want detections in this size.*/
-    let resizedDetections = fapi.resizeResults(detections, 
+    let resizedDetections = fapi.resizeResults(detections, /*Draw the items in this size.*/
       { 
-        width: facePreview.width, height: facePreview.height 
+        width: window.innerWidth * (9/10), 
+        height: window.innerHeight * (9/10)
       });
     facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);
    
@@ -287,7 +288,7 @@ facePreview.addEventListener("play", function() {
     resizedDetections.forEach(function(detection) {
       const box = detection.detection.box;
       const drawBox = new fapi.draw.DrawBox(box, {
-        label: `${Math.round(detection.age)}y, ${detection.gender}`,
+        label: "About" + Math.round(detection.age) + " years old, " + detection.gender,
       });
       drawBox.draw(facePreviewCanvas);
     });
