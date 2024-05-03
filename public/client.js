@@ -218,82 +218,82 @@ socket.on('incorrectPasswordOrUsername', function(words) {
 });
 
 socket.on('signInByFace', function() {
-faceScanner.style.display = "block";
+  faceScanner.style.display = "block";
   
-Promise.all([
-  fapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  fapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  fapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-  fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-])
-  .then(function() {
-    if (!navigator.mediaDevices) {
-      console.error("mediaDevices not supported");
-      return;
-    }
-    navigator.mediaDevices
-      .getUserMedia({
-        video: {
-          width: { min: 640, ideal: 1280, max: 1920 },
-          height: { min: 360, ideal: 720, max: 1080 },
-        },
-        audio: false,
-      })
-      .then(function(stream) {
-        facePreview.srcObject = stream;
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  }).catch(function(error) {
-    console.log(error);
-  });
-
-
-facePreview.addEventListener("play", function() {
-  const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Create a canvas.*/
+  Promise.all([
+    fapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+    fapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+    fapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+    fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+    fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
+  ])
+    .then(function() {
+      if (!navigator.mediaDevices) {
+        console.error("mediaDevices not supported");
+        return;
+      }
+      navigator.mediaDevices
+        .getUserMedia({
+          video: {
+            width: { min: 640, ideal: 1280, max: 1920 },
+            height: { min: 360, ideal: 720, max: 1080 },
+          },
+          audio: false,
+        })
+        .then(function(stream) {
+          facePreview.srcObject = stream;
+          if(faceRecording)
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    }).catch(function(error) {
+      console.log(error);
+    });
   
-  facePreviewCanvas.willReadFrequently = true;/*This makes it so the device does not use hardware acceleration.*/
-  facePreviewCanvas.style.position = "absolute";
-  facePreviewCanvas.style.left = "0%";
-  facePreviewCanvas.style.top = "0%";
-  fapi.matchDimensions(facePreviewCanvas, {/*Size the canvas to fit the facePreview video element. I'm using window.inner... because faceapi.matchDimensions doesn't support % notation.*/
-      width: window.innerWidth * (9/10), 
-      height: window.innerHeight * (9/10)
-  });
-  faceScanner.insertBefore(facePreviewCanvas, facePreviewCancel);/*Put the canvas in the faceScanner, right before facePreviewCancel.*/
-
-  setInterval(async function() {
-    let detections = await fapi /*Pause this function while face-api.js detects faces.*/
-      .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
-      .withFaceLandmarks()
-      .withFaceExpressions()
-      .withAgeAndGender();
-
-    /*Let face-api.js know that we only want detections in this size.*/
-    let resizedDetections = fapi.resizeResults(detections, /*Draw the items in this size.*/
-      { 
+  facePreview.addEventListener("play", function() {
+    const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Create a canvas.*/
+    
+    facePreviewCanvas.willReadFrequently = true;/*This makes it so the device does not use hardware acceleration.*/
+    facePreviewCanvas.style.position = "absolute";
+    facePreviewCanvas.style.left = "0%";
+    facePreviewCanvas.style.top = "0%";
+    fapi.matchDimensions(facePreviewCanvas, {/*Size the canvas to fit the facePreview video element. I'm using window.inner... because faceapi.matchDimensions doesn't support % notation.*/
         width: window.innerWidth * (9/10), 
         height: window.innerHeight * (9/10)
-      });
-    facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);
-   
-    // Adjust the size of the detection canvas
-    fapi.draw.drawDetections(facePreviewCanvas, resizedDetections);
-    fapi.draw.drawFaceLandmarks(facePreviewCanvas, resizedDetections);
-    fapi.draw.drawFaceExpressions(facePreviewCanvas, resizedDetections);
-  
-    // Drawing AGE and GENDER
-    resizedDetections.forEach(function(detection) {
-      const box = detection.detection.box;
-      const drawBox = new fapi.draw.DrawBox(box, {
-        label: "About" + Math.round(detection.age) + " years old " + detection.gender + ".",
-      });
-      drawBox.draw(facePreviewCanvas);
     });
-  }, 1000/24 /*24 FPS is fast enough to trick your mind into seeing motion without crashing your computer.*/);
-});
+    faceScanner.insertBefore(facePreviewCanvas, facePreviewCancel);/*Put the canvas in the faceScanner, right before facePreviewCancel.*/
+  
+    setInterval(async function() {
+      let detections = await fapi /*Pause this function while face-api.js detects faces.*/
+        .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
+        .withFaceLandmarks()
+        .withFaceExpressions()
+        .withAgeAndGender();
+  
+        /*Let face-api.js know that we only want detections in this size.*/
+      let resizedDetections = fapi.resizeResults(detections, /*Draw the items in this size.*/
+        { 
+          width: window.innerWidth * (9/10), 
+          height: window.innerHeight * (9/10)
+        });
+      facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);
+     
+      // Adjust the size of the detection canvas
+      fapi.draw.drawDetections(facePreviewCanvas, resizedDetections);
+      fapi.draw.drawFaceLandmarks(facePreviewCanvas, resizedDetections);
+      fapi.draw.drawFaceExpressions(facePreviewCanvas, resizedDetections);
+    
+      // Drawing AGE and GENDER
+      resizedDetections.forEach(function(detection) {
+        const box = detection.detection.box;
+        const drawBox = new fapi.draw.DrawBox(box, {
+          label: "About" + Math.round(detection.age) + " years old " + detection.gender + ".",
+        });
+        drawBox.draw(facePreviewCanvas);
+      });
+    }, 1000/24 /*24 FPS is fast enough to trick your mind into seeing motion without crashing your computer.*/);
+  });
 });
 
 socket.on('buzzermode', function(adminOrNot) {
