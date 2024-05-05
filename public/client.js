@@ -38,7 +38,9 @@ var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
 var facePreviewCanvas = undefined; /*This is an uncreated element that will be filled later by the startRecording function. Use Ctrl + ; and type startRecording async function to find it.*/
-
+var threeDVideo = document.querySelectorAll('.3dVideo')[0];
+var leftThreeDVideo = document.querySelectorAll('.left3dVideo')[0];
+var rightThreeDVideo = document.querySelectorAll('.right3dVideo')[0];
 
 /*Miscellaneous Setup*/
 
@@ -343,6 +345,13 @@ socket.on("changeMode", function(mode) {
     print("You already are in text mode!");
   }
   updateGameMode();
+});
+
+socket.on("threeDVideo", function(threeDVideoURLS) {
+  leftThreeDVideo.src = threeDVideoURLS[0];
+  rightThreeDVideo.src = threeDVideoURLS[1];
+  leftThreeDVideo.play();
+  rightThreeDVideo.play();
 });
 
 socket.on("unknownCommand", function() {
