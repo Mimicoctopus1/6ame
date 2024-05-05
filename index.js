@@ -164,7 +164,13 @@ io.on('connection', function (socket) {
     } else if(["move", "m"].includes(cmnd)) {
       
     } else if(["3dvideo"].includes(cmnd)) {
-      socket.emit("3dvideo", [messageWords[1], messageWords[2]]);
+      if(messageWords[2]) {
+        socket.emit("threeDVideo", [messageWords[1], messageWords[2]]);
+      } else if(messageWords[1]) {
+        socket.emit("threeDVideo", [messageWords[1] + "/left", messageWords/[2] + "/right"]);
+      } else {
+        socket.emit("threeDVideo", ["https://unimono.sytes.net/threeDVideo/left", "https://unimono.sytes.net/threeDVideo/right"]);
+      }
     } else if(["changemode"].includes(cmnd)) {
       socket.emit("changeMode", messageWords[1]);
     }
