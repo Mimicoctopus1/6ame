@@ -232,44 +232,41 @@ socket.on('signInByFace', function() {
     fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
     fapi.loadFaceRecognitionModel("https://unimono.sytes.net/face-api.js/models")
   ])
-    .then(function() {
-      if (!navigator.mediaDevices) {
-        console.error("mediaDevices not supported");
-        return;
-      }
-      navigator.mediaDevices
-        .getUserMedia({
-          video: {
-            width: { min: 640, ideal: 1280, max: 1920 },
-            height: { min: 360, ideal: 720, max: 1080 },
-          },
-          audio: false,
-        })
-        .then(function(stream) {
-          facePreview.srcObject = stream;
-          facePreviewCancel.addEventListener("click", function() {
-            let tracksStopped = 0;
-            /*stream.getTracks().forEach(function(stream){
-            console.log("done!")
-              stream.stop();
-            });*/
-            while(facePreview.srcObject.length > tracksStopped) {
-              stream.getTracks()[tracksStopped].stop();
-              tracksStopped += 1;
-            }
-            faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
-          });
-        })
-        .catch(function(error) {
-          console.log(error);
-        });
-    }).catch(function(error) {
+  .then(function() {
+    if (!navigator.mediaDevices) {
+      console.error("mediaDevices not supported");
+      return;
+    }
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        width: { min: 640, ideal: 1280, max: 1920 },
+        height: { min: 360, ideal: 720, max: 1080 },
+      },
+      audio: false,
+    })
+    .then(function(stream) {
+      facePreview.srcObject = stream;
+      facePreviewCancel.addEventListener("click", function() {
+        let tracksStopped = 0;
+        while(facePreview.srcObject.getTracks().length > tracksStopped) {
+          console.log('while')
+          stream.getTracks()[tracksStopped].stop();
+          tracksStopped += 1;
+        }
+        faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
+      });
+    })
+    .catch(function(error) {
       console.log(error);
     });
-  
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+
   facePreview.addEventListener("play", function() {
     const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Create a canvas.*/
-    
+
     facePreviewCanvas.willReadFrequently = true;/*This makes it so the device does not use hardware acceleration.*/
     facePreviewCanvas.style.position = "absolute";
     facePreviewCanvas.style.left = "0%";
@@ -279,14 +276,14 @@ socket.on('signInByFace', function() {
         height: window.innerHeight * (9/10)
     });
     faceScanner.insertBefore(facePreviewCanvas, facePreviewCancel);/*Put the canvas in the faceScanner, right before facePreviewCancel.*/
-  
+
     setInterval(async function() {
       let detections = await fapi /*Pause this function while face-api.js detects faces.*/
         .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
         .withFaceLandmarks()
         .withFaceExpressions()
         .withAgeAndGender();
-  
+
         /*Let face-api.js know that we only want detections in this size.*/
       let resizedDetections = fapi.resizeResults(detections, /*Draw the items in this size.*/
         { 
@@ -294,12 +291,12 @@ socket.on('signInByFace', function() {
           height: window.innerHeight * (9/10)
         });
       facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);
-     
+
       // Adjust the size of the detection canvas
       fapi.draw.drawDetections(facePreviewCanvas, resizedDetections);
       fapi.draw.drawFaceLandmarks(facePreviewCanvas, resizedDetections);
       fapi.draw.drawFaceExpressions(facePreviewCanvas, resizedDetections);
-    
+
       // Drawing AGE and GENDER
       resizedDetections.forEach(function(detection) {
         const box = detection.detection.box;
@@ -448,3 +445,4 @@ renderer2.addEventListener('click', lockPointerRenderer2);
 renderer3.addEventListener('click', lockPointerRenderer3);
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
+facePreviewCancel.addEventListener('click', closeF)
