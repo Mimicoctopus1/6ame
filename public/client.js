@@ -248,7 +248,11 @@ socket.on('signInByFace', function() {
         .then(function(stream) {
           facePreview.srcObject = stream;
           facePreviewCancel.addEventListener("click", function() {
-            facePreview.srcObject.getStreams()[0].stop();
+            let streamsStopped = 0;
+            while(facePreview.srcObject.length > tracksStopped) {
+              facePreview.srcObject.getTrackss()[tracksStopped].stop();
+              streamsStopped += 1;
+            }
             faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
           });
         })
@@ -413,8 +417,10 @@ var keyUpHandlers = /*When a key is released...*/{
 
 var keyDown = function(event) {
   keys[event.code] = true;
-  while(keys[event.code]) {/*While the key is still presssed...*/
-    keyCodeHandlers[event.code]();
+  if(keyCodeHandlers[event.code]) {
+    while(keys[event.code]) {/*While the key is still presssed...*/
+      keyCodeHandlers[event.code]();
+    }
   }
   if(keyDownHandlers[event.code]) {
     keyDownHandlers[event.code]();
