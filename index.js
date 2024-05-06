@@ -215,12 +215,6 @@ io.on('connection', function (socket) {
       -H 'Content-Type: application/octet-stream' \
       --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*TODO: Do something with the terminal output.*/}
     );
-    console.log(`
-      curl -X 'POST' \
-      '` + process.env.fileStorageURL + filenameOfMediaToUpload +  `' \
-      -H 'accept: application/json' \
-      -H 'Content-Type: application/octet-stream' \
-      --data-binary '@media.mkv'`)
   });
   
   socket.on("disconnect", function() {
