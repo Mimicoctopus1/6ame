@@ -249,7 +249,10 @@ socket.on('signInByFace', function() {
           facePreview.srcObject = stream;
           facePreviewCancel.addEventListener("click", function() {
             let tracksStopped = 0;
-            // stream.getTracks().forEach(function(stream){stream.stop();});
+            /*stream.getTracks().forEach(function(stream){
+            console.log("done!")
+              stream.stop();
+            });*/
             while(facePreview.srcObject.length > tracksStopped) {
               stream.getTracks()[tracksStopped].stop();
               tracksStopped += 1;
