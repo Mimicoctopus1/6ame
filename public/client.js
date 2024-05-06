@@ -394,16 +394,14 @@ var stopFaceScanner = function(event) {
 };
 
 var keyCodes = [];
-var keys = {};
+var keyCodeHandlers;
 
 var keyDown = function(event) {
   keyCodes[event.keyCode] = true;
-  keys[event.key] = true;
 };
 
 var keyUp = function(event) {
   keyCodes[event.keyCode] = false;
-  keys[event.key] = false;
 };
 
 
@@ -417,5 +415,3 @@ renderer3.addEventListener('click', lockPointerRenderer3);
 facePreviewCancel.addEventListener('click', stopFaceScanner);
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
-
-/*Forever l*/
