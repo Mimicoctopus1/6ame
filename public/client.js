@@ -130,9 +130,9 @@ var startRecording = async function(e) {
     
 		let mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
     mediaPreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
-    let mediaFile = new File([mediaBlob], "media.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
+    let mediaFile = new File([mediaBlob], "media.mkv");/*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
     socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.                    */
-    URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.                                                         */
+    URL.revokeObjectURL(mediaBlob);                    /*Delete the blob.                                                             */
 	};
 
 	recorder.start();

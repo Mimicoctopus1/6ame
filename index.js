@@ -191,16 +191,16 @@ io.on('connection', function (socket) {
     io.emit('buzzesUpdate', buzzes);
   });
   
-  socket.on('mediaUpload', function(file){
+  socket.on('mediaUpload', function(file) {
     fs.writeFile('media.mkv', file, function(error) {/*Store the file, overwriting previous files, but upon an error...*/
       if(error) { 
         throw(error); /*Throw it.*/
       }
     });
     
-    let filenameOfMediaToUpload = "guestUpload/" + new Date().getTime();/*Set the upload to something like guestUpload/128394807*/
+    let filenameOfMediaToUpload = "guestUpload" + new Date().getTime();/*Set the upload to something like guestUpload/128394807*/
     
-    if(readJSON(".data/userdata.json")[socket.username]["password"] === socket.password) {/*If the user is logged in...*/
+    if(socket.username && socket.password && readJSON(".data/userdata.json")[socket.username]["password"] === socket.password) {/*If the user is logged in...*/
       let filenameOfMediaToUpload = socket.username + "." + new Date().getTime();/*Set it to something like johndoe.128957091*/
       let userdata = readJSON(".data/userdata.json");
       userdata[socket.username]["media"][userdata[socket.username]["media"].length] = process.env.fileStorageURL + filenameOfMediaToUpload;
@@ -215,6 +215,12 @@ io.on('connection', function (socket) {
       -H 'Content-Type: application/octet-stream' \
       --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*TODO: Do something with the terminal output.*/}
     );
+    console.log(`
+      curl -X 'POST' \
+      '` + process.env.fileStorageURL + filenameOfMediaToUpload +  `' \
+      -H 'accept: application/json' \
+      -H 'Content-Type: application/octet-stream' \
+      --data-binary '@media.mkv'`)
   });
   
   socket.on("disconnect", function() {
