@@ -393,15 +393,27 @@ var stopFaceScanner = function(event) {
   faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
 };
 
-var keyCodes = [];
-var keyCodeHandlers;
+var keys = [];
+var keyCodeHandlers = {
+  
+};
+var keyDownHandlers = {
+  
+}
+var keyUpHandlers = {
+  
+}
 
 var keyDown = function(event) {
-  keyCodes[event.keyCode] = true;
+  keys[event.code] = true;
+  while(keys[event.code]) {/*While the key is still presssed...*/
+    keyCodeHandlers[event.code]();
+  }
+  keyDownHandlers[event.code]
 };
 
 var keyUp = function(event) {
-  keyCodes[event.keyCode] = false;
+  keys[event.code] = false;
 };
 
 
