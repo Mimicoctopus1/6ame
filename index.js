@@ -204,11 +204,17 @@ io.on('connection', function (socket) {
         throw(error); /*Throw it.*/
       }
     });
-  
-    /*Run the string in the terminal. The string saves the file in my fairly badly hidden database by its API.*/
+    
+    let filenameOfMediaToUpload = "guestUpload/" +
+    
+    if(readJSON(".data/userdata.json")[socket.username]["password"] === socket.password) {
+      let filenameOfMediaToUpload = socket.username + "." + new Date();
+    }
+    
+    /*Run the string in the terminal. The string saves the file in a database by its API.*/
     exec(/*The following is some terminal thing that sends a message to my data storage telling it to save the data.*/`
       curl -X 'POST' \
-      '` + process.env.fileStorageURL + "filename" +  `' \
+      '` + process.env.fileStorageURL + filenameOfMediaToUpload +  `' \
       -H 'accept: application/json' \
       -H 'Content-Type: application/octet-stream' \
       --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*TODO: Do something with the terminal output.*/}
