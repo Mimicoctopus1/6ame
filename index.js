@@ -69,8 +69,6 @@ io.on('connection', function (socket) {
     socket.emit("currentToS", fs.readFileSync("public/ToS/index.html").toString())/*Send it to the client.*/
   });
   
-  socket.emit('signInByFace')
-  
 	socket.on('message', function (msg) {
 		/*When an entry is received from the user...*/ let messageWords = msg.split(' '); /*Split the string by whitespaces.*/
 		let cmnd = messageWords[0]; /*cmnd is the first word of the message*/

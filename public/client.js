@@ -36,7 +36,7 @@ var renderer2 = document.querySelectorAll('.renderer2')[0];
 var renderer3 = document.querySelectorAll('.renderer3')[0];
 var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
-var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
+var faceScannerCancel = document.querySelectorAll('.faceScannerCancel')[0];
 var facePreviewCanvas = undefined; /*This is an uncreated element that will be filled later by the startRecording function. Use Ctrl + ; and type startRecording async function to find it.*/
 var pausePanels = document.querySelectorAll('.pausePanels')[0];
 var threeDVideo = document.querySelectorAll('.threeDVideo')[0];
@@ -128,9 +128,9 @@ var startRecording = async function(e) {
     mediaPreviewStart.disabled = false;
     mediaPreview.controls = true; /*Show the controls, which couldn't be shown before or they would show for a blank video frame.*/
     
-		var mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
+		let mediaBlob = new Blob(chunks, {type: chunks[0].type});/*Make the video into a blob with the same type as the chunks. A blob is just a file without a name or lastModified date object.*/
     mediaPreview.src = URL.createObjectURL(mediaBlob);/*Create a blob URL. A blob URL such as blob:example.com/hash is stored on the browser and can't be opened by anyone else. It dies when you close the document that created it, so you can use the link again.*/
-    var mediaFile = new File([mediaBlob], "file.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
+    let mediaFile = new File([mediaBlob], "media.mkv"); /*Make a file out of the blob because blobs are sort of ugly and hard to use.  */
     socket.emit('mediaUpload', mediaFile);             /*Tell the server to upload this to my file storing system.                    */
     URL.revokeObjectURL(mediaBlob);                    /*Delete the blob URL.                                                         */
 	};
@@ -246,10 +246,9 @@ socket.on('signInByFace', function() {
     })
     .then(function(stream) {
       facePreview.srcObject = stream;
-      facePreviewCancel.addEventListener("click", function() {
+      faceScannerCancel.addEventListener("click", function() {
         let tracksStopped = 0;
         while(facePreview.srcObject.getTracks().length > tracksStopped) {
-          console.log('while')
           stream.getTracks()[tracksStopped].stop();
           tracksStopped += 1;
         }
@@ -275,7 +274,7 @@ socket.on('signInByFace', function() {
         width: window.innerWidth * (9/10), 
         height: window.innerHeight * (9/10)
     });
-    faceScanner.insertBefore(facePreviewCanvas, facePreviewCancel);/*Put the canvas in the faceScanner, right before facePreviewCancel.*/
+    faceScanner.insertBefore(facePreviewCanvas, faceScannerCancel);/*Put the canvas in the faceScanner, right before faceScannerCancel.*/
 
     setInterval(async function() {
       let detections = await fapi /*Pause this function while face-api.js detects faces.*/
@@ -403,15 +402,17 @@ var keyCodeHandlers = /*While a key is pressed...*/{
 var keyNotPressedHandlers = /*While a key is not pressed...*/{
   
 };
+
 var keyDownHandlers = /*When a key is pressed...*/{
   "KeyP": function() {
-    if(pausePanels.display === "block") {
-      pausePanels.display = "none";
+    if(pausePanels.style.display === "block") {
+      pausePanels.style.display = "none";
     } else {
-      pausePanels.display = "block"
+      pausePanels.style.display = "block"
     }
   }
 };
+
 var keyUpHandlers = /*When a key is released...*/{
   
 };
@@ -435,6 +436,9 @@ var keyUp = function(event) {
   }
 };
 
+var closeFaceScanner = function() {
+  faceScanner.style.display = "none";
+}
 
 document.addEventListener('contextmenu', handleContextMenu);
 input.addEventListener('keyup', handleInputKeyup);
@@ -445,4 +449,4 @@ renderer2.addEventListener('click', lockPointerRenderer2);
 renderer3.addEventListener('click', lockPointerRenderer3);
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
-facePreviewCancel.addEventListener('click', closeF)
+faceScannerCancel.addEventListener('click', closeFaceScanner);
