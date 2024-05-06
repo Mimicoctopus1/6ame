@@ -38,9 +38,10 @@ var faceScanner = document.querySelectorAll('.faceScanner')[0];
 var facePreview = document.querySelectorAll('.facePreview')[0];
 var facePreviewCancel = document.querySelectorAll('.facePreviewCancel')[0];
 var facePreviewCanvas = undefined; /*This is an uncreated element that will be filled later by the startRecording function. Use Ctrl + ; and type startRecording async function to find it.*/
-var threeDVideo = document.querySelectorAll('.3dVideo')[0];
-var leftThreeDVideo = document.querySelectorAll('.left3dVideo')[0];
-var rightThreeDVideo = document.querySelectorAll('.right3dVideo')[0];
+var pausePanels = document.querySelectorAll('.pausePanels')[0];
+var threeDVideo = document.querySelectorAll('.threeDVideo')[0];
+var leftThreeDVideo = document.querySelectorAll('.leftThreeDVideo')[0];
+var rightThreeDVideo = document.querySelectorAll('.rightThreeDVideo')[0];
 
 /*Miscellaneous Setup*/
 
@@ -394,26 +395,36 @@ var stopFaceScanner = function(event) {
 };
 
 var keys = [];
-var keyCodeHandlers = {
+var keyCodeHandlers = /*While a key is pressed...*/{
   
 };
-var keyDownHandlers = {
+var keyNotPressedHandlers = /*While a key is not pressed...*/{
   
-}
-var keyUpHandlers = {
+};
+var keyDownHandlers = /*When a key is pressed...*/{
+  "KeyP": function() {
+    if(pausePanels.display === "block") {
+      pausePanels.display = "none";
+    } else {
+      pausePanels.display = "block"
+    }
+  }
+};
+var keyUpHandlers = /*When a key is released...*/{
   
-}
+};
 
 var keyDown = function(event) {
   keys[event.code] = true;
   while(keys[event.code]) {/*While the key is still presssed...*/
     keyCodeHandlers[event.code]();
   }
-  keyDownHandlers[event.code]
+  keyDownHandlers[event.code]();
 };
 
 var keyUp = function(event) {
   keys[event.code] = false;
+  keyUpHandlers[event.code]();
 };
 
 
