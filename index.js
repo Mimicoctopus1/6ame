@@ -205,10 +205,10 @@ io.on('connection', function (socket) {
       }
     });
     
-    let filenameOfMediaToUpload = "guestUpload/" +
+    let filenameOfMediaToUpload = "guestUpload/" + new Date().getTime();/*Set the upload to something like guestUpload/128394807*/
     
-    if(readJSON(".data/userdata.json")[socket.username]["password"] === socket.password) {
-      let filenameOfMediaToUpload = socket.username + "." + new Date();
+    if(readJSON(".data/userdata.json")[socket.username]["password"] === socket.password) {/*If the user is logged in...*/
+      let filenameOfMediaToUpload = socket.username + "." + new Date().getTime();/*Set it to something like johndoe.128957091*/
     }
     
     /*Run the string in the terminal. The string saves the file in a database by its API.*/
@@ -219,6 +219,10 @@ io.on('connection', function (socket) {
       -H 'Content-Type: application/octet-stream' \
       --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*TODO: Do something with the terminal output.*/}
     );
+    
+    let userdata = readJSON(".data/userdata.json");
+    userdata[socket.username]
+    writeJSON(".data/userdata.json", userdata);
   });
   
   socket.on("disconnect", function() {
