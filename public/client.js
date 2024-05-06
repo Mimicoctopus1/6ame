@@ -247,7 +247,10 @@ socket.on('signInByFace', function() {
         })
         .then(function(stream) {
           facePreview.srcObject = stream;
-          faceRecording = stream;
+          facePreviewCancel.addEventListener("click", function() {
+            facePreview.srcObject.getStreams()[0].stop();
+            faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
+          });
         })
         .catch(function(error) {
           console.log(error);
@@ -306,7 +309,7 @@ socket.on('buzzermode', function(adminOrNot) {
   gameMode = "buzz";
 	if (adminOrNot) {
 		clearBuzzesButton.style.display = 'block';
-		clearBuzzesButton.addEventListener('click', function () {
+		clearBuzzesButton.addEventListener('click', function() {
 			socket.emit('clearBuzzes');
 		});
 	}
@@ -362,7 +365,7 @@ socket.on("unknownCommand", function() {
 /*Event Listeners*/
 
 /*Edit the right click menu*/
-var handlecontextmenu = function (e) {
+var handleContextMenu = function (e) {
 	/*Stop the right click menu from working the way it usually does.*/
 	e.preventDefault();
   
@@ -386,12 +389,6 @@ var handleInputKeyup = function(event) {
     messages.appendChild(printItem);
 		input.innerHTML = ''; /*Clear the entry area.*/
 	}
-};
-
-var stopFaceScanner = function(event) {
-  faceRecording.stop();
-  faceRecording = false;
-  faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
 };
 
 var keys = [];
@@ -419,22 +416,25 @@ var keyDown = function(event) {
   while(keys[event.code]) {/*While the key is still presssed...*/
     keyCodeHandlers[event.code]();
   }
-  keyDownHandlers[event.code]();
+  if(keyDownHandlers[event.code]) {
+    keyDownHandlers[event.code]();
+  }
 };
 
 var keyUp = function(event) {
   keys[event.code] = false;
-  keyUpHandlers[event.code]();
+  if(keyUpHandlers[event.code]) {
+    keyUpHandlers[event.code]();
+  }
 };
 
 
-document.addEventListener('contextmenu', handlecontextmenu);
+document.addEventListener('contextmenu', handleContextMenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.addEventListener('click', enterFullscreen);
 mediaPreviewStart.addEventListener('click', startRecording);
 mediaPreviewStop.addEventListener('click', stopRecording);
 renderer2.addEventListener('click', lockPointerRenderer2);
 renderer3.addEventListener('click', lockPointerRenderer3);
-facePreviewCancel.addEventListener('click', stopFaceScanner);
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
