@@ -248,10 +248,10 @@ socket.on('signInByFace', function() {
         .then(function(stream) {
           facePreview.srcObject = stream;
           facePreviewCancel.addEventListener("click", function() {
-            let streamsStopped = 0;
+            let tracksStopped = 0;
             while(facePreview.srcObject.length > tracksStopped) {
-              facePreview.srcObject.getTrackss()[tracksStopped].stop();
-              streamsStopped += 1;
+              facePreview.srcObject.getTracks()[tracksStopped].stop();
+              tracksStopped += 1;
             }
             faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
           });
