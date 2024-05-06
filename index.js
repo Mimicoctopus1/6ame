@@ -209,6 +209,9 @@ io.on('connection', function (socket) {
     
     if(readJSON(".data/userdata.json")[socket.username]["password"] === socket.password) {/*If the user is logged in...*/
       let filenameOfMediaToUpload = socket.username + "." + new Date().getTime();/*Set it to something like johndoe.128957091*/
+      let userdata = readJSON(".data/userdata.json");
+      userdata[socket.username]["media"][userdata[socket.username]["media"].length] = process.env.fileStorageURL + filenameOfMediaToUpload;
+      writeJSON(".data/userdata.json", userdata);
     }
     
     /*Run the string in the terminal. The string saves the file in a database by its API.*/
@@ -219,10 +222,6 @@ io.on('connection', function (socket) {
       -H 'Content-Type: application/octet-stream' \
       --data-binary '@media.mkv'`, function(error, stdout, stderr) {/*TODO: Do something with the terminal output.*/}
     );
-    
-    let userdata = readJSON(".data/userdata.json");
-    userdata[socket.username]
-    writeJSON(".data/userdata.json", userdata);
   });
   
   socket.on("disconnect", function() {

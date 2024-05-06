@@ -372,8 +372,8 @@ var handlecontextmenu = function (e) {
 	rcmenu.style.top = e.pageY - 20 + 'px';
 };
 
-var handleInputKeyup = function(e) {
-	if (e.key === 'Enter' || e.keyCode === 13) {
+var handleInputKeyup = function(event) {
+	if (event.key === 'Enter' || event.keyCode === 13) {
 		/*When enter is pressed...*/
 		socket.emit(
 			'message',
@@ -387,11 +387,25 @@ var handleInputKeyup = function(e) {
 	}
 };
 
-var stopFaceScanner = function(e) {
+var stopFaceScanner = function(event) {
   faceRecording.stop();
   faceRecording = false;
   faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
-}
+};
+
+var keyCodes = [];
+var keys = {};
+
+var keyDown = function(event) {
+  keyCodes[event.keyCode] = true;
+  keys[event.key] = true;
+};
+
+var keyUp = function(event) {
+  keyCodes[event.keyCode] = false;
+  keys[event.key] = false;
+};
+
 
 document.addEventListener('contextmenu', handlecontextmenu);
 input.addEventListener('keyup', handleInputKeyup);
@@ -401,3 +415,7 @@ mediaPreviewStop.addEventListener('click', stopRecording);
 renderer2.addEventListener('click', lockPointerRenderer2);
 renderer3.addEventListener('click', lockPointerRenderer3);
 facePreviewCancel.addEventListener('click', stopFaceScanner);
+document.addEventListener('keydown', keyDown);
+document.addEventListener('keyup', keyUp);
+
+/*Forever l*/
