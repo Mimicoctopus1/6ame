@@ -380,9 +380,9 @@ var handleContextMenu = function(event) {
 var handleClick = function(event) {
 	socket.emit('fullscreenCheck'); /*Tell the server to check if it's a good idea to fullscreen or not.*/
   
-  if((event.which && event.which === 1) || (event.button && event.button === 1)) {/*Left click. Most browsers use the which property, but IE and Opera use button.*/
+  if(event.buttons === 1) {/*Left click. Most browsers use the which property, but IE and Opera use button.*/
     rcmenu.style.display = "none";
-  } else if((event.which && event.which === 3) || (event.button && event.button === 2)) {/*Middle mouse button (scroll wheel press).*/
+  } else if(event.buttons) {/*Middle mouse button (scroll wheel press).*/
     
   } else if((event.which && event.which === 3) || (event.button && event.button === 4)) {/*Right mouse button.*/
   
