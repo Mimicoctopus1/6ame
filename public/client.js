@@ -143,10 +143,6 @@ var startRecording = async function(e) {
 	mediaPreviewStop.disabled = false;
 };
 
-var enterFullscreen = function() {
-	socket.emit('fullscreenCheck'); /*Tell the server to check if it's a good idea to fullscreen or not.*/
-};
-
 var stopRecording = function(e) {
 	recorder.stop();                  /*Stop the recording, automatically calling recorder.onstop();*/
 	stream.getVideoTracks()[0].stop();/*Stop the stream (I think). Go to https://shorturl.at/erzMN to find the real answer. Attempt to let me know if you do.*/
@@ -370,15 +366,23 @@ socket.on("unknownCommand", function() {
 /*Event Listeners*/
 
 /*Edit the right click menu*/
-var handleContextMenu = function (e) {
+var handleContextMenu = function(event) {
 	/*Stop the right click menu from working the way it usually does.*/
-	e.preventDefault();
+	event.preventDefault();
   
   /*Display the right-click menu.*/
 	rcmenu.style.display = 'block';
 	rcmenu.style.position = 'absolute';
-	rcmenu.style.left = e.pageX - 50 + 'px';
-	rcmenu.style.top = e.pageY - 20 + 'px';
+	rcmenu.style.left = event.pageX - 50 + 'px';
+	rcmenu.style.top = event.pageY - 20 + 'px';
+};
+
+var handleClick = function(event) {
+	socket.emit('fullscreenCheck'); /*Tell the server to check if it's a good idea to fullscreen or not.*/
+  
+  if(event.which || event.button) {/*Most browsers use the which property, but IE and Opera use button.*/
+    /*Handle rightclick*/
+  } 
 };
 
 var handleInputKeyup = function(event) {
@@ -443,9 +447,10 @@ var closeFaceScanner = function() {
   faceScanner.style.display = "none";
 }
 
+
 document.addEventListener('contextmenu', handleContextMenu);
 input.addEventListener('keyup', handleInputKeyup);
-document.addEventListener('click', enterFullscreen);
+document.addEventListener('click', handleClick);
 mediaPreviewStart.addEventListener('click', startRecording);
 mediaPreviewStop.addEventListener('click', stopRecording);
 renderer2.addEventListener('click', lockPointerRenderer2);
