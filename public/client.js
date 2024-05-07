@@ -19,7 +19,7 @@ var fapi = faceapi;/*Make a shortcut.*/
 
 var messages = document.querySelector('#messages');
 var form = document.querySelector('#form');
-var input = document.querySelector('#input');
+var input = document.querySelectorAll('.commandInput')[0];
 var arrowSymbol = document.querySelectorAll(".arrowSymbol")[0];
 var rcmenu = document.querySelectorAll('.rcmenu')[0];
 var ToS = document.querySelectorAll('.ToS')[0];
@@ -418,14 +418,15 @@ var keyUpHandlers = /*When a key is released...*/{
 };
 
 var keyDown = function(event) {
-  if(document.activeElement ===)
-  keys[event.code] = true;
-  if(keyDownHandlers[event.code]) {
-    keyDownHandlers[event.code]();
-  }
-  if(keyCodeHandlers[event.code]) {
-    while(keys[event.code]) {/*While the key is still presssed...*/
-      keyCodeHandlers[event.code]();
+  if(document.activeElement.className !== "commandInput") {
+    keys[event.code] = true;
+    if(keyDownHandlers[event.code]) {
+      keyDownHandlers[event.code]();
+    }
+    if(keyCodeHandlers[event.code]) {
+      while(keys[event.code]) {/*While the key is still presssed...*/
+        keyCodeHandlers[event.code]();
+      }
     }
   }
 };

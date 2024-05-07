@@ -38,13 +38,13 @@ body::backdrop { /*body::backdrop is a psuedo (theoretical) -element that is beh
 .buzzerButton td {
   border: 1px solid black;
 }
-#input {
+.commandInput {
   border: 0px;
   margin: 0px;
   width: 100%;
   display: none;
 }
-#input:focus {
+.commandInput:focus {
   outline: none;
 }
 #messages {

@@ -75,8 +75,8 @@ io.on('connection', function (socket) {
     /*Do the same thing in lowercase.*/
     let lMessageWords = msg.toLowerCase().split(' ');
     let lCmnd = lMessageWords[0];
-		if (['help'].includes(cmnd)) {
-      
+		if(['help'].includes(cmnd)) {
+      socket.emit('printCommandHelp');
     } else if (['chat', 'c', 'say', 'talk'].includes(cmnd)) {
 			/*The next few code blocks check if the cmnd is a certain word, then decides what to do after that.*/
 			/*Take all the words except the first, join them together by spaces (the opposite of .split), and send to the clients.*/
