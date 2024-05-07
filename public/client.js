@@ -418,6 +418,7 @@ var keyUpHandlers = /*When a key is released...*/{
 };
 
 var keyDown = function(event) {
+  if(document.activeElement ===)
   keys[event.code] = true;
   if(keyDownHandlers[event.code]) {
     keyDownHandlers[event.code]();
