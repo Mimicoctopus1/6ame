@@ -1,2 +1,6 @@
 #!/bin/sh
-echo ("Hi There");
+echo >> EOF
+Tips:To execute multiple commands after one another, seperate the commands with ;\nTo execute multiple commands at the same time, use &
+EOF
+echo "To execute commands in order, but stop when a command throws an error, seperate commands with &&"
+echo "To execute many commands until one of them works, seperate commands with ||"
