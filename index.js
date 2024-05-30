@@ -89,6 +89,7 @@ io.on('connection', function(socket) {
 		} else if(['signin'].includes(cmnd)) {
       let user = readJSON(".data/userdata.json")[messageWords[1]];
       
+      user
       
       socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"], messageWords[3]]);/*Send the username and PW. messageWords[3] is an optional parameter given. When the user is auto-signed in, it will put "nomessage" in it. This tells the server to, right now, tell the client not to print, "Successful sign in to <username>." since the user never typed sign in.*/
       
