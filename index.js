@@ -57,13 +57,13 @@ var emailer = nodemailer.createTransport({/*Setup the account recovery emailer i
 
 app.use(express.static('public'));/*Tell node and express to use the public folder as the files to send to the client.*/
 
-app.get('/', function (req, res) {
+app.get('/', function(req, res) {
 	res.sendFile(new URL('./public/client.html', import.meta.url).pathname);
 });
 
 var buzzes = [];
 
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
   socket.on("getCurrentToS", function() {
     /*When the client requests to know the current Terms of Service...*/
     socket.emit("currentToS", fs.readFileSync("public/ToS/index.html").toString())/*Send it to the client.*/
@@ -88,20 +88,7 @@ io.on('connection', function (socket) {
 			}
 		} else if(['signin'].includes(cmnd)) {
       let user = readJSON(".data/userdata.json")[messageWords[1]];
-      let incorrectAuthentication = function() {
-      }
       
-      if(!(user.password === undefined || user.password === messageWords[2])) {/*If the password is NOT correct or bypassed.*/
-        socket.emit('incorrectPasswordOrUsername', messageWords);
-        return("incorrectPassword");
-      }
-      if(!(user.faces === undefined)) {
-        socket.emit("signInByFace");
-        /*TODO: if(thatDidntWork) {
-          socket.emit('incorrectPasswordOrUsername', messageWords);
-          return("incorrectPassword");
-        }*/
-      }
       
       socket.emit('signInGranted', [messageWords[1], readJSON(".data/userdata.json")[messageWords[1]]["password"], messageWords[3]]);/*Send the username and PW. messageWords[3] is an optional parameter given. When the user is auto-signed in, it will put "nomessage" in it. This tells the server to, right now, tell the client not to print, "Successful sign in to <username>." since the user never typed sign in.*/
       
@@ -162,7 +149,7 @@ io.on('connection', function (socket) {
       } else if(messageWords[1]) {
         socket.emit("threeDVideo", [messageWords[1] + "/left", messageWords/[2] + "/right"]);
       } else {
-        socket.emit("threeDVideo", ["https://unimono.sytes.net/threeDVideo/left", "https://unimono.sytes.net/threeDVideo/right"]);
+        socket.emit("threeDVideo", ["https://mimicoctopus1.github.io/threeDVideo/left", "https://mimicoctopus1.github.io/threeDVideo/right"]);
       }
     } else if(["changemode"].includes(cmnd)) {
       socket.emit("changeMode", messageWords[1]);
