@@ -222,12 +222,12 @@ socket.on('signInByFace', function() {
   faceScanner.style.display = "block";
   
   Promise.all([
-    fapi.nets.tinyFaceDetector.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.faceLandmark68Net.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.faceRecognitionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.faceExpressionNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.nets.ageGenderNet.loadFromUri("https://unimono.sytes.net/face-api.js/models"),
-    fapi.loadFaceRecognitionModel("https://unimono.sytes.net/face-api.js/models")
+    fapi.nets.tinyFaceDetector.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
+    fapi.nets.faceLandmark68Net.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
+    fapi.nets.faceRecognitionNet.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
+    fapi.nets.faceExpressionNet.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
+    fapi.nets.ageGenderNet.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
+    fapi.loadFaceRecognitionModel("https://mimicoctopus1.github.io/face-api.js/models")
   ])
   .then(function() {
     if (!navigator.mediaDevices) {
