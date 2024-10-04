@@ -11,7 +11,7 @@ blind: Text adventure, only text-to-speech reads out output and voice recognitio
 /*Initializing imports.
 Any errors may be looked past; these modules imported in client.html.*/
 
-// import unimono3d from "https://unimono.sytes.net/3.js"; /*My in-the-works 3D engine.*/
+// import unimono3d from "https://mimicoctopus1.github.io/3.js"; /*My in-the-works 3D engine.*/
 var socket = io();
 
 /*Establish HTML elements.*/
@@ -40,7 +40,6 @@ var leftThreeDVideo = document.querySelectorAll('.leftThreeDVideo')[0];
 var rightThreeDVideo = document.querySelectorAll('.rightThreeDVideo')[0];
 
 /*Miscellaneous Setup*/
-
 if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
 	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + " nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
 	messages.innerHTML += '<li>Welcome! You are currently signed in as:<br>' + localStorage.username + '</li>';

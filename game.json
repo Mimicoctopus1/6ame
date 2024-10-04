@@ -5,7 +5,7 @@
 		"moves": {
       "Hit": {
         "name": "Hit",
-        "icon": "https://unimono.sytes.net/Move%20Hit.png",
+        "icon": "https://mimicoctopus1.github.io/Move%20Hit.png",
         "effect": "console.log(\"used the hit move\")"
       }
     },
@@ -89,7 +89,7 @@
     "moves": {
       "Hit": {
         "name": "Hit",
-        "icon": "https://unimono.sytes.net/Move%20Hit.png",
+        "icon": "https://mimicoctopus1.github.io/Move%20Hit.png",
         "effect": "console.log('It worked')"
       }
     }
