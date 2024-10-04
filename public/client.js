@@ -13,7 +13,6 @@ Any errors may be looked past; these modules imported in client.html.*/
 
 // import unimono3d from "https://unimono.sytes.net/3.js"; /*My in-the-works 3D engine.*/
 var socket = io();
-var fapi = faceapi;/*Make a shortcut.*/
 
 /*Establish HTML elements.*/
 
@@ -36,17 +35,11 @@ var mediaPreviewStart = document.querySelectorAll('.mediaPreviewStart')[0];
 var mediaPreviewStop = document.querySelectorAll('.mediaPreviewStop')[0];
 var renderer2 = document.querySelectorAll('.renderer2')[0];
 var renderer3 = document.querySelectorAll('.renderer3')[0];
-var faceScanner = document.querySelectorAll('.faceScanner')[0];
-var facePreview = document.querySelectorAll('.facePreview')[0];
-var faceScannerCancel = document.querySelectorAll('.faceScannerCancel')[0];
-var facePreviewCanvas = undefined; /*This is an uncreated element that will be filled later by the startRecording function. Use Ctrl + ; and type startRecording async function to find it.*/
 var threeDVideo = document.querySelectorAll('.threeDVideo')[0];
 var leftThreeDVideo = document.querySelectorAll('.leftThreeDVideo')[0];
 var rightThreeDVideo = document.querySelectorAll('.rightThreeDVideo')[0];
 
 /*Miscellaneous Setup*/
-
-faceScanner.style.display = "none";
 
 if (localStorage.signedIntoGame == 'true') {/*If you are currently signed in*/
 	socket.emit('message', 'signin ' + localStorage.username + ' ' + localStorage.password + " nomessage"); /*Automatically sign in, only without the Successful sign in message.*/
@@ -217,94 +210,6 @@ socket.on('incorrectPasswordOrUsername', function(words) {
   console.log(words);
 });
 
-var faceRecording;/*This is a variable to store the stream so I can stop it later.*/
-socket.on('signInByFace', function() {
-  faceScanner.style.display = "block";
-  
-  Promise.all([
-    fapi.nets.tinyFaceDetector.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
-    fapi.nets.faceLandmark68Net.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
-    fapi.nets.faceRecognitionNet.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
-    fapi.nets.faceExpressionNet.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
-    fapi.nets.ageGenderNet.loadFromUri("https://mimicoctopus1.github.io/face-api.js/models"),
-    fapi.loadFaceRecognitionModel("https://mimicoctopus1.github.io/face-api.js/models")
-  ])
-  .then(function() {
-    if (!navigator.mediaDevices) {
-      console.error("mediaDevices not supported");
-      return;
-    }
-    navigator.mediaDevices.getUserMedia({
-      video: {
-        width: { min: 640, ideal: 1280, max: 1920 },
-        height: { min: 360, ideal: 720, max: 1080 },
-      },
-      audio: false,
-    })
-    .then(function(stream) {
-      facePreview.srcObject = stream;
-      faceScannerCancel.addEventListener("click", function() {
-        let tracksStopped = 0;
-        while(facePreview.srcObject.getTracks().length > tracksStopped) {
-          stream.getTracks()[tracksStopped].stop();
-          tracksStopped += 1;
-        }
-        faceScanner.style.display = "none"; /*Hide the face scanner thing.*/
-      });
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-
-  facePreview.addEventListener("play", function() {
-    const facePreviewCanvas = fapi.createCanvasFromMedia(facePreview);/*Create a canvas.*/
-
-    facePreviewCanvas.willReadFrequently = true;/*This makes it so the device does not use hardware acceleration.*/
-    facePreviewCanvas.style.position = "absolute";
-    facePreviewCanvas.style.left = "0%";
-    facePreviewCanvas.style.top = "0%";
-    fapi.matchDimensions(facePreviewCanvas, {/*Size the canvas to fit the facePreview video element. I'm using window.inner... because faceapi.matchDimensions doesn't support % notation.*/
-        width: window.innerWidth * (9/10), 
-        height: window.innerHeight * (9/10)
-    });
-    faceScanner.insertBefore(facePreviewCanvas, faceScannerCancel);/*Put the canvas in the faceScanner, right before faceScannerCancel.*/
-
-    setInterval(async function() {
-      let detections = await fapi /*Pause this function while face-api.js detects faces.*/
-        .detectAllFaces(facePreview, new fapi.TinyFaceDetectorOptions())
-        .withFaceLandmarks()
-        .withFaceExpressions()
-        .withAgeAndGender();
-
-        /*Let face-api.js know that we only want detections in this size.*/
-      let resizedDetections = fapi.resizeResults(detections, /*Draw the items in this size.*/
-        { 
-          width: window.innerWidth * (9/10), 
-          height: window.innerHeight * (9/10)
-        });
-      facePreviewCanvas.getContext("2d").clearRect(0, 0, facePreviewCanvas.width, facePreviewCanvas.height);
-
-      // Adjust the size of the detection canvas
-      fapi.draw.drawDetections(facePreviewCanvas, resizedDetections);
-      fapi.draw.drawFaceLandmarks(facePreviewCanvas, resizedDetections);
-      fapi.draw.drawFaceExpressions(facePreviewCanvas, resizedDetections);
-
-      // Drawing AGE and GENDER
-      resizedDetections.forEach(function(detection) {
-        const box = detection.detection.box;
-        const drawBox = new fapi.draw.DrawBox(box, {
-          label: "Age: About " + Math.round(detection.age) + " years. Gender: " + detection.gender + ".",
-        });
-        drawBox.draw(facePreviewCanvas);
-      });
-    }, 1000/24 /*24 FPS is fast enough to trick your mind into seeing motion without crashing your computer.*/);
-  });
-});
-
 socket.on('buzzermode', function(adminOrNot) {
 	buzzerButton.style.display = 'block';
   gameMode = "buzz";
@@ -447,11 +352,6 @@ var keyUp = function(event) {
   }
 };
 
-var closeFaceScanner = function() {
-  faceScanner.style.display = "none";
-}
-
-
 document.addEventListener('contextmenu', handleContextMenu);
 input.addEventListener('keyup', handleInputKeyup);
 document.addEventListener('click', handleClick);
@@ -461,4 +361,3 @@ renderer2.addEventListener('click', lockPointerRenderer2);
 renderer3.addEventListener('click', lockPointerRenderer3);
 document.addEventListener('keydown', keyDown);
 document.addEventListener('keyup', keyUp);
-faceScannerCancel.addEventListener('click', closeFaceScanner);
