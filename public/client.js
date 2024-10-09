@@ -1,11 +1,11 @@
-var gameMode = 'text';
+var gameMode = '2D';
 
 /*
 gameMode values.
 text: Text adventure game.
 2D: Flat, top-down view.
 3D: 3D mode;
-blind: Text adventure, only text-to-speech reads out output and voice recognition reads input.
+audio: Text adventure, only text-to-speech reads out output and voice recognition reads input.
 */
 
 /*Initializing imports.
@@ -80,6 +80,7 @@ var updateGameMode = function() {
   if(gameMode == "text") {
     arrowSymbol.style.display = "inline";
     input.style.display = "inline";
+	document.body.style.font = ""
   }
   if(gameMode == "2D") {
     renderer2.style.display = "block";
