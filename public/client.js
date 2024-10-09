@@ -80,7 +80,7 @@ var updateGameMode = function() {
   if(gameMode == "text") {
     arrowSymbol.style.display = "inline";
     input.style.display = "inline";
-	document.body.style.font = ""
+	document.body.style.font = "Micro-5";
   }
   if(gameMode == "2D") {
     renderer2.style.display = "block";

@@ -1,3 +1,14 @@
+/*Load custom fonts.*/
+@font-face {
+  font-family: 'Sans_Forgetica'; /*a name to be used later*/
+  src: url("https://mimicoctopus1.github.io/assets/fonts/Sans_Forgetica.otf"); /*URL to font*/
+}
+
+@font-face {
+  font-family: 'Micro-5';
+  src: url("https://fonts.googleapis.com/css2?family=Micro+5&display=swap")
+}
+
 body {
   margin: 0;
   padding-bottom: 3rem;
